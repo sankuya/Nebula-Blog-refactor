@@ -27,7 +27,7 @@ public class LoginService {
                 .eq("mail", userVO.getUsername())
         ;
         UserInfo userInfo = userInfoMapper.selectOne(queryWrapper);
-        if (userInfo.getPassword().equals(userVO.getPassword())) {
+        if (userInfo!=null&&userInfo.getPassword().equals(userVO.getPassword())) {
             return userInfo.getUid();
         }
         return -1;
