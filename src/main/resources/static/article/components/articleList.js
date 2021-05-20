@@ -10,7 +10,7 @@ function deleteArticle(event) {
         }
         $.ajax({
             type: "POST",
-            url: "/article/deleteArticle",
+            url: "/api/article/deleteArticle",
             contentType: "application/json;charset=utf-8",
             data: JSON.stringify(postData),
             dataType: "json",
@@ -39,7 +39,7 @@ var getAllArt = function () {
         page: pageAll
     }
     $.ajax({
-        url: "/article/getArticleList",
+        url: "/api/article/getArticleList",
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify(postData),
@@ -87,7 +87,7 @@ getMyArt = function () {
         page: pageMy
     }
     $.ajax({
-        url: "/article/getArticleList",
+        url: "/api/article/getArticleList",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(postData),
@@ -234,10 +234,10 @@ Vue.component('articlelist', {
             }
         },
         addclick: function () {
-            window.location.href = "/article/post.html";
+            window.location.href = "../post.html";
         },
         searchClick: function () {
-            window.location.href = "/article/search.html?keyword=" + this.search;
+            window.location.href = "../search.html?keyword=" + this.search;
         },
         listenkey: function (event) {
             var e = event || window.event || arguments.callee.caller.arguments[0];

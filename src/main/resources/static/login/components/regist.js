@@ -122,7 +122,7 @@ Vue.component('regist',{
 				mail:this.mail
 			};
 			$.ajax({
-				url:"/login/regist",
+				url:"/api/login/regist",
 				type:"POST",
 				contentType:"application/json",
 				data:JSON.stringify(postData),

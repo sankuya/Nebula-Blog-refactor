@@ -14,8 +14,8 @@
     <script src="../public/components/zButton.js" type="text/javascript"></script>
     <script src="../public/components/jumpTop.js" type="text/javascript"></script>
     <script src="../public/components/footerBar.js" type="text/javascript"></script>
-    <script src="/home/components/userInfoBoard.js" type="text/javascript"></script>
-    <script src="/home/components/articleBoard.js" type="text/javascript"></script>
+    <script src="components/userInfoBoard.js" type="text/javascript"></script>
+    <script src="components/articleBoard.js" type="text/javascript"></script>
     <style type="text/css">
         .layui-icon-loading {
             font-size: 80px;
@@ -35,7 +35,7 @@
 <div id="loading"><i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i></div>
 <div id="Nebula" style="display: none;">
     <alert v-if="alertshow">{{alertmsg}}</alert>
-    <background src="/home/img/homeBG.jpg" display="none"></background>
+    <background src="img/homeBG.jpg" display="none"></background>
     <topbar :nickname="userdata.nickname_Top"></topbar>
     <div :style="containerStyle" id="container">
         <div name="space" style="height:70px"></div>
@@ -80,7 +80,7 @@
                 var userdata = this.userdata;
                 $.ajax({
                     type: "POST",
-                    url: "/public/getUserData",
+                    url: "/api/public/getUserData",
                     contentType: "application/json",
                     dataType: "json",
                     success: function (data, status) {

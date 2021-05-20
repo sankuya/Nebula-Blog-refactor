@@ -14,7 +14,7 @@
     <script src="../public/components/zButton.js" type="text/javascript"></script>
     <script src="../public/components/jumpTop.js" type="text/javascript"></script>
     <script src="../public/components/footerBar.js" type="text/javascript"></script>
-    <script src="/Q&A/components/QAList.js" type="text/javascript"></script>
+    <script src="components/QAList.js" type="text/javascript"></script>
 
     <script src="../public/components/mdEditor.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../editormd/css/editormd.css"/>
@@ -92,7 +92,7 @@
             getUserData: function () {
                 var userdata = this.userdata;
                 $.ajax({
-                    url: "/public/getUserData",
+                    url: "/api/public/getUserData",
                     contentType: "application/json",
                     dataType: "json",
                     type:"POST",
@@ -127,7 +127,7 @@
                     author: a
                 };
                 $.ajax({
-                    url: "/FAQ/QPost",
+                    url: "/api/FAQ/QPost",
                     contentType: "application/json",
                     data: JSON.stringify(postData),
                     type:"POST",

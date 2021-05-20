@@ -6,7 +6,7 @@ var getResult = function () {
         keyword: keyword
     }
     $.ajax({
-        url: "/article/getSearchResult",
+        url: "/api/article/getSearchResult",
         dataType: "json",
         contentType: "application/json",
         data: JSON.stringify(postData),
@@ -89,7 +89,7 @@ Vue.component('searcharticle', {
     },
     methods: {
         searchClick: function () {
-            window.location.href = "/article/search.html?keyword=" + this.search;
+            window.location.href = "../search.html?keyword=" + this.search;
         },
         listenkey: function (event) {
             var e = event || window.event || arguments.callee.caller.arguments[0];

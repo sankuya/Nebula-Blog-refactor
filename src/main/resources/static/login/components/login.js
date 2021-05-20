@@ -103,7 +103,7 @@ Vue.component('login', {
             };
             $.ajax({
                 type: "POST",
-                url: "/login/login",
+                url: "/api/login/login",
                 contentType: "application/json;charset=utf-8",
                 data: JSON.stringify(data),
                 dataType: "json",

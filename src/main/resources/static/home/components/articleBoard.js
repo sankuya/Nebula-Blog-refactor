@@ -8,7 +8,7 @@ var getAllArt = function () {
     $.ajax({
             type: "post",
             contentType: "application/json;charset=UTF-8",
-            url: "/home/getArticleList",
+            url: "/api/home/getArticleList",
             data: JSON.stringify(data),
             dataType: "json",
             success: function (data, status) {
@@ -57,7 +57,7 @@ let getMyArt = function () {
     $.ajax({
         type: "post",
         contentType: "application/json;charset=UTF-8",
-        url: "/home/getArticleList",
+        url: "/api/home/getArticleList",
         data: JSON.stringify(data),
         dataType: "json",
         success: function (data, status) {

@@ -93,7 +93,7 @@
 				getUserData:function(){
 					var userdata=this.userdata;
 					$.ajax({
-						url:"/public/getUserData",
+						url:"/api/public/getUserData",
 						type:"POST",
 						dataType:"json",
 						contentType:"application/json",
@@ -126,7 +126,7 @@
 					var c=window.myeditor.getMarkdown();
 					var id=this.userdata.uid;
 					var aid=this.data.id;
-					$.post("./php/editArticle.php",{
+					$.post("/api/article/editArticle",{
 						title:t,
 						content:c,
 						uid:id,
@@ -161,7 +161,7 @@
 					this.data.id=id;
 					var artdata=this.data;
 					var that=this;
-					$.post("./php/getArticleData.php",{
+					$.post("/api/article/getArticleData",{
 						artid:id
 					},function(data,status){
 						if(data=="没有这篇文章")alert("该文章不存在");

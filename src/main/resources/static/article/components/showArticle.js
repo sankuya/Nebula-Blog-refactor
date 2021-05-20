@@ -89,7 +89,7 @@ Vue.component('showarticle', {
             };
             $.ajax({
                 type: "POST",
-                url: "/article/getArticleData",
+                url: "/api/article/getArticleData",
                 contentType: "application/json;charset=utf-8",
                 data: JSON.stringify(postData),
                 dataType: "json",
@@ -121,7 +121,7 @@ Vue.component('showarticle', {
             };
             $.ajax({
                 type: "POST",
-                url: "/public/getUserDataByID",
+                url: "/api/public/getUserDataByID",
                 contentType: "application/json;charset=utf-8",
                 data: JSON.stringify(postData),
                 dataType: "json",

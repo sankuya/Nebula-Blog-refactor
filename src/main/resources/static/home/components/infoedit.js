@@ -82,7 +82,7 @@ Vue.component('infoedit', {
             };
             $.ajax({
                 type: "POST",
-                url: "/home/infoChange",
+                url: "/api/home/infoChange",
                 contentType: "application/json;charset=utf-8",
                 data: JSON.stringify(data),
                 success: function (data, status) {
@@ -124,7 +124,7 @@ Vue.component('infoedit', {
             var upload = layui.upload;
             var uploadInst = upload.render({
                 elem: '#profilephoto',
-                url: './php/uploadPhoto.php',
+                url: '/api/home/uploadPhoto',
                 accept: 'images',
                 acceptMime: 'image/jpeg',
                 size: '2388.992',

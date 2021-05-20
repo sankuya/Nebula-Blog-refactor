@@ -93,7 +93,7 @@
             getUserData: function () {
                 var userdata = this.userdata;
                 $.ajax({
-                    url: "/public/getUserData",
+                    url: "/api/public/getUserData",
                     dataType: "json",
                     contentType: "application/json",
 					type:"POST",
@@ -128,7 +128,7 @@
                     author: a
                 };
                 $.ajax({
-                    url: "/FAQ/QPost",
+                    url: "/api/FAQ/QPost",
                     contentType: "application/json",
                     data: JSON.stringify(postData),
 					type:"POST",

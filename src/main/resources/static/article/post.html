@@ -92,7 +92,7 @@
                 var userdata = this.userdata;
                 var that = this;
                 $.ajax({
-                    url: "/public/getUserData",
+                    url: "/api/public/getUserData",
                     dataType: "json",
                     contentType: "application/json",
                     type:"POST",
@@ -131,7 +131,7 @@
 					author: a
 				};
                 $.ajax({
-					url:"/article/postArticle",
+					url:"/api/article/postArticle",
 					data:JSON.stringify(postData),
 					contentType: "application/json",
                     type:"POST",

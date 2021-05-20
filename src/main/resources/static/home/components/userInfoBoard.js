@@ -39,7 +39,7 @@ Vue.component('userinfoboard',{
 		infoEdit:function(){
 			if(this.userdata['userid']=='')alert("没登录还想改!");
 			else {
-				window.location.href="/home/info.html";
+				window.location.href="../info.html";
 			}
 		},
 		indexOver:function(event){
