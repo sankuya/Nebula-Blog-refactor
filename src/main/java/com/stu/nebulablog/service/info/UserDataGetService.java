@@ -8,6 +8,7 @@ import com.stu.nebulablog.module.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -18,15 +19,26 @@ public class UserDataGetService {
     private UserInfoMapper userInfoMapper;
 
     public Map<String, Object> doGetUserData(Integer uid) {
-        QueryWrapper<UserDetail> userDetailQueryWrapper = new QueryWrapper<>();
-        userDetailQueryWrapper.eq("uid", uid);
         try {
-            Map<String, Object> res = userDetailMapper.selectMaps(userDetailQueryWrapper).get(0);
+            Map<String, Object> res = new HashMap<>();
+            UserDetail userDetail = userDetailMapper.selectById(uid);
             UserInfo userInfo = userInfoMapper.selectById(uid);
-            res.put("userid",userInfo.getUid());
+            res.put("motto", userDetail.getMotto());
+            res.put("QQ", userDetail.getQQ());
+            res.put("hobby", userDetail.getHobby());
+            res.put("location", userDetail.getLocation());
+            res.put("blogname", userDetail.getBlogname());
+            res.put("nickname", userDetail.getNickname());
+            res.put("userid", userInfo.getUid());
             res.put("mail", userInfo.getMail());
             res.put("tel", userInfo.getTel());
             res.put("username", userInfo.getUsername());
+            res.put("gender", userDetail.getGender());
+            res.forEach((k, v) -> {
+                if (v == null) {
+                    res.put(k,"");
+                }
+            });
             return res;
         } catch (Exception e) {
             return null;
