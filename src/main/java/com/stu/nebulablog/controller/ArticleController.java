@@ -40,6 +40,7 @@ public class ArticleController {
     @PostMapping("/editArticle")
     public Object editArticle(@RequestBody Article article, HttpSession session) {
         Integer uid = (Integer) session.getAttribute("userid");
+        System.out.println(article);
         if (uid != article.getUid()) return "wrong";
         if (articleEditService.doEditArticle(article)) return "ok";
         return "wrong";

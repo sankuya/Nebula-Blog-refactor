@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -65,16 +67,21 @@ public class PublicController {
     }
 
     @PostMapping("uploadImage")
-    public Object uploadImage(@RequestParam("editormd-image-file") MultipartFile multipartFile, HttpSession session) {
+    public Object uploadImage(HttpServletRequest httpServletRequest, HttpSession session) {
+        MultipartFile multipartFile=((MultipartHttpServletRequest)httpServletRequest).getFiles("editormd-image-file").get(0);
         Map<String, Object> res = new HashMap<>();
-        Integer uid = (Integer) session.getAttribute("userid");
-        UserInfo userInfo = userInfoMapper.selectById(uid);
-        res.put("message", "未知原因上传失败啦qwq");
-        res.put("success", "0");
-        if (userInfo == null) return res;
-        if (imageUploadService.uploadPhoto(userInfo, multipartFile)) {
-            res.put("success", 1);
-            res.put("url", "../user/" + userInfo.getUsername() + "/img/" + multipartFile.getOriginalFilename());
+        try {
+            Integer uid = (Integer) session.getAttribute("userid");
+            UserInfo userInfo = userInfoMapper.selectById(uid);
+            res.put("message", "未知原因上传失败啦qwq");
+            res.put("success", "0");
+            if (userInfo == null) return res;
+            if (imageUploadService.uploadPhoto(userInfo, multipartFile)) {
+                res.put("success", 1);
+                res.put("url", "../user/" + userInfo.getUsername() + "/img/" + multipartFile.getOriginalFilename());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return res;
     }

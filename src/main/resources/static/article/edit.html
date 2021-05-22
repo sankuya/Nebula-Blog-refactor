@@ -126,26 +126,33 @@
 					var c=window.myeditor.getMarkdown();
 					var id=this.userdata.uid;
 					var aid=this.data.id;
-					$.post("/article/editArticle",{
+					let postData={
 						title:t,
 						content:c,
 						uid:id,
-						aid:aid,
-					},function(data,status){
-						if(data=="ok"){
-							alert('成功修改了呢~');
-							window.onbeforeunload=function(e){
+						art_id:aid
+					};
+					$.ajax({
+						url:"/article/editArticle",
+						type:"POST",
+						contentType: "application/json",
+						data:JSON.stringify(postData),
+						success:function(data,status){
+							if(data=="ok"){
+								alert('成功修改了呢~');
+								window.onbeforeunload=function(e){
+								}
+								window.alert_ok=function(){
+									window.alert_ok=function(){};
+									window.location.href="./detail.html?id="+aid;
+								}
 							}
-							window.alert_ok=function(){
-								window.alert_ok=function(){};
-								window.location.href="./detail.html?id="+aid;
+							else if(data=="wrong"){
+								alert('你太坏了!这篇文章不是你的!')
 							}
+							else alert('未知原因修改失败qwq'+data);
 						}
-						else if(data=="fuck"){
-							alert('你太坏了!这篇文章不是你的!')
-						}
-						else alert('未知原因修改失败qwq'+data);
-					},"json");
+					});
 				},
 				getQueryVariable:function(variable){
 				       var query = window.location.search.substring(1);
@@ -161,17 +168,25 @@
 					this.data.id=id;
 					var artdata=this.data;
 					var that=this;
-					$.post("/article/getArticleData",{
+					let postData={
 						artid:id
-					},function(data,status){
-						if(data=="没有这篇文章")alert("该文章不存在");
-						else if(typeof(data)=='object'){
-							artdata['title']=data['title'];
-							artdata['content']=data['content'];
+					};
+					$.ajax({
+						url:"/article/getArticleData",
+						type:"POST",
+						dataType:"json",
+						contentType:"application/json",
+						data:JSON.stringify(postData),
+						success:function(data,status){
+							if(data=="没有这篇文章")alert("该文章不存在");
+							else if(typeof(data)=='object'){
+								artdata['title']=data['title'];
+								artdata['content']=data['content'];
+							}
+							else alert(data);
+							that.showEditor=true;
 						}
-						else alert(data);
-						that.showEditor=true;
-					},"json");
+					})
 				}
 			},
 			mounted() {
