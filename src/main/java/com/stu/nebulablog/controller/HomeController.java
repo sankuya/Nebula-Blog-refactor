@@ -6,7 +6,6 @@ import com.stu.nebulablog.module.UserInfo;
 import com.stu.nebulablog.service.article.ArticleListGetService;
 import com.stu.nebulablog.service.info.InfoChangeService;
 import com.stu.nebulablog.service.info.file.AbstractFileUploadService;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,9 +28,9 @@ public class HomeController {
     private final int size = 10;
 
     @PostMapping("/getArticleList")
-    public Object getArticleList(@RequestBody JSONObject src, HttpSession session) {
-        String type = src.getString("type");
-        int page = src.getInt("page");
+    public Object getArticleList(@RequestBody Map<String,String > src, HttpSession session) {
+        String type = src.get("type");
+        Integer page = Integer.valueOf(src.get("page"));
         if (type == null) return null;
         Map<String, Object> res;
         if (type.equals("all")) {

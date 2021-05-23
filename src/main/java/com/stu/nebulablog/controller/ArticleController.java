@@ -2,7 +2,6 @@ package com.stu.nebulablog.controller;
 
 import com.stu.nebulablog.module.Article;
 import com.stu.nebulablog.service.article.*;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,9 +29,9 @@ public class ArticleController {
     private final int size = 12;
 
     @PostMapping("/deleteArticle")
-    public Object deleteArticle(@RequestBody JSONObject src, HttpSession session) {
+    public Object deleteArticle(@RequestBody Map<String,String> src, HttpSession session) {
         Integer uid = (Integer) session.getAttribute("userid");
-        Integer art_id = Integer.valueOf(src.getString("id"));
+        Integer art_id =Integer.valueOf( src.get("id"));
         if (articleDeleteService.doDeleteArticle(uid, art_id)) return "ok";
         return "wrong";
     }
@@ -40,24 +39,23 @@ public class ArticleController {
     @PostMapping("/editArticle")
     public Object editArticle(@RequestBody Article article, HttpSession session) {
         Integer uid = (Integer) session.getAttribute("userid");
-        System.out.println(article);
         if (uid != article.getUid()) return "wrong";
         if (articleEditService.doEditArticle(article)) return "ok";
         return "wrong";
     }
 
     @PostMapping("/getArticleData")
-    public Object getArticleData(@RequestBody JSONObject src) {
-        Integer art_id = Integer.valueOf(src.getString("artid"));
+    public Object getArticleData(@RequestBody Map<String ,String> src) {
+        Integer art_id =Integer.valueOf(src.get("artid"));
         Article article = articleDataGetService.doGetArticleData(art_id);
         if (article != null) return article;
         return "没有这篇文章";
     }
 
     @PostMapping("/getArticleList")
-    public Object getArticleList(@RequestBody JSONObject src, HttpSession session) {
-        String type = src.getString("type");
-        int page = src.getInt("page");
+    public Object getArticleList(@RequestBody Map<String ,String> src, HttpSession session) {
+        String type = src.get("type");
+        Integer page =Integer.valueOf(src.get("page")) ;
         if (type == null) return null;
         Map<String, Object> res;
         if (type.equals("all")) {
@@ -71,9 +69,9 @@ public class ArticleController {
     }
 
     @PostMapping("/getSearchResult")
-    public Object getSearchResult(@RequestBody JSONObject src) {
-        Integer p = Integer.valueOf(src.getString("page"));
-        String keyword = src.getString("keyword");
+    public Object getSearchResult(@RequestBody Map<String ,String > src) {
+        Integer p =Integer.valueOf(src.get("page"));
+        String keyword =src.get("keyword");
         Map<String, Object> res = articleSearchService.doSearchArticle(keyword, p, size);
         return res;
     }

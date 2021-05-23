@@ -5,7 +5,6 @@ import com.stu.nebulablog.module.A;
 import com.stu.nebulablog.module.Q;
 import com.stu.nebulablog.module.UserInfo;
 import com.stu.nebulablog.service.faq.*;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,27 +47,27 @@ public class FAQController {
     }
 
     @PostMapping("/getAData")
-    public List<A> ADataGet(@RequestBody JSONObject src) {
-        Integer qid = Integer.valueOf(src.getString("qid"));
+    public List<A> ADataGet(@RequestBody Map<String ,String> src) {
+        Integer qid =Integer.valueOf(src.get("qid"));
         return answerGetService.doGetA(qid);
     }
 
     @PostMapping("/getQAList")
-    public Map<String, Object> getQAList(@RequestBody JSONObject src) {
-        Integer page = Integer.valueOf(src.getString("page"));
+    public Map<String, Object> getQAList(@RequestBody Map<String ,String > src) {
+        Integer page = Integer.valueOf(src.get("page"));
         return qaListGetService.doGetQAList(size, page);
     }
 
     @PostMapping("/getQASearch")
-    public Map<String, Object> getQASearch(@RequestBody JSONObject src) {
-        Integer page = Integer.valueOf(src.getString("page"));
-        String keyword = src.getString("keyword");
+    public Map<String, Object> getQASearch(@RequestBody Map<String ,String > src) {
+        Integer page = Integer.valueOf(src.get("page"));
+        String keyword =src.get("keyword");
         return qaSearchGetService.doASSearch(keyword, page, 9);
     }
 
     @PostMapping("/getQData")
-    public Object getQData(@RequestBody JSONObject src) {
-        Integer qid = Integer.valueOf(src.getString("qid"));
+    public Object getQData(@RequestBody Map<String ,String > src) {
+        Integer qid =Integer.valueOf(src.get("qid"));
         Q q = questionDataGetService.doGetQuestion(qid);
         if (q == null) return "没有这篇问题";
         else return q;

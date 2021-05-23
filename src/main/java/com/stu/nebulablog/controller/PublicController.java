@@ -5,7 +5,6 @@ import com.stu.nebulablog.module.UserInfo;
 import com.stu.nebulablog.service.info.ImageUploadService;
 import com.stu.nebulablog.service.info.UserDataGetService;
 import com.stu.nebulablog.utils.PasswordUtil;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
@@ -47,8 +46,8 @@ public class PublicController {
     }
 
     @PostMapping("getUserDataByID")
-    public Map<String, Object> getUserDataByID(@RequestBody JSONObject src) {
-        Integer uid = Integer.valueOf(src.getString("uid"));
+    public Map<String, Object> getUserDataByID(@RequestBody Map<String ,String > src) {
+        Integer uid = Integer.valueOf(src.get("uid"));
         if (uid == null) return null;
         return userDataGetService.doGetUserData(uid);
     }

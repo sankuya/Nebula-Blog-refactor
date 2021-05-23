@@ -13,7 +13,6 @@ function deleteArticle(event) {
             url: "/article/deleteArticle",
             contentType: "application/json;charset=utf-8",
             data: JSON.stringify(postData),
-            dataType: "json",
             success: function (data, status) {
                 if (data == "ok") {
                     alert("哎呀,删除成功了 *v*");
