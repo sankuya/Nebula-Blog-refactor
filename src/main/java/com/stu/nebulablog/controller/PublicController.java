@@ -77,7 +77,7 @@ public class PublicController {
             if (userInfo == null) return res;
             if (imageUploadService.uploadPhoto(userInfo, multipartFile)) {
                 res.put("success", 1);
-                res.put("url", "../user/" + userInfo.getUsername() + "/img/" + multipartFile.getOriginalFilename());
+                res.put("url", "/user/" + userInfo.getUsername() + "/img/" + multipartFile.getOriginalFilename());
             }
         } catch (Exception e) {
             e.printStackTrace();
