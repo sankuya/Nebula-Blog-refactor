@@ -16,11 +16,6 @@
     <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log_path}/nebula.info.log</file>
         <append>true</append>
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>ERROR</level>
-            <onMatch>DENY</onMatch>
-            <onMismatch>ACCEPT</onMismatch>
-        </filter>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>
                 %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n
@@ -31,6 +26,31 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--按时间保存日志 修改格式可以按小时、按天、月来保存-->
             <fileNamePattern>${log_path}/nebula.info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--保存时长-->
+            <MaxHistory>90</MaxHistory>
+            <!--文件大小-->
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="fileSQLLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log_path}/nebula.sql.log</file>
+        <append>true</append>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss} %logger{50} - %msg%n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--按时间保存日志 修改格式可以按小时、按天、月来保存-->
+            <fileNamePattern>${log_path}/nebula.sql.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!--保存时长-->
             <MaxHistory>90</MaxHistory>
             <!--文件大小-->
@@ -60,5 +80,10 @@
         <appender-ref ref="consoleLog"/>
         <appender-ref ref="fileInfoLog"/>
         <appender-ref ref="fileErrorLog"/>
+        <appender-ref ref="fileSQLLog"/>
     </root>
+    <logger name="org.springframework" level="WARN" />
+    <logger name="org.apache.ibatis" level="DEBUG" />
+    <logger name="java.sql" level="DEBUG" />
+    <logger name="com.stu.nebulablog.mapper" level="DEBUG"></logger>
 </configuration>
