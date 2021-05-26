@@ -15,6 +15,7 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
+        <skipTests>true</skipTests>
     </properties>
     <dependencies>
         <dependency>
@@ -74,19 +75,9 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*</include>
+                    <include>*</include>
                 </includes>
-                <excludes>
-                    <exclude>static/**/*</exclude>
-                    <exclude>dev/*</exclude>
-                    <exclude>pro/*</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <directory>src/main/resources/${profiles.active}</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
+                <filtering>true</filtering>
             </resource>
         </resources>
         <plugins>
@@ -111,6 +102,7 @@
             <id>dev</id>
             <properties>
                 <profiles.active>dev</profiles.active>
+                <log.path>./logs</log.path>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -125,6 +117,7 @@
                         <directory>src/main/resources</directory>
                         <includes>
                             <include>static/**/*</include>
+                            <include>profiles/dev/**/*</include>
                         </includes>
                     </resource>
                 </resources>
@@ -136,6 +129,7 @@
             <id>pro</id>
             <properties>
                 <profiles.active>pro</profiles.active>
+                <log.path>/home/sankuyan/project/Nebula-Blog/java/logs</log.path>
             </properties>
             <activation>
                 <property>
@@ -143,6 +137,16 @@
                     <value>pro</value>
                 </property>
             </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <includes>
+                            <include>profiles/pro/**/*</include>
+                        </includes>
+                    </resource>
+                </resources>
+            </build>
         </profile>
     </profiles>
 </project>
