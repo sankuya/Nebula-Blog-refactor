@@ -116,7 +116,6 @@
                     <resource>
                         <directory>src/main/resources</directory>
                         <includes>
-                            <include>static/**/*</include>
                             <include>profiles/dev/**/*</include>
                         </includes>
                     </resource>

@@ -18,7 +18,7 @@ public class Q {
     private String author;
     private Integer status;
     private String content;
-    @TableField(update = "now()",fill = FieldFill.INSERT_UPDATE)
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date date;
     private Integer answer;
     public int hashCode(){

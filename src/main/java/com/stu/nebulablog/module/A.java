@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Data
 public class A{
@@ -14,8 +15,8 @@ public class A{
     private Integer aid;
     private Integer uid;
     private String content;
-    @TableField(update = "now()",fill = FieldFill.INSERT_UPDATE)
-    private Timestamp date;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date date;
     private Integer qid;
     private String author;
     private String username;
