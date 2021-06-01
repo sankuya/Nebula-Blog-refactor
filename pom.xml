@@ -75,7 +75,7 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>*</include>
+                    <include>**/*</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>
@@ -100,10 +100,10 @@
     <profiles>
         <profile>
             <id>dev</id>
-            <properties>
-                <profiles.active>dev</profiles.active>
-                <log.path>./logs</log.path>
-            </properties>
+<!--            <properties>-->
+<!--                <profiles.active>dev</profiles.active>-->
+<!--&lt;!&ndash;                <log.path>./logs</log.path>&ndash;&gt;-->
+<!--            </properties>-->
             <activation>
                 <activeByDefault>true</activeByDefault>
                 <property>
@@ -115,9 +115,9 @@
                 <resources>
                     <resource>
                         <directory>src/main/resources</directory>
-                        <includes>
-                            <include>profiles/dev/**/*</include>
-                        </includes>
+<!--                        <includes>-->
+<!--                            <include>profiles/dev/**/*</include>-->
+<!--                        </includes>-->
                     </resource>
                 </resources>
             </build>
@@ -126,10 +126,10 @@
         <!--生产环境-->
         <profile>
             <id>pro</id>
-            <properties>
-                <profiles.active>pro</profiles.active>
-                <log.path>/home/sankuyan/project/Nebula-Blog/java/logs</log.path>
-            </properties>
+<!--            <properties>-->
+<!--                <profiles.active>pro</profiles.active>-->
+<!--                <log.path>/home/sankuyan/project/Nebula-Blog/java/logs</log.path>-->
+<!--            </properties>-->
             <activation>
                 <property>
                     <name>env</name>
@@ -140,9 +140,9 @@
                 <resources>
                     <resource>
                         <directory>src/main/resources</directory>
-                        <includes>
-                            <include>profiles/pro/**/*</include>
-                        </includes>
+<!--                        <includes>-->
+<!--                            <include>profiles/pro/**/*</include>-->
+<!--                        </includes>-->
                     </resource>
                 </resources>
             </build>
