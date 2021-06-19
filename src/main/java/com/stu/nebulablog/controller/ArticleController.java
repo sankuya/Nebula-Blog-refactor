@@ -83,7 +83,7 @@ public class ArticleController {
         return responseData;
     }
 
-    @PostMapping("/myList")
+    @PostMapping("/list")
     public ResponseData getArticleList(@RequestBody Map<String, String> src, HttpSession session) {
         ResponseData responseData = new ResponseData();
         Integer page = Integer.valueOf(src.get("page"));

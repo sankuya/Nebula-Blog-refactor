@@ -1,5 +1,6 @@
 package com.stu.nebulablog.service.info;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stu.nebulablog.mapper.UserDetailMapper;
 import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.entity.UserDetail;
