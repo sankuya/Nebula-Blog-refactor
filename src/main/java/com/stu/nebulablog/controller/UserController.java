@@ -30,7 +30,7 @@ public class UserController {
     @Autowired
     private PhotoUploadService photoUploadService;
 
-    @PostMapping("getUserData")
+    @PostMapping("getUser")
     public ResponseData getUserData(HttpSession session) {
         Integer uid = (Integer) session.getAttribute("uid");
         ResponseData responseData = new ResponseData();
@@ -39,7 +39,7 @@ public class UserController {
         return responseData;
     }
 
-    @PostMapping("/infoChange")
+    @PostMapping("infoChange")
     public ResponseData infoChange(@RequestBody UserDetail src, HttpSession session) {
         ResponseData responseData = new ResponseData();
         Integer uid = (Integer) session.getAttribute("uid");

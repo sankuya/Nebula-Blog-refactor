@@ -23,7 +23,7 @@ public class UserGetService {
         try {
             Map<String, Object> res = userDetailMapper.selectMaps(userDetailQueryWrapper).get(0);
             UserInfo userInfo = userInfoMapper.selectById(uid);
-            res.put("userid",userInfo.getUid());
+            res.put("uid",userInfo.getUid());
             res.put("mail", userInfo.getMail());
             res.put("tel", userInfo.getTel());
             res.put("username", userInfo.getUsername());

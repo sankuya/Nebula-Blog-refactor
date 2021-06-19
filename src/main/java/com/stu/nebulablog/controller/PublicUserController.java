@@ -68,7 +68,7 @@ public class PublicUserController {
         responseData.setMsg("ok");
         return responseData;
     }
-    @PostMapping("getUserDataById")
+    @PostMapping("getUserById")
     public ResponseData getUserDataByID(@RequestParam int uid) {
         ResponseData responseData = new ResponseData();
         Map<String, Object> data = userGetService.doGetUser(uid);
