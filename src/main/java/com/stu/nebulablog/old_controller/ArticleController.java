@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -19,9 +18,9 @@ public class ArticleController {
     @Autowired
     private ArticleEditService articleEditService;
     @Autowired
-    private ArticleDataGetService articleDataGetService;
+    private ArticleGetService articleGetService;
     @Autowired
-    private ArticleListGetService articleListGetService;
+    private ArticleListService articleListService;
     @Autowired
     private ArticleSearchService articleSearchService;
     @Autowired
@@ -47,7 +46,7 @@ public class ArticleController {
     @PostMapping("/getArticleData")
     public Object getArticleData(@RequestBody Map<String ,String> src) {
         Integer art_id =Integer.valueOf(src.get("artid"));
-        Article article = articleDataGetService.doGetArticleData(art_id);
+        Article article = articleGetService.doGetArticle(art_id);
         if (article != null) return article;
         return "没有这篇文章";
     }
@@ -59,11 +58,11 @@ public class ArticleController {
         if (type == null) return null;
         Map<String, Object> res;
         if (type.equals("all")) {
-            res = articleListGetService.getAllArticleList(page, size);
+            res = articleListService.listAll(page, size);
         } else {
             Integer uid = (Integer) session.getAttribute("userid");
             if (uid == null) return null;
-            res = articleListGetService.getArticleListByUserId(page, uid, size);
+            res = articleListService.listByUid(page, uid, size);
         }
         return res;
     }

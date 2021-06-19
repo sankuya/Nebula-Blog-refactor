@@ -3,7 +3,6 @@ package com.stu.nebulablog.controller;
 import com.stu.nebulablog.module.ResponseData;
 import com.stu.nebulablog.module.entity.Article;
 import com.stu.nebulablog.service.article.*;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,18 +16,15 @@ import java.util.Map;
 @RequestMapping("article")
 public class ArticleController {
     @Autowired
-    private ArticleListGetService articleListGetService;
+    private ArticleListService articleListService;
     @Autowired
     private ArticlePostService articlePostService;
-
     @Autowired
     private ArticleDeleteService articleDeleteService;
     @Autowired
     private ArticleEditService articleEditService;
     @Autowired
-    private ArticleDataGetService articleDataGetService;
-    @Autowired
-    private ArticleSearchService articleSearchService;
+    private ArticleGetService articleGetService;
     private static final int MAXSIZE = 10;
 
     @PostMapping("/delete")
@@ -60,7 +56,7 @@ public class ArticleController {
     public ResponseData get(@RequestBody Map<String, String> src) {
         ResponseData responseData = new ResponseData();
         Integer artId = Integer.valueOf(src.get("artId"));
-        Article article = articleDataGetService.doGetArticleData(artId);
+        Article article = articleGetService.doGetArticle(artId);
         if (article != null) {
             responseData.setCode(400);
             responseData.setData(article);
@@ -70,18 +66,6 @@ public class ArticleController {
         return responseData;
     }
 
-    @PostMapping("/search")
-    public Object search(@RequestBody Map<String, String> src) {
-        ResponseData responseData = new ResponseData();
-        Integer p = Integer.valueOf(src.get("page"));
-        String keyword = src.get("keyword");
-        Integer size = Integer.valueOf(src.get("size"));
-        size = Math.min(size, MAXSIZE);
-        Map<String, Object> data = articleSearchService.doSearchArticle(keyword, p, size);
-        responseData.setCode(400);
-        responseData.setData(data);
-        return responseData;
-    }
 
     @PostMapping("/list")
     public ResponseData getArticleList(@RequestBody Map<String, String> src, HttpSession session) {
@@ -92,7 +76,7 @@ public class ArticleController {
         if (size == null)
             size = Integer.MAX_VALUE;
         size = Math.min(size, MAXSIZE);
-        Map<String, Object> data = articleListGetService.getArticleListByUserId(page, uid, size);
+        Map<String, Object> data = articleListService.listByUid(page, uid, size);
         responseData.setCode(400);
         responseData.setData(data);
         return responseData;

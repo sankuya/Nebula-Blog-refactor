@@ -1,8 +1,8 @@
 package com.stu.nebulablog.controller;
 
 import com.stu.nebulablog.module.ResponseData;
-import com.stu.nebulablog.module.entity.Q;
-import com.stu.nebulablog.service.faq.QuestionPostService;
+import com.stu.nebulablog.module.entity.Question;
+import com.stu.nebulablog.service.question.QuestionPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +17,11 @@ public class QuestionController {
     @Autowired
     private QuestionPostService questionPostService;
     @PostMapping("/post")
-    public ResponseData questionPost(@RequestBody Q q, HttpSession session) {
+    public ResponseData questionPost(@RequestBody Question question, HttpSession session) {
         ResponseData responseData=new ResponseData();
         Integer uid = (Integer)session.getAttribute("uid");
-        q.setUid(uid);
-        if (questionPostService.doPost(q)){
+        question.setUid(uid);
+        if (questionPostService.doPost(question)){
             responseData.setCode(800);
         }else{
             responseData.setCode(801);

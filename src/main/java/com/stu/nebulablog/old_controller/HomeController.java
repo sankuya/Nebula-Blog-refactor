@@ -3,9 +3,9 @@ package com.stu.nebulablog.old_controller;
 import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.entity.UserDetail;
 import com.stu.nebulablog.module.entity.UserInfo;
-import com.stu.nebulablog.service.article.ArticleListGetService;
-import com.stu.nebulablog.service.info.InfoChangeService;
-import com.stu.nebulablog.service.info.file.AbstractFileUploadService;
+import com.stu.nebulablog.service.article.ArticleListService;
+import com.stu.nebulablog.service.user.UserInfoChangeService;
+import com.stu.nebulablog.service.file.AbstractFileUploadService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +19,9 @@ import java.util.Map;
 @RequestMapping("/home")
 public class HomeController {
     @Autowired
-    private ArticleListGetService articleListGetService;
+    private ArticleListService articleListService;
     @Autowired
-    private InfoChangeService infoChangeService;
+    private UserInfoChangeService userInfoChangeService;
     @Autowired
     private UserInfoMapper userInfoMapper;
     @Autowired
@@ -35,11 +35,11 @@ public class HomeController {
         if (type == null) return null;
         Map<String, Object> res;
         if (type.equals("all")) {
-            res = articleListGetService.getAllArticleList(page, size);
+            res = articleListService.listAll(page, size);
         } else {
             Integer uid = (Integer) session.getAttribute("userid");
             if(uid==null)return null;
-            res = articleListGetService.getArticleListByUserId(page, uid, size);
+            res = articleListService.listByUid(page, uid, size);
         }
         return res;
     }
@@ -49,7 +49,7 @@ public class HomeController {
         Integer uid = (Integer) session.getAttribute("userid");
         if (uid == null) return "wrong";
         src.setUid(uid);
-        if (infoChangeService.doInfoChange(src)) return "ok";
+        if (userInfoChangeService.doInfoChange(src)) return "ok";
         else return "wrong";
     }
 

@@ -2,9 +2,9 @@ package com.stu.nebulablog.controller;
 
 import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.ResponseData;
-import com.stu.nebulablog.module.entity.A;
+import com.stu.nebulablog.module.entity.Answer;
 import com.stu.nebulablog.module.entity.UserInfo;
-import com.stu.nebulablog.service.faq.AnswerPostService;
+import com.stu.nebulablog.service.answer.AnswerPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,15 +21,15 @@ public class AnswerController {
     @Autowired
     private AnswerPostService answerPostService;
     @PostMapping("/post")
-    public ResponseData aPost(@RequestBody A a, HttpSession session) {
+    public ResponseData aPost(@RequestBody Answer answer, HttpSession session) {
         ResponseData responseData=new ResponseData();
         Integer uid = (Integer)session.getAttribute("uid");
         UserInfo userInfo = userInfoMapper.selectById(uid);
         if (userInfo != null){
             String username = userInfo.getUsername();
-            a.setUsername(username);
-            a.setUid(uid);
-            if(answerPostService.doAnswerPost(a)){
+            answer.setUsername(username);
+            answer.setUid(uid);
+            if(answerPostService.doAnswerPost(answer)){
                 responseData.setCode(500);
                 return responseData;
             }

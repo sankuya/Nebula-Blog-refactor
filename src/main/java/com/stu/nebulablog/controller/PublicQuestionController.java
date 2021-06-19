@@ -1,15 +1,12 @@
 package com.stu.nebulablog.controller;
 
 import com.stu.nebulablog.module.ResponseData;
-import com.stu.nebulablog.module.entity.Q;
-import com.stu.nebulablog.service.faq.QuestionGetService;
-import com.stu.nebulablog.service.faq.QuestionSearchService;
-import com.stu.nebulablog.service.faq.QuestionListService;
+import com.stu.nebulablog.module.entity.Question;
+import com.stu.nebulablog.service.question.QuestionGetService;
+import com.stu.nebulablog.service.question.QuestionSearchService;
+import com.stu.nebulablog.service.question.QuestionListService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -24,10 +21,8 @@ public class PublicQuestionController {
     private QuestionGetService questionGetService;
     private static final int MAXSIZE=10;
     @PostMapping("/list")
-    public ResponseData list(@RequestBody Map<String ,String > src) {
+    public ResponseData list(@RequestParam int page,@RequestParam int size) {
         ResponseData responseData=new ResponseData();
-        Integer page = Integer.valueOf(src.get("page"));
-        Integer size=Integer.valueOf(src.get("size"));
         size=Math.min(MAXSIZE,size);
         Map<String ,Object>data= questionListService.doList(size, page);
         responseData.setCode(700);
@@ -35,11 +30,8 @@ public class PublicQuestionController {
         return responseData;
     }
     @PostMapping("/search")
-    public ResponseData getQASearch(@RequestBody Map<String ,String > src) {
+    public ResponseData getQASearch(@RequestParam int page,@RequestParam int size,@RequestParam String keyword) {
         ResponseData responseData=new ResponseData();
-        Integer page = Integer.valueOf(src.get("page"));
-        String keyword =src.get("keyword");
-        Integer size= Integer.valueOf(src.get("size"));
         size=Math.min(size,MAXSIZE);
         Map<String ,Object  >data=questionSearchService.doQuestionSearch(keyword,page,size);
         responseData.setCode(700);
@@ -47,15 +39,14 @@ public class PublicQuestionController {
         return responseData;
     }
     @PostMapping("/get")
-    public ResponseData getQData(@RequestBody Map<String ,String > src) {
+    public ResponseData getQData(@RequestParam int qid) {
         ResponseData responseData=new ResponseData();
-        Integer qid =Integer.valueOf(src.get("qid"));
-        Q q = questionGetService.doGetQuestion(qid);
-        if (q == null){
+        Question question = questionGetService.doGetQuestion(qid);
+        if (question == null){
             responseData.setCode(701);
         }else{
             responseData.setCode(700);
-            responseData.setData(q);
+            responseData.setData(question);
         }
         return responseData;
     }

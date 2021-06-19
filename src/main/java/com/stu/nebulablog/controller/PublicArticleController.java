@@ -1,12 +1,10 @@
 package com.stu.nebulablog.controller;
 
 import com.stu.nebulablog.module.ResponseData;
-import com.stu.nebulablog.service.article.ArticleListGetService;
+import com.stu.nebulablog.service.article.ArticleListService;
+import com.stu.nebulablog.service.article.ArticleSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -15,18 +13,26 @@ import java.util.Map;
 public class PublicArticleController {
 
     @Autowired
-    private ArticleListGetService articleListGetService;
+    private ArticleListService articleListService;
+    @Autowired
+    private ArticleSearchService articleSearchService;
     private static final int MAXSIZE = 10;
 
     @PostMapping("/list")
-    public ResponseData getArticleList(@RequestBody Map<String, String> src) {
+    public ResponseData getArticleList(@RequestParam int page, @RequestParam int size) {
         ResponseData responseData = new ResponseData();
-        Integer page = Integer.valueOf(src.get("page"));
-        Integer size=Integer.valueOf(src.get("size"));
-        if(size==null)size=Integer.MAX_VALUE;
-        size=Math.min(size,MAXSIZE);
-        Map<String, Object> data = articleListGetService.getAllArticleList(page, size);
+        size=Math.min(MAXSIZE,size);
+        Map<String, Object> data = articleListService.listAll(page, size);
         responseData.setCode(200);
+        responseData.setData(data);
+        return responseData;
+    }
+    @PostMapping("/search")
+    public Object search(@RequestParam int page,@RequestParam int size,@RequestParam String keyword) {
+        ResponseData responseData = new ResponseData();
+        size = Math.min(size, MAXSIZE);
+        Map<String, Object> data = articleSearchService.doSearchArticle(keyword, page, size);
+        responseData.setCode(400);
         responseData.setData(data);
         return responseData;
     }

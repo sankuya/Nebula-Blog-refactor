@@ -4,33 +4,29 @@ import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.ResponseData;
 import com.stu.nebulablog.module.entity.UserDetail;
 import com.stu.nebulablog.module.entity.UserInfo;
-import com.stu.nebulablog.service.info.ImageUploadService;
-import com.stu.nebulablog.service.info.InfoChangeService;
-import com.stu.nebulablog.service.info.PhotoUploadService;
-import com.stu.nebulablog.service.info.UserDataGetService;
+import com.stu.nebulablog.service.file.ImageUploadService;
+import com.stu.nebulablog.service.user.UserInfoChangeService;
+import com.stu.nebulablog.service.file.PhotoUploadService;
+import com.stu.nebulablog.service.user.UserGetService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("user")
 public class UserController {
     @Autowired
-    private UserDataGetService userDataGetService;
+    private UserGetService userGetService;
     @Autowired
     private UserInfoMapper userInfoMapper;
     @Autowired
     private ImageUploadService imageUploadService;
     @Autowired
-    private InfoChangeService infoChangeService;
+    private UserInfoChangeService userInfoChangeService;
     @Autowired
     private PhotoUploadService photoUploadService;
 
@@ -39,7 +35,7 @@ public class UserController {
         Integer uid = (Integer) session.getAttribute("uid");
         ResponseData responseData = new ResponseData();
         responseData.setCode(300);
-        responseData.setData(userDataGetService.doGetUserData(uid));
+        responseData.setData(userGetService.doGetUser(uid));
         return responseData;
     }
 
@@ -48,7 +44,7 @@ public class UserController {
         ResponseData responseData = new ResponseData();
         Integer uid = (Integer) session.getAttribute("uid");
         src.setUid(uid);
-        if (infoChangeService.doInfoChange(src)) {
+        if (userInfoChangeService.doInfoChange(src)) {
             responseData.setCode(300);
         } else {
             responseData.setCode(301);

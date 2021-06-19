@@ -3,16 +3,12 @@ package com.stu.nebulablog.controller;
 import com.stu.nebulablog.module.ResponseData;
 import com.stu.nebulablog.module.UserVO;
 import com.stu.nebulablog.module.entity.UserInfo;
-import com.stu.nebulablog.service.info.UserDataGetService;
+import com.stu.nebulablog.service.user.UserGetService;
 import com.stu.nebulablog.service.login.LoginService;
 import com.stu.nebulablog.service.login.RegisterService;
 import com.stu.nebulablog.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +25,7 @@ public class PublicUserController {
     @Autowired
     private RegisterService registerService;
     @Autowired
-    private UserDataGetService userDataGetService;
+    private UserGetService userGetService;
     @PostMapping("login")
     ResponseData login(@RequestBody UserVO userVO, HttpSession httpSession, HttpServletResponse httpServletResponse) {
         ResponseData responseData = new ResponseData();
@@ -49,7 +45,7 @@ public class PublicUserController {
         return responseData;
     }
     @PostMapping("register")
-    ResponseData register(@RequestBody @Validated UserInfo userRegisterVO) {
+    ResponseData register(@RequestBody UserInfo userRegisterVO) {
         ResponseData responseData=new ResponseData();
         int code=registerService.doRegister(userRegisterVO);
         responseData.setCode(code);
@@ -72,11 +68,10 @@ public class PublicUserController {
         responseData.setMsg("ok");
         return responseData;
     }
-    @PostMapping("getUserDataByID")
-    public ResponseData getUserDataByID(@Validated @RequestBody Map<String, String> src) {
-        Integer uid = Integer.valueOf(src.get("uid"));
+    @PostMapping("getUserDataById")
+    public ResponseData getUserDataByID(@RequestParam int uid) {
         ResponseData responseData = new ResponseData();
-        Map<String, Object> data = userDataGetService.doGetUserData(uid);
+        Map<String, Object> data = userGetService.doGetUser(uid);
         if (data == null) {
             responseData.setCode(101);
             responseData.setMsg("uid错误");

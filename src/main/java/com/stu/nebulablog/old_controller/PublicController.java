@@ -2,8 +2,8 @@ package com.stu.nebulablog.old_controller;
 
 import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.entity.UserInfo;
-import com.stu.nebulablog.service.info.ImageUploadService;
-import com.stu.nebulablog.service.info.UserDataGetService;
+import com.stu.nebulablog.service.file.ImageUploadService;
+import com.stu.nebulablog.service.user.UserGetService;
 import com.stu.nebulablog.utils.PasswordUtil;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.Map;
 //@RestController
 public class PublicController {
     @Autowired
-    private UserDataGetService userDataGetService;
+    private UserGetService userGetService;
     @Autowired
     private PasswordUtil passwordUtil;
     @Autowired
@@ -41,14 +41,14 @@ public class PublicController {
                 return res;
             }
         }
-        return userDataGetService.doGetUserData(uid);
+        return userGetService.doGetUser(uid);
     }
 
     @PostMapping("getUserDataByID")
     public Map<String, Object> getUserDataByID(@RequestBody JSONObject src) {
         Integer uid = Integer.valueOf(src.getString("uid"));
         if (uid == null) return null;
-        return userDataGetService.doGetUserData(uid);
+        return userGetService.doGetUser(uid);
     }
 
     @PostMapping("logout")
