@@ -1,10 +1,9 @@
 package com.stu.nebulablog.service.info;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stu.nebulablog.mapper.UserDetailMapper;
 import com.stu.nebulablog.mapper.UserInfoMapper;
-import com.stu.nebulablog.module.UserDetail;
-import com.stu.nebulablog.module.UserInfo;
+import com.stu.nebulablog.module.entity.UserDetail;
+import com.stu.nebulablog.module.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

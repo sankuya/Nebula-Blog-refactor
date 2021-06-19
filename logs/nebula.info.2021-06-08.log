@@ -1,0 +1,167 @@
+2021-06-08 19:18:57 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 10308 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 19:18:57 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 19:18:57 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 19:18:59 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 19:19:03 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 7.246 seconds (JVM running for 10.716)
+2021-06-08 19:19:53 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 5760 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 19:19:53 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 19:19:53 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 19:19:54 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 19:19:57 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.768 seconds (JVM running for 6.016)
+2021-06-08 19:26:13 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 9348 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 19:26:13 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 19:26:13 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 19:26:14 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 19:26:17 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.86 seconds (JVM running for 6.124)
+2021-06-08 19:27:24 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 9056 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 19:27:24 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 19:27:24 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 19:27:25 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 19:27:28 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.655 seconds (JVM running for 5.918)
+2021-06-08 19:47:11 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 14744 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 19:47:11 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 19:47:11 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 19:47:12 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 19:47:16 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 5.215 seconds (JVM running for 6.407)
+2021-06-08 19:47:16 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-08 19:47:18 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-08 19:47:18 [main] DEBUG c.stu.nebulablog.mapper.UserInfoMapper.selectList - ==>  Preparing: SELECT uid,username,password,tel,mail FROM user_info
+2021-06-08 19:47:18 [main] DEBUG c.stu.nebulablog.mapper.UserInfoMapper.selectList - ==> Parameters: 
+2021-06-08 19:47:18 [main] DEBUG c.stu.nebulablog.mapper.UserInfoMapper.selectList - <==      Total: 3
+2021-06-08 19:47:18 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-06-08 19:47:18 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2021-06-08 19:49:24 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 7920 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 19:49:24 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 19:49:24 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 19:49:26 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 19:49:29 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 5.228 seconds (JVM running for 6.434)
+2021-06-08 19:49:46 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 14464 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 19:49:46 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 19:49:46 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 19:49:47 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 19:49:50 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.66 seconds (JVM running for 5.896)
+2021-06-08 20:45:34 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 12820 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 20:45:34 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 20:45:34 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 20:45:35 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 20:45:39 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.974 seconds (JVM running for 6.253)
+2021-06-08 20:46:57 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 2156 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 20:46:57 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 20:46:57 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 20:46:58 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 20:47:02 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.966 seconds (JVM running for 6.178)
+2021-06-08 20:47:50 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 14280 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 20:47:50 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 20:47:50 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 20:47:51 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 20:47:54 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.865 seconds (JVM running for 6.051)
+2021-06-08 20:49:56 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 10408 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 20:49:56 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 20:49:56 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 20:49:57 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 20:50:01 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 5.233 seconds (JVM running for 6.487)
+2021-06-08 20:57:09 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 13572 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 20:57:09 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 20:57:09 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 20:57:10 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 20:57:14 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 5.013 seconds (JVM running for 6.263)
+2021-06-08 20:57:41 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 14244 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 20:57:41 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 20:57:41 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 20:57:42 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 20:57:45 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.977 seconds (JVM running for 6.202)
+2021-06-08 20:58:32 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 8572 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 20:58:32 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 20:58:32 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 20:58:33 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 20:58:36 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 5.042 seconds (JVM running for 6.352)
+2021-06-08 21:03:05 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 15324 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:03:05 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:03:05 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:03:06 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:03:10 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.953 seconds (JVM running for 6.18)
+2021-06-08 21:06:28 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 11876 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:06:28 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:06:28 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:06:29 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:06:33 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.882 seconds (JVM running for 6.094)
+2021-06-08 21:08:51 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 15728 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:08:51 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:08:51 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:08:52 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:08:55 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.811 seconds (JVM running for 5.986)
+2021-06-08 21:09:34 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 15448 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:09:34 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:09:34 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:09:35 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:09:38 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.813 seconds (JVM running for 6.044)
+2021-06-08 21:10:58 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 4268 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:10:58 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:10:58 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:10:59 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:11:03 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.934 seconds (JVM running for 6.161)
+2021-06-08 21:12:32 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 11860 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:12:32 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:12:32 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:12:33 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:12:37 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 5.152 seconds (JVM running for 6.382)
+2021-06-08 21:13:14 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 16124 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:13:14 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:13:14 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:13:15 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:13:18 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.878 seconds (JVM running for 6.113)
+2021-06-08 21:13:37 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 8472 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:13:37 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:13:37 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:13:38 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:13:42 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.947 seconds (JVM running for 6.168)
+2021-06-08 21:18:26 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 15564 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:18:26 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:18:26 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:18:27 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:18:30 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.842 seconds (JVM running for 6.343)
+2021-06-08 21:19:24 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 15484 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:19:24 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:19:24 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:19:25 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:19:29 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.603 seconds (JVM running for 5.794)
+2021-06-08 21:23:05 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 16152 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:23:05 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:23:05 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:23:06 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:23:09 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.889 seconds (JVM running for 6.096)
+2021-06-08 21:24:02 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 15808 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:24:02 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:24:02 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:24:03 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:24:06 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 5.043 seconds (JVM running for 6.251)
+2021-06-08 21:25:52 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 14244 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:25:52 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:25:52 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:25:53 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:25:57 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.993 seconds (JVM running for 6.215)
+2021-06-08 21:26:52 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 15744 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:26:52 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:26:52 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:26:53 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:26:56 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.932 seconds (JVM running for 6.145)
+2021-06-08 21:27:20 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 2356 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:27:20 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:27:20 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:27:21 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:27:24 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.918 seconds (JVM running for 6.321)
+2021-06-08 21:30:07 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 11852 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:30:07 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:30:07 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:30:08 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:30:11 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.886 seconds (JVM running for 6.139)
+2021-06-08 21:33:30 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 13360 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:33:30 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:33:30 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:33:31 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:33:35 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 5.034 seconds (JVM running for 6.237)
+2021-06-08 21:35:22 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 16380 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-08 21:35:22 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - The following profiles are active: @profiles.active@
+2021-06-08 21:35:22 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-08 21:35:23 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-08 21:35:26 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.621 seconds (JVM running for 5.818)

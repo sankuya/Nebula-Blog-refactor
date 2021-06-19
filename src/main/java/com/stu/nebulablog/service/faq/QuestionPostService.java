@@ -2,7 +2,7 @@ package com.stu.nebulablog.service.faq;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stu.nebulablog.mapper.QMapper;
-import com.stu.nebulablog.module.Q;
+import com.stu.nebulablog.module.entity.Q;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ public class QuestionPostService {
     @Autowired
     private QMapper qMapper;
 
-    public boolean doQPost(Q q) {
+    public boolean doPost(Q q) {
         QueryWrapper<Q> qQueryWrapper = new QueryWrapper<>();
         qQueryWrapper.eq("uid", q.getUid());
         qQueryWrapper.eq("title", q.getTitle());

@@ -1,4 +1,4 @@
-package com.stu.nebulablog.module;
+package com.stu.nebulablog.module.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -7,21 +7,19 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 @Data
-public class Q {
+public class A{
     @TableId(type = IdType.AUTO)
-    private Integer q_id;
+    private Integer aid;
     private Integer uid;
-    private String title;
-    private String author;
-    private Integer status;
     private String content;
     @TableField(update = "now()",fill = FieldFill.INSERT_UPDATE)
-    private Date date;
-    private Integer answer;
+    private Timestamp date;
+    private Integer qid;
+    private String author;
+    private String username;
     public int hashCode(){
-        return q_id;
+        return aid;
     }
 }

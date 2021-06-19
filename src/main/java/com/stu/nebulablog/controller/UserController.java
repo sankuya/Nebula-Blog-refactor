@@ -1,0 +1,90 @@
+package com.stu.nebulablog.controller;
+
+import com.stu.nebulablog.mapper.UserInfoMapper;
+import com.stu.nebulablog.module.ResponseData;
+import com.stu.nebulablog.module.entity.UserDetail;
+import com.stu.nebulablog.module.entity.UserInfo;
+import com.stu.nebulablog.service.info.ImageUploadService;
+import com.stu.nebulablog.service.info.InfoChangeService;
+import com.stu.nebulablog.service.info.PhotoUploadService;
+import com.stu.nebulablog.service.info.UserDataGetService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+@RequestMapping("user")
+public class UserController {
+    @Autowired
+    private UserDataGetService userDataGetService;
+    @Autowired
+    private UserInfoMapper userInfoMapper;
+    @Autowired
+    private ImageUploadService imageUploadService;
+    @Autowired
+    private InfoChangeService infoChangeService;
+    @Autowired
+    private PhotoUploadService photoUploadService;
+
+    @PostMapping("getUserData")
+    public ResponseData getUserData(HttpSession session) {
+        Integer uid = (Integer) session.getAttribute("uid");
+        ResponseData responseData = new ResponseData();
+        responseData.setCode(300);
+        responseData.setData(userDataGetService.doGetUserData(uid));
+        return responseData;
+    }
+
+    @PostMapping("/infoChange")
+    public ResponseData infoChange(@RequestBody UserDetail src, HttpSession session) {
+        ResponseData responseData = new ResponseData();
+        Integer uid = (Integer) session.getAttribute("uid");
+        src.setUid(uid);
+        if (infoChangeService.doInfoChange(src)) {
+            responseData.setCode(300);
+        } else {
+            responseData.setCode(301);
+        }
+        return responseData;
+    }
+
+    @PostMapping("/uploadPhoto")
+    public Object uploadPhoto(@RequestParam("file") MultipartFile multipartFile, HttpSession session) {
+        ResponseData responseData = new ResponseData();
+        Integer uid = (Integer) session.getAttribute("uid");
+        UserInfo userInfo = userInfoMapper.selectById(uid);
+        if (userInfo != null && photoUploadService.uploadPhoto(userInfo, multipartFile)) {
+            responseData.setCode(300);
+            responseData.setData("../" + userInfo.getUsername() + "/ProfilePhoto.jpg");
+        } else {
+            responseData.setCode(301);
+        }
+        return responseData;
+    }
+    @PostMapping("uploadImage")
+    public ResponseData uploadImage(HttpServletRequest httpServletRequest, HttpSession session) {
+        ResponseData responseData = new ResponseData();
+        MultipartFile multipartFile = ((MultipartHttpServletRequest) httpServletRequest).getFiles("editormd-image-file").get(0);
+        try {
+            Integer uid = (Integer) session.getAttribute("uid");
+            UserInfo userInfo = userInfoMapper.selectById(uid);
+            if (userInfo != null && imageUploadService.uploadPhoto(userInfo, multipartFile)) {
+                responseData.setCode(300);
+                responseData.setData("/user/" + userInfo.getUsername() + "/img/" + multipartFile.getOriginalFilename());
+            } else {
+                responseData.setCode(301);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return responseData;
+    }
+}

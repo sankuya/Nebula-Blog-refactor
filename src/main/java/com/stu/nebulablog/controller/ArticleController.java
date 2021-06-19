@@ -1,6 +1,7 @@
 package com.stu.nebulablog.controller;
 
-import com.stu.nebulablog.module.Article;
+import com.stu.nebulablog.module.ResponseData;
+import com.stu.nebulablog.module.entity.Article;
 import com.stu.nebulablog.service.article.*;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,13 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/article")
+@RequestMapping("article")
 public class ArticleController {
+    @Autowired
+    private ArticleListGetService articleListGetService;
+    @Autowired
+    private ArticlePostService articlePostService;
+
     @Autowired
     private ArticleDeleteService articleDeleteService;
     @Autowired
@@ -22,67 +28,86 @@ public class ArticleController {
     @Autowired
     private ArticleDataGetService articleDataGetService;
     @Autowired
-    private ArticleListGetService articleListGetService;
-    @Autowired
     private ArticleSearchService articleSearchService;
-    @Autowired
-    private ArticlePostService articlePostService;
-    private final int size = 12;
+    private static final int MAXSIZE = 10;
 
-    @PostMapping("/deleteArticle")
-    public Object deleteArticle(@RequestBody JSONObject src, HttpSession session) {
-        Integer uid = (Integer) session.getAttribute("userid");
-        Integer art_id = Integer.valueOf(src.getString("id"));
-        if (articleDeleteService.doDeleteArticle(uid, art_id)) return "ok";
-        return "wrong";
-    }
-
-    @PostMapping("/editArticle")
-    public Object editArticle(@RequestBody Article article, HttpSession session) {
-        Integer uid = (Integer) session.getAttribute("userid");
-        if (uid != article.getUid()) return "wrong";
-        if (articleEditService.doEditArticle(article)) return "ok";
-        return "wrong";
-    }
-
-    @PostMapping("/getArticleData")
-    public Object getArticleData(@RequestBody JSONObject src) {
-        Integer art_id = Integer.valueOf(src.getString("artid"));
-        Article article = articleDataGetService.doGetArticleData(art_id);
-        if (article != null) return article;
-        return "没有这篇文章";
-    }
-
-    @PostMapping("/getArticleList")
-    public Object getArticleList(@RequestBody JSONObject src, HttpSession session) {
-        String type = src.getString("type");
-        int page = src.getInt("page");
-        if (type == null) return null;
-        Map<String, Object> res;
-        if (type.equals("all")) {
-            res = articleListGetService.getAllArticleList(page, size);
+    @PostMapping("/delete")
+    public ResponseData delete(@RequestBody Map<String, String> src, HttpSession session) {
+        ResponseData responseData = new ResponseData();
+        Integer uid = (Integer) session.getAttribute("uid");
+        Integer art_id = Integer.valueOf(src.get("id"));
+        if (articleDeleteService.doDeleteArticle(uid, art_id)) {
+            responseData.setCode(400);
         } else {
-            Integer uid = (Integer) session.getAttribute("userid");
-            if (uid == null) return null;
-            res = articleListGetService.getArticleListByUserId(page, uid, size);
+            responseData.setCode(401);
         }
-        return res;
+        return responseData;
     }
 
-    @PostMapping("/getSearchResult")
-    public Object getSearchResult(@RequestBody JSONObject src) {
-        Integer p = Integer.valueOf(src.getString("page"));
-        String keyword = src.getString("keyword");
-        Map<String, Object> res = articleSearchService.doSearchArticle(keyword, p, size);
-        return res;
+    @PostMapping("/edit")
+    public ResponseData edit(@RequestBody Article article, HttpSession session) {
+        ResponseData responseData = new ResponseData();
+        Integer uid = (Integer) session.getAttribute("uid");
+        if (uid.equals(article.getUid()) && articleEditService.doEditArticle(article)) {
+            responseData.setCode(400);
+        } else {
+            responseData.setCode(401);
+        }
+        return responseData;
     }
 
-    @PostMapping("/postArticle")
-    public Object postArticle(@RequestBody Article srcArticle, HttpSession session) {
-        Integer uid = (Integer) session.getAttribute("userid");
-        if (uid == null) return "wrong";
+    @PostMapping("/get")
+    public ResponseData get(@RequestBody Map<String, String> src) {
+        ResponseData responseData = new ResponseData();
+        Integer artId = Integer.valueOf(src.get("artId"));
+        Article article = articleDataGetService.doGetArticleData(artId);
+        if (article != null) {
+            responseData.setCode(400);
+            responseData.setData(article);
+        } else {
+            responseData.setCode(401);
+        }
+        return responseData;
+    }
+
+    @PostMapping("/search")
+    public Object search(@RequestBody Map<String, String> src) {
+        ResponseData responseData = new ResponseData();
+        Integer p = Integer.valueOf(src.get("page"));
+        String keyword = src.get("keyword");
+        Integer size = Integer.valueOf(src.get("size"));
+        size = Math.min(size, MAXSIZE);
+        Map<String, Object> data = articleSearchService.doSearchArticle(keyword, p, size);
+        responseData.setCode(400);
+        responseData.setData(data);
+        return responseData;
+    }
+
+    @PostMapping("/myList")
+    public ResponseData getArticleList(@RequestBody Map<String, String> src, HttpSession session) {
+        ResponseData responseData = new ResponseData();
+        Integer page = Integer.valueOf(src.get("page"));
+        Integer uid = (Integer) session.getAttribute("uid");
+        Integer size = Integer.valueOf(src.get("size"));
+        if (size == null)
+            size = Integer.MAX_VALUE;
+        size = Math.min(size, MAXSIZE);
+        Map<String, Object> data = articleListGetService.getArticleListByUserId(page, uid, size);
+        responseData.setCode(400);
+        responseData.setData(data);
+        return responseData;
+    }
+
+    @PostMapping("/post")
+    public ResponseData postArticle(@RequestBody Article srcArticle, HttpSession session) {
+        ResponseData responseData = new ResponseData();
+        Integer uid = (Integer) session.getAttribute("uid");
         srcArticle.setUid(uid);
-        if (articlePostService.doPostArticle(srcArticle)) return "ok";
-        else return "wrong";
+        if (articlePostService.doPostArticle(srcArticle)) {
+            responseData.setCode(400);
+        } else {
+            responseData.setCode(401);
+        }
+        return responseData;
     }
 }

@@ -3,8 +3,8 @@ package com.stu.nebulablog.service.login;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stu.nebulablog.mapper.UserDetailMapper;
 import com.stu.nebulablog.mapper.UserInfoMapper;
-import com.stu.nebulablog.module.UserDetail;
-import com.stu.nebulablog.module.UserInfo;
+import com.stu.nebulablog.module.entity.UserDetail;
+import com.stu.nebulablog.module.entity.UserInfo;
 import com.stu.nebulablog.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 @Service
-public class RegistService {
+public class RegisterService {
     private static String preUrl;
     private static String defaultProfilePhotoPath;
     private static File defaultProfilePhotoFile;
@@ -33,20 +33,20 @@ public class RegistService {
         this.defaultProfilePhotoFile = new File(defaultProfilePhotoPath);
     }
 
-    public String doRegist(UserInfo userRegistVO) {
-        userRegistVO.setPassword(passwordUtil.passwordEncoder(userRegistVO.getPassword()));
+    public int doRegister(UserInfo userRegisterVO) {
+        userRegisterVO.setPassword(passwordUtil.passwordEncoder(userRegisterVO.getPassword()));
         QueryWrapper<UserInfo> userInfoQueryWrapper = new QueryWrapper<>();
         userInfoQueryWrapper
-                .eq("username", userRegistVO.getUsername())
+                .eq("username", userRegisterVO.getUsername())
                 .or()
-                .eq("mail", userRegistVO.getMail())
+                .eq("mail", userRegisterVO.getMail())
                 .or()
-                .eq("tel", userRegistVO.getTel());
+                .eq("tel", userRegisterVO.getTel());
         UserInfo userInfo = userInfoMapper.selectOne(userInfoQueryWrapper);
         if (userInfo != null) {
-            return "该用户名已存在";
+            return 201;//"该用户名已存在"
         }
-        userInfo = userRegistVO;
+        userInfo = userRegisterVO;
         UserDetail userDetail = new UserDetail();
         userDetail.setBlogname(userInfo.getUsername() + "的小天地");
         userDetail.setGender("男");
@@ -58,12 +58,12 @@ public class RegistService {
             File imgFile = new File(imgDirectoryPath, "ProfilePhoto.jpg");
             try {
                 Files.copy(defaultProfilePhotoFile.toPath(), imgFile.toPath());
-                return "注册成功";
+                return 200;//"注册成功"
             } catch (IOException e) {
                 e.printStackTrace();
-                return "注册成功可是初始化头像失败了qwq";
+                return 203;//"注册成功可是初始化头像失败了qwq";
             }
         }
-        return "未知错误";
+        return 202;//"未知错误";
     }
 }

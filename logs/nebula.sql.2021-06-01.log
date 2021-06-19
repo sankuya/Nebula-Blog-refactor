@@ -1,0 +1,14 @@
+2021-06-01 22:51:09 org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-01 22:51:19 c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM article
+2021-06-01 22:51:19 c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-01 22:51:19 c.s.n.mapper.ArticleMapper.selectPage_mpCount - <==      Total: 1
+2021-06-01 22:51:19 com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==>  Preparing: SELECT art_id,title,author,date FROM article LIMIT ?
+2021-06-01 22:51:19 com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==> Parameters: 10(Long)
+2021-06-01 22:51:19 com.stu.nebulablog.mapper.ArticleMapper.selectPage - <==      Total: 6
+2021-06-01 22:52:35 org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-01 22:52:41 c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM article
+2021-06-01 22:52:41 c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-01 22:52:41 c.s.n.mapper.ArticleMapper.selectPage_mpCount - <==      Total: 1
+2021-06-01 22:52:41 com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==>  Preparing: SELECT art_id,title,author,date FROM article LIMIT ?
+2021-06-01 22:52:41 com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==> Parameters: 10(Long)
+2021-06-01 22:52:41 com.stu.nebulablog.mapper.ArticleMapper.selectPage - <==      Total: 6

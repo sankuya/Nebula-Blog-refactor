@@ -1,9 +1,9 @@
-package com.stu.nebulablog.controller;
+package com.stu.nebulablog.old_controller;
 
-import com.stu.nebulablog.module.UserInfo;
+import com.stu.nebulablog.module.entity.UserInfo;
 import com.stu.nebulablog.module.UserVO;
 import com.stu.nebulablog.service.login.LoginService;
-import com.stu.nebulablog.service.login.RegistService;
+import com.stu.nebulablog.service.login.RegisterService;
 import com.stu.nebulablog.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -18,13 +18,13 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
-@RequestMapping("login")
+//@RequestMapping("login")
 @RestController
 public class LoginController {
     @Autowired
     LoginService loginService;
     @Autowired
-    RegistService registService;
+    RegisterService registerService;
     @Autowired
     PasswordUtil passwordUtil;
 
@@ -48,6 +48,6 @@ public class LoginController {
 
     @PostMapping("/regist")
     public String regist(@RequestBody @Validated UserInfo userRegistVO) {
-        return registService.doRegist(userRegistVO);
+        return String.valueOf(registerService.doRegister(userRegistVO));
     }
 }

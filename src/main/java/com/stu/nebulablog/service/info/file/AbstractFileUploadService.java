@@ -1,6 +1,6 @@
 package com.stu.nebulablog.service.info.file;
 
-import com.stu.nebulablog.module.UserInfo;
+import com.stu.nebulablog.module.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

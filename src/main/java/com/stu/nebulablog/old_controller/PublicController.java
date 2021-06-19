@@ -1,7 +1,7 @@
-package com.stu.nebulablog.controller;
+package com.stu.nebulablog.old_controller;
 
 import com.stu.nebulablog.mapper.UserInfoMapper;
-import com.stu.nebulablog.module.UserInfo;
+import com.stu.nebulablog.module.entity.UserInfo;
 import com.stu.nebulablog.service.info.ImageUploadService;
 import com.stu.nebulablog.service.info.UserDataGetService;
 import com.stu.nebulablog.utils.PasswordUtil;
@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RequestMapping("/public")
-@RestController
+//@RestController
 public class PublicController {
     @Autowired
     private UserDataGetService userDataGetService;

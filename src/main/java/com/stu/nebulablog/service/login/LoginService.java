@@ -2,12 +2,11 @@ package com.stu.nebulablog.service.login;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stu.nebulablog.mapper.UserInfoMapper;
-import com.stu.nebulablog.module.UserInfo;
+import com.stu.nebulablog.module.entity.UserInfo;
 import com.stu.nebulablog.module.UserVO;
 import com.stu.nebulablog.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
 
 @Service
 public class LoginService {

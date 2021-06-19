@@ -2,7 +2,7 @@ package com.stu.nebulablog.service.faq;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stu.nebulablog.mapper.AMapper;
-import com.stu.nebulablog.module.A;
+import com.stu.nebulablog.module.entity.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

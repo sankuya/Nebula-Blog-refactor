@@ -1,0 +1,44 @@
+2021-06-01 22:51:09 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-01 22:51:09 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 21164 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-01 22:51:09 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - The following profiles are active: dev
+2021-06-01 22:51:09 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-01 22:51:10 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-01 22:51:10 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-01 22:51:10 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-01 22:51:10 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-01 22:51:11 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-01 22:51:11 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 3.172 seconds (JVM running for 4.373)
+2021-06-01 22:51:18 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-01 22:51:19 [http-nio-8080-exec-2] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [569] milliseconds.
+2021-06-01 22:51:19 [http-nio-8080-exec-1] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [610] milliseconds.
+2021-06-01 22:51:19 [http-nio-8080-exec-3] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [569] milliseconds.
+2021-06-01 22:51:19 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-01 22:51:19 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-01 22:51:19 [http-nio-8080-exec-2] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM article
+2021-06-01 22:51:19 [http-nio-8080-exec-2] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-01 22:51:19 [http-nio-8080-exec-2] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - <==      Total: 1
+2021-06-01 22:51:19 [http-nio-8080-exec-2] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==>  Preparing: SELECT art_id,title,author,date FROM article LIMIT ?
+2021-06-01 22:51:19 [http-nio-8080-exec-2] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==> Parameters: 10(Long)
+2021-06-01 22:51:19 [http-nio-8080-exec-2] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - <==      Total: 6
+2021-06-01 22:52:34 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-01 22:52:34 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 9352 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-01 22:52:34 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - The following profiles are active: @profiles.active@
+2021-06-01 22:52:35 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-01 22:52:35 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-01 22:52:35 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-01 22:52:35 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-01 22:52:35 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-01 22:52:37 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-01 22:52:37 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 3.403 seconds (JVM running for 4.62)
+2021-06-01 22:52:40 [http-nio-8080-exec-3] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-01 22:52:40 [http-nio-8080-exec-3] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [543] milliseconds.
+2021-06-01 22:52:40 [http-nio-8080-exec-2] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [543] milliseconds.
+2021-06-01 22:52:40 [http-nio-8080-exec-1] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [590] milliseconds.
+2021-06-01 22:52:40 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-01 22:52:41 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-01 22:52:41 [http-nio-8080-exec-2] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM article
+2021-06-01 22:52:41 [http-nio-8080-exec-2] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-01 22:52:41 [http-nio-8080-exec-2] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - <==      Total: 1
+2021-06-01 22:52:41 [http-nio-8080-exec-2] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==>  Preparing: SELECT art_id,title,author,date FROM article LIMIT ?
+2021-06-01 22:52:41 [http-nio-8080-exec-2] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==> Parameters: 10(Long)
+2021-06-01 22:52:41 [http-nio-8080-exec-2] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - <==      Total: 6

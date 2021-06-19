@@ -1,0 +1,12 @@
+2021-06-18 19:35:13 org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-18 19:38:10 c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM article
+2021-06-18 19:38:10 c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-18 19:38:10 c.s.n.mapper.ArticleMapper.selectPage_mpCount - <==      Total: 1
+2021-06-18 19:38:10 com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==>  Preparing: SELECT art_id,title,author,date FROM article LIMIT ?
+2021-06-18 19:38:10 com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==> Parameters: 10(Long)
+2021-06-18 19:38:11 com.stu.nebulablog.mapper.ArticleMapper.selectPage - <==      Total: 6
+2021-06-18 19:39:58 org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-18 19:41:53 org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-18 19:45:42 org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-18 19:58:43 org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-18 20:00:45 org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.

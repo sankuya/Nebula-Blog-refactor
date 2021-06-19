@@ -1,8 +1,8 @@
-package com.stu.nebulablog.controller;
+package com.stu.nebulablog.old_controller;
 
 import com.stu.nebulablog.mapper.UserInfoMapper;
-import com.stu.nebulablog.module.UserDetail;
-import com.stu.nebulablog.module.UserInfo;
+import com.stu.nebulablog.module.entity.UserDetail;
+import com.stu.nebulablog.module.entity.UserInfo;
 import com.stu.nebulablog.service.article.ArticleListGetService;
 import com.stu.nebulablog.service.info.InfoChangeService;
 import com.stu.nebulablog.service.info.file.AbstractFileUploadService;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController
+//@RestController
 @RequestMapping("/home")
 public class HomeController {
     @Autowired
@@ -26,7 +26,7 @@ public class HomeController {
     private UserInfoMapper userInfoMapper;
     @Autowired
     private AbstractFileUploadService photoUploadService;
-    private final int size = 10;
+    private static final int size = 10;
 
     @PostMapping("/getArticleList")
     public Object getArticleList(@RequestBody JSONObject src, HttpSession session) {

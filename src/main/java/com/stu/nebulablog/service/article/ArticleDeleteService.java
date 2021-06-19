@@ -1,9 +1,8 @@
 package com.stu.nebulablog.service.article;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stu.nebulablog.mapper.ArticleMapper;
-import com.stu.nebulablog.module.Article;
+import com.stu.nebulablog.module.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
