@@ -9,7 +9,9 @@ import com.stu.nebulablog.service.info.file.AbstractFileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,7 +55,8 @@ public class HomeController {
     }
 
     @PostMapping("/uploadPhoto")
-    public Object uploadPhoto(@RequestParam("file") MultipartFile multipartFile, HttpSession session) {
+    public Object uploadPhoto(HttpServletRequest httpServletRequest, HttpSession session) {
+        MultipartFile multipartFile=((MultipartHttpServletRequest)httpServletRequest).getFiles("file").get(0);
         Map<String, String> res = new HashMap<>();
         Integer uid = (Integer) session.getAttribute("userid");
         UserInfo userInfo = userInfoMapper.selectById(uid);

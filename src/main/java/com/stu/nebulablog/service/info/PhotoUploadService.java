@@ -14,7 +14,7 @@ public class PhotoUploadService extends AbstractFileUploadService {
 
     @Override
     protected boolean doUploadPhoto(String prePath, MultipartFile multipartFile) {
-        String path=prePath+ "ProfilePhoto.jpg";
+        String path=prePath+ "/ProfilePhoto.jpg";
         try {
             BufferedImage image = ImageIO.read(multipartFile.getInputStream());
             int size = Math.min(image.getHeight(), image.getWidth());
