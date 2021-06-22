@@ -1,5 +1,6 @@
 package com.stu.nebulablog.service.question;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.stu.nebulablog.mapper.QuestionMapper;
@@ -19,13 +20,13 @@ public class QuestionSearchService {
 
     public Map<String, Object> doQuestionSearch(String keyword, int page, int size) {
         Page<Question> qPage = new Page<>(page, size);
-        QueryWrapper<Question> qQueryWrapper = new QueryWrapper<>();
-        qQueryWrapper
-                .select("q_id","title","author","date","answer","status")
-                .like("title",keyword)
+        LambdaQueryWrapper<Question>questionLambdaQueryWrapper=new LambdaQueryWrapper<>();
+        questionLambdaQueryWrapper
+                .select(Question::getQuestionId,Question::getTitle,Question::getAuthor,Question::getDate,Question::getAnswer,Question::getStatus)
+                .like(Question::getTitle,keyword)
                 .or()
-                .like("author",keyword)
-                .orderByDesc("q_id");
-        return pageToMapUtil.getMapFromPageWithPages(questionMapper.selectPage(qPage, qQueryWrapper));
+                .like(Question::getContent,keyword)
+                .orderByDesc(Question::getQuestionId);
+        return pageToMapUtil.getMapFromPageWithPages(questionMapper.selectPage(qPage, questionLambdaQueryWrapper));
     }
 }

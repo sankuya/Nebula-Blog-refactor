@@ -20,7 +20,7 @@ public class PublicQuestionController {
     @Autowired
     private QuestionGetService questionGetService;
     private static final int MAXSIZE=10;
-    @PostMapping("/list")
+    @GetMapping("/list")
     public ResponseData list(@RequestParam int page,@RequestParam int size) {
         ResponseData responseData=new ResponseData();
         size=Math.min(MAXSIZE,size);
@@ -29,8 +29,8 @@ public class PublicQuestionController {
         responseData.setData(data);
         return responseData;
     }
-    @PostMapping("/search")
-    public ResponseData getQASearch(@RequestParam int page,@RequestParam int size,@RequestParam String keyword) {
+    @GetMapping("/search")
+    public ResponseData search(@RequestParam int page,@RequestParam int size,@RequestParam String keyword) {
         ResponseData responseData=new ResponseData();
         size=Math.min(size,MAXSIZE);
         Map<String ,Object  >data=questionSearchService.doQuestionSearch(keyword,page,size);
@@ -38,10 +38,10 @@ public class PublicQuestionController {
         responseData.setData(data);
         return responseData;
     }
-    @PostMapping("/get")
-    public ResponseData getQData(@RequestParam int qid) {
+    @GetMapping("/get")
+    public ResponseData get(@RequestParam int questionId) {
         ResponseData responseData=new ResponseData();
-        Question question = questionGetService.doGetQuestion(qid);
+        Question question = questionGetService.doGetQuestion(questionId);
         if (question == null){
             responseData.setCode(701);
         }else{

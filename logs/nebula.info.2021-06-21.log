@@ -1,0 +1,891 @@
+2021-06-21 20:55:58 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 4788 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 20:55:58 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 20:55:58 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 20:55:59 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 20:55:59 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 20:55:59 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 20:55:59 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 20:55:59 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 20:56:01 [restartedMain] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 20:56:01 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 20:56:01 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 4.078 seconds (JVM running for 5.569)
+2021-06-21 20:56:30 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 20:56:30 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 20:56:31 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 20:56:31 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM article
+2021-06-21 20:56:31 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-21 20:56:31 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 20:56:31 [http-nio-8080-exec-1] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==>  Preparing: SELECT art_id,title,author,date FROM article LIMIT ?
+2021-06-21 20:56:31 [http-nio-8080-exec-1] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==> Parameters: 5(Long)
+2021-06-21 20:56:31 [http-nio-8080-exec-1] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - <==      Total: 5
+2021-06-21 20:56:31 [http-nio-8080-exec-1] ERROR o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Duplicate key 0 (attempted merging values Article(articleId=0, uid=0, author=root, title=test, content=null, date=2021-05-19) and Article(articleId=0, uid=0, author=root, title=testdsaf, content=null, date=2021-05-20))] with root cause
+java.lang.IllegalStateException: Duplicate key 0 (attempted merging values Article(articleId=0, uid=0, author=root, title=test, content=null, date=2021-05-19) and Article(articleId=0, uid=0, author=root, title=testdsaf, content=null, date=2021-05-20))
+	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
+	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
+	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1654)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at com.stu.nebulablog.utils.PageToMapUtil.getMapFromPageWithPages(PageToMapUtil.java:15)
+	at com.stu.nebulablog.service.article.ArticleListService.listAll(ArticleListService.java:25)
+	at com.stu.nebulablog.controller.PublicArticleController.getArticleList(PublicArticleController.java:25)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:887)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1684)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2021-06-21 20:56:32 [http-nio-8080-exec-1] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [884] milliseconds.
+2021-06-21 20:58:00 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 17656 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 20:58:00 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 20:58:00 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 20:58:01 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 20:58:01 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 20:58:01 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 20:58:01 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 20:58:01 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 20:58:03 [restartedMain] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 20:58:03 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 20:58:03 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 4.2 seconds (JVM running for 5.828)
+2021-06-21 20:58:04 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 20:58:04 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 20:58:04 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 20:58:04 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM article
+2021-06-21 20:58:04 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-21 20:58:04 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 20:58:04 [http-nio-8080-exec-1] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==>  Preparing: SELECT art_id,title,author,date FROM article LIMIT ?
+2021-06-21 20:58:04 [http-nio-8080-exec-1] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==> Parameters: 5(Long)
+2021-06-21 20:58:04 [http-nio-8080-exec-1] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - <==      Total: 5
+2021-06-21 20:58:04 [http-nio-8080-exec-1] ERROR o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.IllegalStateException: Duplicate key 0 (attempted merging values Article(articleId=0, uid=0, author=root, title=test, content=null, date=2021-05-19) and Article(articleId=0, uid=0, author=root, title=testdsaf, content=null, date=2021-05-20))] with root cause
+java.lang.IllegalStateException: Duplicate key 0 (attempted merging values Article(articleId=0, uid=0, author=root, title=test, content=null, date=2021-05-19) and Article(articleId=0, uid=0, author=root, title=testdsaf, content=null, date=2021-05-20))
+	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:133)
+	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:180)
+	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1654)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at com.stu.nebulablog.utils.PageToMapUtil.getMapFromPageWithPages(PageToMapUtil.java:15)
+	at com.stu.nebulablog.service.article.ArticleListService.listAll(ArticleListService.java:25)
+	at com.stu.nebulablog.controller.PublicArticleController.getArticleList(PublicArticleController.java:25)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:887)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1684)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2021-06-21 20:58:05 [http-nio-8080-exec-1] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [890] milliseconds.
+2021-06-21 21:07:08 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 5816 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 21:07:08 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 21:07:08 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 21:07:08 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 21:07:09 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 21:07:09 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 21:07:09 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 21:07:09 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 21:07:11 [restartedMain] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 21:07:12 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 21:07:12 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 4.676 seconds (JVM running for 6.678)
+2021-06-21 21:07:12 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 21:07:12 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 21:07:12 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 21:07:12 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM article
+2021-06-21 21:07:13 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-21 21:07:13 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 21:07:13 [http-nio-8080-exec-1] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==>  Preparing: SELECT articleId,title,author,date FROM article LIMIT ?
+2021-06-21 21:07:13 [http-nio-8080-exec-1] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==> Parameters: 5(Long)
+2021-06-21 21:07:13 [http-nio-8080-exec-1] ERROR o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column 'articleId' in 'field list'
+### The error may exist in com/stu/nebulablog/mapper/ArticleMapper.java (best guess)
+### The error may involve defaultParameterMap
+### The error occurred while setting parameters
+### SQL: SELECT   articleId,title,author,date   FROM article LIMIT ?
+### Cause: java.sql.SQLSyntaxErrorException: Unknown column 'articleId' in 'field list'
+; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Unknown column 'articleId' in 'field list'] with root cause
+java.sql.SQLSyntaxErrorException: Unknown column 'articleId' in 'field list'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:370)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59)
+	at com.sun.proxy.$Proxy97.execute(Unknown Source)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:64)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:63)
+	at com.sun.proxy.$Proxy95.query(Unknown Source)
+	at com.baomidou.mybatisplus.core.executor.MybatisSimpleExecutor.doQuery(MybatisSimpleExecutor.java:69)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:325)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156)
+	at com.baomidou.mybatisplus.core.executor.MybatisCachingExecutor.query(MybatisCachingExecutor.java:165)
+	at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:81)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:61)
+	at com.sun.proxy.$Proxy93.query(Unknown Source)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:147)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:140)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:426)
+	at com.sun.proxy.$Proxy60.selectList(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:223)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.executeForIPage(MybatisMapperMethod.java:122)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:86)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:148)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
+	at com.sun.proxy.$Proxy77.selectPage(Unknown Source)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:344)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:198)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:215)
+	at com.sun.proxy.$Proxy78.selectPage(Unknown Source)
+	at com.stu.nebulablog.service.article.ArticleListService.listAll(ArticleListService.java:24)
+	at com.stu.nebulablog.controller.PublicArticleController.getArticleList(PublicArticleController.java:25)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:887)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1684)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2021-06-21 21:07:14 [http-nio-8080-exec-1] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [908] milliseconds.
+2021-06-21 21:08:21 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 18120 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 21:08:21 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 21:08:21 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 21:08:21 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 21:08:22 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 21:08:22 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 21:08:22 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 21:08:22 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 21:08:24 [restartedMain] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 21:08:25 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 21:08:25 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 4.868 seconds (JVM running for 6.726)
+2021-06-21 21:11:20 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 18352 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 21:11:20 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - No active profile set, falling back to default profiles: default
+2021-06-21 21:11:20 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 21:11:21 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 21:11:24 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 21:11:25 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 5.329 seconds (JVM running for 9.01)
+2021-06-21 21:11:26 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 21:11:26 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 21:11:26 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id AS articleId,uid,author,title,content,date FROM article
+2021-06-21 21:11:26 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:11:26 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:11:27 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-06-21 21:11:27 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2021-06-21 21:12:41 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 4528 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 21:12:41 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - No active profile set, falling back to default profiles: default
+2021-06-21 21:12:41 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 21:12:42 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 21:12:44 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 21:12:45 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.569 seconds (JVM running for 5.785)
+2021-06-21 21:12:45 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 21:12:46 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 21:12:46 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id,content FROM article
+2021-06-21 21:12:46 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:12:46 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:12:46 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id AS articleId,uid,author,title,content,date FROM article
+2021-06-21 21:12:46 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:12:46 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:12:46 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-06-21 21:12:46 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2021-06-21 21:16:22 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 18924 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 21:16:22 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - No active profile set, falling back to default profiles: default
+2021-06-21 21:16:22 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 21:16:23 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 21:16:25 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 21:16:26 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.656 seconds (JVM running for 5.882)
+2021-06-21 21:21:52 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 17880 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 21:21:52 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - No active profile set, falling back to default profiles: default
+2021-06-21 21:21:52 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 21:21:53 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 21:21:56 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 21:21:57 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.682 seconds (JVM running for 5.92)
+2021-06-21 21:21:57 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 21:21:57 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 21:21:57 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id AS articleId FROM article
+2021-06-21 21:21:57 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:21:57 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:21:57 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id AS articleId,uid,author,title,content,date FROM article
+2021-06-21 21:21:57 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:21:57 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:21:57 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-06-21 21:21:57 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2021-06-21 21:22:24 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 19628 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 21:22:24 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - No active profile set, falling back to default profiles: default
+2021-06-21 21:22:24 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 21:22:25 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 21:22:27 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 21:22:28 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.54 seconds (JVM running for 5.75)
+2021-06-21 21:23:21 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 17652 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 21:23:21 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - No active profile set, falling back to default profiles: default
+2021-06-21 21:23:21 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 21:23:23 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 21:23:26 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 21:23:27 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 5.7 seconds (JVM running for 7.121)
+2021-06-21 21:23:27 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 21:23:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 21:23:28 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id AS articleId FROM article
+2021-06-21 21:23:28 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:23:28 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:23:28 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id AS articleId,uid,author,title,content,date FROM article
+2021-06-21 21:23:28 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:23:28 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:23:28 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-06-21 21:23:28 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2021-06-21 21:27:23 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 20444 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 21:27:23 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - No active profile set, falling back to default profiles: default
+2021-06-21 21:27:23 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 21:27:24 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 21:27:26 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 21:27:27 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.63 seconds (JVM running for 5.848)
+2021-06-21 21:27:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 21:27:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 21:27:28 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id AS articleId FROM article
+2021-06-21 21:27:28 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:27:28 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:27:28 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id AS articleId,uid,author,title,content,date FROM article
+2021-06-21 21:27:28 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:27:28 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:27:28 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-06-21 21:27:28 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2021-06-21 21:28:16 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 16988 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 21:28:16 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - No active profile set, falling back to default profiles: default
+2021-06-21 21:28:16 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 21:28:17 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 21:28:19 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 21:28:20 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.61 seconds (JVM running for 5.818)
+2021-06-21 21:28:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 21:28:21 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 21:28:21 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id AS articleId FROM article
+2021-06-21 21:28:21 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:28:21 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:28:21 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id AS articleId,uid,author,title,content,date FROM article
+2021-06-21 21:28:21 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:28:21 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:28:21 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-06-21 21:28:21 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2021-06-21 21:31:44 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 18716 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 21:31:44 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - No active profile set, falling back to default profiles: default
+2021-06-21 21:31:44 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 21:31:45 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 21:31:47 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 21:31:48 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 4.577 seconds (JVM running for 5.79)
+2021-06-21 21:31:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 21:31:49 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 21:31:49 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id AS articleId,content FROM article
+2021-06-21 21:31:49 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:31:49 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:31:49 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id AS articleId,uid,author,title,content,date FROM article
+2021-06-21 21:31:49 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:31:49 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:31:49 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-06-21 21:31:49 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2021-06-21 21:42:13 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 18704 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 21:42:13 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - No active profile set, falling back to default profiles: default
+2021-06-21 21:42:13 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 21:42:15 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 21:42:17 [main] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 21:42:18 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 5.545 seconds (JVM running for 6.838)
+2021-06-21 21:42:19 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 21:42:19 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 21:42:19 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id AS articleId,content FROM article
+2021-06-21 21:42:20 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:42:20 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:42:20 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==>  Preparing: SELECT art_id AS articleId,uid,author,title,content,date FROM article
+2021-06-21 21:42:20 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - ==> Parameters: 
+2021-06-21 21:42:20 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectList - <==      Total: 7
+2021-06-21 21:42:20 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-06-21 21:42:20 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2021-06-21 21:42:20 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 18904 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 21:42:20 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 21:42:20 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 21:42:20 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 21:42:21 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 21:42:21 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 21:42:21 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 21:42:21 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 21:42:23 [restartedMain] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 21:42:23 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 21:42:23 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 4.288 seconds (JVM running for 6.812)
+2021-06-21 21:42:32 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 21:42:32 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 21:42:33 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 21:42:33 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM article
+2021-06-21 21:42:33 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-21 21:42:33 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 21:42:33 [http-nio-8080-exec-1] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==>  Preparing: SELECT art_id AS articleId,author,title,date FROM article LIMIT ?
+2021-06-21 21:42:33 [http-nio-8080-exec-1] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==> Parameters: 5(Long)
+2021-06-21 21:42:33 [http-nio-8080-exec-1] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - <==      Total: 5
+2021-06-21 21:45:44 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 19584 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 21:45:44 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 21:45:44 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 21:45:44 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 21:45:45 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 21:45:45 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 21:45:45 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 21:45:45 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 21:45:47 [restartedMain] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 21:45:47 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 21:45:47 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 3.941 seconds (JVM running for 5.398)
+2021-06-21 21:46:17 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 21:46:17 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 21:46:18 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 21:46:18 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM article
+2021-06-21 21:46:18 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-21 21:46:18 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 21:46:18 [http-nio-8080-exec-1] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==>  Preparing: SELECT art_id AS articleId,author,title,date FROM article LIMIT ?
+2021-06-21 21:46:18 [http-nio-8080-exec-1] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==> Parameters: 5(Long)
+2021-06-21 21:46:18 [http-nio-8080-exec-1] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - <==      Total: 5
+2021-06-21 22:30:12 [http-nio-8080-exec-4] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM article
+2021-06-21 22:30:12 [http-nio-8080-exec-4] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-21 22:30:12 [http-nio-8080-exec-4] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 22:30:12 [http-nio-8080-exec-4] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==>  Preparing: SELECT art_id AS articleId,author,title,date FROM article LIMIT ?
+2021-06-21 22:30:12 [http-nio-8080-exec-4] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==> Parameters: 5(Long)
+2021-06-21 22:30:12 [http-nio-8080-exec-4] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - <==      Total: 5
+2021-06-21 22:30:19 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 22:30:19 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 22056 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 22:30:19 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 22:30:20 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 22:30:20 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 22:30:20 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 22:30:20 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 22:30:20 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 22:30:23 [restartedMain] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 22:30:23 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 22:30:23 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 4.099 seconds (JVM running for 5.728)
+2021-06-21 22:33:03 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 21044 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 22:33:03 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 22:33:03 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 22:33:03 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 22:33:04 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 22:33:04 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 22:33:04 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 22:33:04 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 22:33:06 [restartedMain] WARN  c.b.mybatisplus.core.metadata.TableInfoHelper - This primary key of "articleId" is primitive !不建议如此请使用包装类 in Class: "com.stu.nebulablog.module.entity.Article"
+2021-06-21 22:33:06 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 22:33:06 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 4.251 seconds (JVM running for 5.882)
+2021-06-21 22:35:08 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 22:35:08 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 20388 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 22:35:08 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 22:35:09 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 22:35:09 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 22:35:09 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 22:35:09 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 22:35:09 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 22:35:11 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 22:35:11 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 4.138 seconds (JVM running for 6.399)
+2021-06-21 22:35:17 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 22:35:18 [http-nio-8080-exec-1] WARN  o.s.w.s.m.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported]
+2021-06-21 22:35:19 [http-nio-8080-exec-1] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [964] milliseconds.
+2021-06-21 22:35:22 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 22:35:22 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 22:35:22 [http-nio-8080-exec-3] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM article
+2021-06-21 22:35:22 [http-nio-8080-exec-3] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-21 22:35:22 [http-nio-8080-exec-3] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 22:35:22 [http-nio-8080-exec-3] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==>  Preparing: SELECT art_id AS articleId,author,title,date FROM article LIMIT ?
+2021-06-21 22:35:22 [http-nio-8080-exec-3] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==> Parameters: 5(Long)
+2021-06-21 22:35:22 [http-nio-8080-exec-3] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - <==      Total: 5
+2021-06-21 22:37:35 [http-nio-8080-exec-6] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectById - ==>  Preparing: SELECT art_id AS articleId,uid,author,title,content,date FROM article WHERE art_id=?
+2021-06-21 22:37:35 [http-nio-8080-exec-6] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectById - ==> Parameters: 1(Integer)
+2021-06-21 22:37:35 [http-nio-8080-exec-6] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectById - <==      Total: 1
+2021-06-21 22:53:03 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 22:53:03 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 20756 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 22:53:03 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 22:53:03 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 22:53:04 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 22:53:04 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 22:53:04 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 22:53:04 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 22:53:07 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 22:53:07 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 4.572 seconds (JVM running for 6.247)
+2021-06-21 22:54:44 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 16028 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 22:54:44 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - No active profile set, falling back to default profiles: default
+2021-06-21 22:54:44 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 22:54:46 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 22:54:49 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 5.264 seconds (JVM running for 7.242)
+2021-06-21 22:54:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 22:54:50 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 22:54:50 [main] DEBUG com.stu.nebulablog.mapper.UserInfoMapper.selectOne - ==>  Preparing: SELECT username FROM user_info WHERE (uid = ?)
+2021-06-21 22:54:50 [main] DEBUG com.stu.nebulablog.mapper.UserInfoMapper.selectOne - ==> Parameters: 1(Integer)
+2021-06-21 22:54:50 [main] DEBUG com.stu.nebulablog.mapper.UserInfoMapper.selectOne - <==      Total: 1
+2021-06-21 22:54:50 [main] DEBUG c.stu.nebulablog.mapper.ArticleMapper.selectCount - ==>  Preparing: SELECT COUNT( * ) FROM article WHERE (uid = ? AND title = ?)
+2021-06-21 22:54:50 [main] DEBUG c.stu.nebulablog.mapper.ArticleMapper.selectCount - ==> Parameters: 1(Integer), ddd(String)
+2021-06-21 22:54:50 [main] DEBUG c.stu.nebulablog.mapper.ArticleMapper.selectCount - <==      Total: 1
+2021-06-21 22:54:50 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-06-21 22:54:51 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2021-06-21 22:56:15 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 20756 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 22:56:15 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 22:56:15 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 22:56:15 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 22:56:15 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 22:56:15 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 22:56:17 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 22:56:17 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 1.796 seconds (JVM running for 196.385)
+2021-06-21 22:56:17 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 21480 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 22:56:17 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - No active profile set, falling back to default profiles: default
+2021-06-21 22:56:17 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 22:56:18 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 22:56:19 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 20756 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 22:56:19 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 22:56:20 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 22:56:20 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 22:56:20 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 22:56:20 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 22:56:21 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 22:56:21 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 1.495 seconds (JVM running for 200.312)
+2021-06-21 22:56:22 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 5.183 seconds (JVM running for 6.541)
+2021-06-21 22:56:22 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 22:56:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 22:56:23 [main] DEBUG com.stu.nebulablog.mapper.UserInfoMapper.selectOne - ==>  Preparing: SELECT username FROM user_info WHERE (uid = ?)
+2021-06-21 22:56:23 [main] DEBUG com.stu.nebulablog.mapper.UserInfoMapper.selectOne - ==> Parameters: 1(Integer)
+2021-06-21 22:56:23 [main] DEBUG com.stu.nebulablog.mapper.UserInfoMapper.selectOne - <==      Total: 1
+2021-06-21 22:56:23 [main] DEBUG c.stu.nebulablog.mapper.ArticleMapper.selectCount - ==>  Preparing: SELECT COUNT( * ) FROM article WHERE (uid = ? AND title = ?)
+2021-06-21 22:56:23 [main] DEBUG c.stu.nebulablog.mapper.ArticleMapper.selectCount - ==> Parameters: 1(Integer), ddd(String)
+2021-06-21 22:56:23 [main] DEBUG c.stu.nebulablog.mapper.ArticleMapper.selectCount - <==      Total: 1
+2021-06-21 22:56:23 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-06-21 22:56:23 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2021-06-21 23:00:13 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 20756 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 23:00:13 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 23:00:14 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:00:14 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 23:00:14 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 23:00:14 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 23:00:15 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:00:15 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 1.752 seconds (JVM running for 434.459)
+2021-06-21 23:00:16 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 20000 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 23:00:16 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - No active profile set, falling back to default profiles: default
+2021-06-21 23:00:16 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 23:00:17 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 23:00:18 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 20756 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 23:00:18 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 23:00:18 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:00:18 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 23:00:18 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 23:00:18 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 23:00:19 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:00:19 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 1.398 seconds (JVM running for 438.435)
+2021-06-21 23:00:21 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 5.298 seconds (JVM running for 6.684)
+2021-06-21 23:00:21 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 23:00:21 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 23:00:21 [main] DEBUG com.stu.nebulablog.mapper.UserInfoMapper.selectOne - ==>  Preparing: SELECT username FROM user_info WHERE (uid = ?)
+2021-06-21 23:00:21 [main] DEBUG com.stu.nebulablog.mapper.UserInfoMapper.selectOne - ==> Parameters: 1(Integer)
+2021-06-21 23:00:21 [main] DEBUG com.stu.nebulablog.mapper.UserInfoMapper.selectOne - <==      Total: 1
+2021-06-21 23:00:21 [main] DEBUG c.stu.nebulablog.mapper.ArticleMapper.selectCount - ==>  Preparing: SELECT COUNT( * ) FROM article WHERE (uid = ? AND title = ?)
+2021-06-21 23:00:21 [main] DEBUG c.stu.nebulablog.mapper.ArticleMapper.selectCount - ==> Parameters: 1(Integer), ddd(String)
+2021-06-21 23:00:21 [main] DEBUG c.stu.nebulablog.mapper.ArticleMapper.selectCount - <==      Total: 1
+2021-06-21 23:00:21 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.insert - ==>  Preparing: INSERT INTO article ( uid, author, title, content, date ) VALUES ( ?, ?, ?, ?, ? )
+2021-06-21 23:00:21 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.insert - ==> Parameters: 1(Integer), root(String), ddd(String), eee(String), 2021-06-21 23:00:21.798(Timestamp)
+2021-06-21 23:00:21 [main] DEBUG com.stu.nebulablog.mapper.ArticleMapper.insert - <==    Updates: 1
+2021-06-21 23:00:21 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-06-21 23:00:21 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2021-06-21 23:06:37 [http-nio-8080-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 23:06:37 [http-nio-8080-exec-2] WARN  o.s.w.s.m.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2021-06-21 23:06:39 [http-nio-8080-exec-2] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [1,924] milliseconds.
+2021-06-21 23:06:47 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 20756 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 23:06:47 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 23:06:47 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:06:47 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 23:06:47 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 23:06:47 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 23:06:49 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:06:49 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 2.189 seconds (JVM running for 828.457)
+2021-06-21 23:06:49 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Starting NebulaBlogRefactorApplicationTests using Java 11.0.6 on DESKTOP-K2CUFMB with PID 12052 (started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 23:06:49 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - No active profile set, falling back to default profiles: default
+2021-06-21 23:06:49 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 23:06:51 [main] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 23:06:52 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 20756 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 23:06:52 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 23:06:52 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:06:52 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 23:06:52 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 23:06:52 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 23:06:54 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:06:54 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 2.102 seconds (JVM running for 833.441)
+2021-06-21 23:06:54 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 23:06:54 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 23:06:55 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 23:06:55 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM q
+2021-06-21 23:06:55 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-21 23:06:55 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 23:06:55 [http-nio-8080-exec-1] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - ==>  Preparing: SELECT q_id,uid,title,author,status,content,date,answer FROM q LIMIT ?
+2021-06-21 23:06:55 [http-nio-8080-exec-1] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - ==> Parameters: 5(Long)
+2021-06-21 23:06:55 [http-nio-8080-exec-1] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - <==      Total: 2
+2021-06-21 23:06:57 [main] INFO  c.s.nebulablog.NebulaBlogRefactorApplicationTests - Started NebulaBlogRefactorApplicationTests in 8.004 seconds (JVM running for 9.805)
+2021-06-21 23:06:57 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 23:06:58 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 23:06:58 [main] DEBUG com.stu.nebulablog.mapper.UserInfoMapper.selectOne - ==>  Preparing: SELECT username FROM user_info WHERE (uid = ?)
+2021-06-21 23:06:58 [main] DEBUG com.stu.nebulablog.mapper.UserInfoMapper.selectOne - ==> Parameters: 1(Integer)
+2021-06-21 23:06:58 [main] DEBUG com.stu.nebulablog.mapper.UserInfoMapper.selectOne - <==      Total: 1
+2021-06-21 23:06:58 [main] DEBUG c.stu.nebulablog.mapper.ArticleMapper.selectCount - ==>  Preparing: SELECT COUNT( * ) FROM article WHERE (uid = ? AND title = ?)
+2021-06-21 23:06:58 [main] DEBUG c.stu.nebulablog.mapper.ArticleMapper.selectCount - ==> Parameters: 1(Integer), ddd(String)
+2021-06-21 23:06:58 [main] DEBUG c.stu.nebulablog.mapper.ArticleMapper.selectCount - <==      Total: 1
+2021-06-21 23:06:58 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2021-06-21 23:06:58 [SpringContextShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2021-06-21 23:14:59 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 23:14:59 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 16664 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 23:14:59 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 23:15:00 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 23:15:00 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:15:00 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 23:15:00 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 23:15:00 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 23:15:03 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:15:03 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 4.098 seconds (JVM running for 5.77)
+2021-06-21 23:15:21 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 23:15:21 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 23:15:21 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 23:15:21 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM q
+2021-06-21 23:15:21 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-21 23:15:21 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 23:15:21 [http-nio-8080-exec-1] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - ==>  Preparing: SELECT q_id AS questionId,uid,title,author,status,content,date,answer FROM q LIMIT ?
+2021-06-21 23:15:21 [http-nio-8080-exec-1] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - ==> Parameters: 5(Long)
+2021-06-21 23:15:21 [http-nio-8080-exec-1] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - <==      Total: 2
+2021-06-21 23:15:57 [http-nio-8080-exec-2] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM q
+2021-06-21 23:15:57 [http-nio-8080-exec-2] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-21 23:15:57 [http-nio-8080-exec-2] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 23:15:57 [http-nio-8080-exec-2] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - ==>  Preparing: SELECT q_id AS questionId,uid,title,author,status,content,date,answer FROM q LIMIT ?
+2021-06-21 23:15:57 [http-nio-8080-exec-2] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - ==> Parameters: 5(Long)
+2021-06-21 23:15:57 [http-nio-8080-exec-2] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - <==      Total: 2
+2021-06-21 23:16:21 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 20816 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 23:16:21 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 23:16:21 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 23:16:22 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 23:16:22 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:16:22 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 23:16:22 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 23:16:22 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 23:16:24 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:16:24 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 4.056 seconds (JVM running for 5.649)
+2021-06-21 23:16:38 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 23:16:38 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 23:16:38 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 23:16:38 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM q WHERE (title LIKE ? OR author LIKE ?)
+2021-06-21 23:16:38 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - ==> Parameters: %d%(String), %d%(String)
+2021-06-21 23:16:38 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 23:16:38 [http-nio-8080-exec-1] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - ==>  Preparing: SELECT q_id,title,author,date,answer,status FROM q WHERE (title LIKE ? OR author LIKE ?) ORDER BY q_id DESC LIMIT ?
+2021-06-21 23:16:38 [http-nio-8080-exec-1] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - ==> Parameters: %d%(String), %d%(String), 5(Long)
+2021-06-21 23:16:38 [http-nio-8080-exec-1] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - <==      Total: 1
+2021-06-21 23:16:38 [http-nio-8080-exec-1] ERROR o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
+java.lang.NullPointerException: null
+	at com.stu.nebulablog.module.entity.Question.hashCode(Question.java:23)
+	at com.stu.nebulablog.utils.PageToMapUtil.lambda$getMapFromPageWithPages$0(PageToMapUtil.java:15)
+	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$1(Collectors.java:177)
+	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1654)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:913)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:578)
+	at com.stu.nebulablog.utils.PageToMapUtil.getMapFromPageWithPages(PageToMapUtil.java:15)
+	at com.stu.nebulablog.service.question.QuestionSearchService.doQuestionSearch(QuestionSearchService.java:29)
+	at com.stu.nebulablog.controller.PublicQuestionController.getQASearch(PublicQuestionController.java:36)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:197)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:141)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:894)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1060)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:962)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:887)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1684)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2021-06-21 23:16:40 [http-nio-8080-exec-1] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [1,108] milliseconds.
+2021-06-21 23:19:53 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 21320 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 23:19:53 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 23:19:53 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 23:19:54 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 23:19:54 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:19:54 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 23:19:54 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 23:19:54 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 23:19:56 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:19:56 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 4.157 seconds (JVM running for 5.748)
+2021-06-21 23:20:08 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 23:20:09 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 23:20:09 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 23:20:09 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM q WHERE (title LIKE ? OR content LIKE ?)
+2021-06-21 23:20:09 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - ==> Parameters: %d%(String), %d%(String)
+2021-06-21 23:20:09 [http-nio-8080-exec-1] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 23:20:09 [http-nio-8080-exec-1] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - ==>  Preparing: SELECT q_id AS questionId,title,author,date,answer,status FROM q WHERE (title LIKE ? OR content LIKE ?) ORDER BY q_id DESC LIMIT ?
+2021-06-21 23:20:09 [http-nio-8080-exec-1] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - ==> Parameters: %d%(String), %d%(String), 5(Long)
+2021-06-21 23:20:09 [http-nio-8080-exec-1] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - <==      Total: 1
+2021-06-21 23:23:11 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 17692 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 23:23:11 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 23:23:11 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 23:23:13 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 23:23:14 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:23:14 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 23:23:14 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 23:23:14 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 23:23:17 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:23:17 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 6.175 seconds (JVM running for 8.052)
+2021-06-21 23:23:35 [http-nio-8080-exec-3] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 23:23:35 [http-nio-8080-exec-3] WARN  o.s.w.s.m.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2021-06-21 23:23:36 [http-nio-8080-exec-3] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [1,616] milliseconds.
+2021-06-21 23:23:44 [http-nio-8080-exec-2] WARN  o.s.w.s.m.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2021-06-21 23:23:55 [http-nio-8080-exec-4] WARN  o.s.w.s.m.support.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2021-06-21 23:24:19 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 23:24:19 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 19516 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 23:24:19 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 23:24:21 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 23:24:22 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:24:22 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 23:24:22 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 23:24:22 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 23:24:25 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:24:25 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 6.369 seconds (JVM running for 8.292)
+2021-06-21 23:24:36 [http-nio-8080-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 23:24:36 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 23:24:37 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 23:24:37 [http-nio-8080-exec-2] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectById - ==>  Preparing: SELECT q_id AS questionId,uid,title,author,status,content,date,answer FROM q WHERE q_id=?
+2021-06-21 23:24:37 [http-nio-8080-exec-2] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectById - ==> Parameters: 1(Integer)
+2021-06-21 23:24:37 [http-nio-8080-exec-2] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectById - <==      Total: 1
+2021-06-21 23:44:23 [http-nio-8080-exec-7] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [1,771] milliseconds.
+2021-06-21 23:45:06 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 20696 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 23:45:06 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 23:45:06 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 23:45:07 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 23:45:08 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:45:08 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 23:45:08 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 23:45:08 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 23:45:11 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:45:11 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 5.814 seconds (JVM running for 7.726)
+2021-06-21 23:45:48 [http-nio-8080-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 23:45:48 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 23:45:48 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 23:45:48 [http-nio-8080-exec-2] DEBUG com.stu.nebulablog.mapper.AnswerMapper.selectList - ==>  Preparing: SELECT aid AS answerId,uid,content,date,qid AS questionId,author,username FROM a WHERE (qid = ?) ORDER BY aid ASC
+2021-06-21 23:45:48 [http-nio-8080-exec-2] DEBUG com.stu.nebulablog.mapper.AnswerMapper.selectList - ==> Parameters: 1(Integer)
+2021-06-21 23:45:48 [http-nio-8080-exec-2] DEBUG com.stu.nebulablog.mapper.AnswerMapper.selectList - <==      Total: 1
+2021-06-21 23:57:07 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-06-21 23:57:07 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Starting NebulaBlogRefactorApplication using Java 11.0.6 on DESKTOP-K2CUFMB with PID 14328 (E:\GitHub\nebula-blog\target\classes started by sakuraski in E:\GitHub\nebula-blog)
+2021-06-21 23:57:07 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - No active profile set, falling back to default profiles: default
+2021-06-21 23:57:08 [restartedMain] DEBUG org.apache.ibatis.logging.LogFactory - Logging initialized using 'class org.apache.ibatis.logging.slf4j.Slf4jImpl' adapter.
+2021-06-21 23:57:09 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:57:09 [restartedMain] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-06-21 23:57:09 [restartedMain] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-06-21 23:57:09 [restartedMain] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-06-21 23:57:11 [restartedMain] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-06-21 23:57:11 [restartedMain] INFO  com.stu.nebulablog.NebulaBlogRefactorApplication - Started NebulaBlogRefactorApplication in 4.457 seconds (JVM running for 6.171)
+2021-06-21 23:57:13 [http-nio-8080-exec-2] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-21 23:57:14 [http-nio-8080-exec-2] WARN  org.apache.catalina.util.SessionIdGeneratorBase - Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [1,103] milliseconds.
+2021-06-21 23:57:27 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2021-06-21 23:57:28 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2021-06-21 23:57:28 [http-nio-8080-exec-3] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM article
+2021-06-21 23:57:28 [http-nio-8080-exec-3] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-21 23:57:28 [http-nio-8080-exec-3] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 23:57:28 [http-nio-8080-exec-3] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==>  Preparing: SELECT art_id AS articleId,author,title,date FROM article LIMIT ?
+2021-06-21 23:57:28 [http-nio-8080-exec-3] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==> Parameters: 5(Long)
+2021-06-21 23:57:28 [http-nio-8080-exec-3] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - <==      Total: 5
+2021-06-21 23:57:43 [http-nio-8080-exec-5] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM q
+2021-06-21 23:57:43 [http-nio-8080-exec-5] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-21 23:57:43 [http-nio-8080-exec-5] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 23:57:43 [http-nio-8080-exec-5] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - ==>  Preparing: SELECT q_id AS questionId,uid,title,author,status,content,date,answer FROM q LIMIT ?
+2021-06-21 23:57:43 [http-nio-8080-exec-5] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - ==> Parameters: 5(Long)
+2021-06-21 23:57:43 [http-nio-8080-exec-5] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - <==      Total: 2
+2021-06-21 23:58:28 [http-nio-8080-exec-6] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM article
+2021-06-21 23:58:28 [http-nio-8080-exec-6] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-21 23:58:28 [http-nio-8080-exec-6] DEBUG c.s.n.mapper.ArticleMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 23:58:28 [http-nio-8080-exec-6] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==>  Preparing: SELECT art_id AS articleId,author,title,date FROM article LIMIT ?
+2021-06-21 23:58:28 [http-nio-8080-exec-6] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - ==> Parameters: 5(Long)
+2021-06-21 23:58:28 [http-nio-8080-exec-6] DEBUG com.stu.nebulablog.mapper.ArticleMapper.selectPage - <==      Total: 5
+2021-06-21 23:59:25 [http-nio-8080-exec-7] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - ==>  Preparing: SELECT COUNT(*) FROM q
+2021-06-21 23:59:25 [http-nio-8080-exec-7] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - ==> Parameters: 
+2021-06-21 23:59:25 [http-nio-8080-exec-7] DEBUG c.s.n.mapper.QuestionMapper.selectPage_mpCount - <==      Total: 1
+2021-06-21 23:59:25 [http-nio-8080-exec-7] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - ==>  Preparing: SELECT q_id AS questionId,uid,title,author,status,content,date,answer FROM q LIMIT ?
+2021-06-21 23:59:25 [http-nio-8080-exec-7] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - ==> Parameters: 5(Long)
+2021-06-21 23:59:25 [http-nio-8080-exec-7] DEBUG c.stu.nebulablog.mapper.QuestionMapper.selectPage - <==      Total: 2

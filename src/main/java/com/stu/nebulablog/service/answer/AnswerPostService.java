@@ -14,11 +14,11 @@ public class AnswerPostService {
     private AnswerMapper answerMapper;
     @Autowired
     private QuestionMapper questionMapper;
-    public boolean doAnswerPost(Answer answer){
-        answer.setAid(null);
+    public boolean doPost(Answer answer){
+        answer.setAnswerId(null);
         UpdateWrapper<Question>qUpdateWrapper=new UpdateWrapper<>();
         qUpdateWrapper.setSql("answer=answer+1");
-        qUpdateWrapper.eq("q_id",answer.getQid());
+        qUpdateWrapper.eq("q_id",answer.getQuestionId());
         if(answerMapper.insert(answer)!=0&& questionMapper.update(null,qUpdateWrapper)!=0)return true;
         return false;
     }

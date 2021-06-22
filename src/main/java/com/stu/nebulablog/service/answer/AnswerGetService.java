@@ -12,7 +12,7 @@ import java.util.List;
 public class AnswerGetService {
     @Autowired
     private AnswerMapper answerMapper;
-    public List<Answer> doGetA(Integer qid){
+    public List<Answer> doGet(Integer qid){
         QueryWrapper<Answer>aQueryWrapper=new QueryWrapper<>();
         aQueryWrapper.eq("qid",qid).orderByAsc("aid");
         return answerMapper.selectList(aQueryWrapper);

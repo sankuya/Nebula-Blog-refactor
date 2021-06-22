@@ -1,5 +1,6 @@
 package com.stu.nebulablog.service.article;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.stu.nebulablog.mapper.ArticleMapper;
@@ -19,8 +20,8 @@ public class ArticleListService {
     private PageToMapUtil<Article>articlePageToMapUtil;
     public Map<String, Object> listAll(int p, int size) {
         Page<Article> articlePage = new Page<>(p, size);
-        QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("art_id", "title", "author", "date");
+        LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.select(Article::getArticleId,Article::getAuthor,Article::getTitle,Article::getDate);
         articleMapper.selectPage(articlePage, queryWrapper);
         return articlePageToMapUtil.getMapFromPageWithPages(articlePage);
     }

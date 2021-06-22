@@ -4,10 +4,7 @@ import com.stu.nebulablog.module.ResponseData;
 import com.stu.nebulablog.module.entity.Article;
 import com.stu.nebulablog.service.article.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -28,14 +25,17 @@ public class ArticleController {
     private static final int MAXSIZE = 10;
 
     @PostMapping("/delete")
-    public ResponseData delete(@RequestBody Map<String, String> src, HttpSession session) {
+    public ResponseData delete(@RequestParam int articleId, HttpSession session) {
         ResponseData responseData = new ResponseData();
         Integer uid = (Integer) session.getAttribute("uid");
-        Integer art_id = Integer.valueOf(src.get("id"));
-        if (articleDeleteService.doDeleteArticle(uid, art_id)) {
+        if (uid == null) {
+            responseData.setCode(401);
+            responseData.setMsg("未登录不能删除文章");
+        } else if (articleDeleteService.doDeleteArticle(uid, articleId)) {
             responseData.setCode(400);
         } else {
-            responseData.setCode(401);
+            responseData.setCode(402);
+            responseData.setMsg("不能删除别人的文章");
         }
         return responseData;
     }
@@ -52,29 +52,11 @@ public class ArticleController {
         return responseData;
     }
 
-    @PostMapping("/get")
-    public ResponseData get(@RequestBody Map<String, String> src) {
-        ResponseData responseData = new ResponseData();
-        Integer artId = Integer.valueOf(src.get("artId"));
-        Article article = articleGetService.doGetArticle(artId);
-        if (article != null) {
-            responseData.setCode(400);
-            responseData.setData(article);
-        } else {
-            responseData.setCode(401);
-        }
-        return responseData;
-    }
 
-
-    @PostMapping("/list")
-    public ResponseData getArticleList(@RequestBody Map<String, String> src, HttpSession session) {
+    @GetMapping ("/list")
+    public ResponseData getArticleList(@RequestParam int page, @RequestParam int size, HttpSession session) {
         ResponseData responseData = new ResponseData();
-        Integer page = Integer.valueOf(src.get("page"));
         Integer uid = (Integer) session.getAttribute("uid");
-        Integer size = Integer.valueOf(src.get("size"));
-        if (size == null)
-            size = Integer.MAX_VALUE;
         size = Math.min(size, MAXSIZE);
         Map<String, Object> data = articleListService.listByUid(page, uid, size);
         responseData.setCode(400);

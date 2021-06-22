@@ -1,5 +1,6 @@
 package com.stu.nebulablog.service.article;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stu.nebulablog.mapper.ArticleMapper;
 import com.stu.nebulablog.module.entity.Article;
@@ -11,10 +12,12 @@ public class ArticleEditService {
     @Autowired
     private ArticleMapper articleMapper;
     public boolean doEditArticle(Article article){
+        LambdaQueryWrapper<Article>articleLambdaQueryWrapper=new LambdaQueryWrapper<>();
+        articleLambdaQueryWrapper
+                .eq(Article::getUid,article.getUid())
+                .eq(Article::getArticleId,article.getArticleId());
         QueryWrapper<Article>articleQueryWrapper=new QueryWrapper<>();
-        articleQueryWrapper.eq("uid",article.getUid());
-        articleQueryWrapper.eq("art_id",article.getArt_id());
-        if(articleMapper.update(article,articleQueryWrapper)!=0)return true;
+        if(articleMapper.update(article,articleLambdaQueryWrapper)!=0)return true;
         return false;
     }
 }

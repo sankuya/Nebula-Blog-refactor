@@ -29,7 +29,7 @@ public class AnswerController {
             String username = userInfo.getUsername();
             answer.setUsername(username);
             answer.setUid(uid);
-            if(answerPostService.doAnswerPost(answer)){
+            if(answerPostService.doPost(answer)){
                 responseData.setCode(500);
                 return responseData;
             }

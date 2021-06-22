@@ -1,4 +1,4 @@
-package com.stu.nebulablog.config;
+package com.stu.nebulablog.config.MybatisPlus;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;

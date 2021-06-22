@@ -13,10 +13,10 @@ import java.util.List;
 public class PublicAnswerController {
    @Autowired
    private AnswerGetService answerGetService;
-    @PostMapping("/getByQid")
-    public ResponseData getByQuestionId(@RequestParam int qid) {
+    @GetMapping("/getByQuestionId")
+    public ResponseData getByQuestionId(@RequestParam int questionId) {
         ResponseData responseData=new ResponseData();
-        List<Answer>data=answerGetService.doGetA(qid);
+        List<Answer>data=answerGetService.doGet(questionId);
         responseData.setCode(600);
         responseData.setData(data);
         return responseData;

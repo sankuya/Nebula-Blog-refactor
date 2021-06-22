@@ -10,11 +10,11 @@ import com.stu.nebulablog.service.question.QuestionGetService;
 import com.stu.nebulablog.service.question.QuestionListService;
 import com.stu.nebulablog.service.question.QuestionPostService;
 import com.stu.nebulablog.service.question.QuestionSearchService;
-import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -55,8 +55,7 @@ public class FAQController {
     }
 
     @PostMapping("/getAData")
-    public List<Answer> ADataGet(@RequestBody JSONObject src) {
-        Integer qid = Integer.valueOf(src.getString("qid"));
+    public List<Answer> ADataGet(@RequestParam int qid) {
         return answerGetService.doGetA(qid);
     }
 
