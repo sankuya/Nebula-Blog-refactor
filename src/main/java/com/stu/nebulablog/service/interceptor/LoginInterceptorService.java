@@ -1,5 +1,6 @@
 package com.stu.nebulablog.service.interceptor;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.entity.UserInfo;
@@ -36,9 +37,11 @@ public class LoginInterceptorService implements HandlerInterceptor {
                 if (cookie.getName().equals("password")) password = cookie.getValue();
             }
             if (username != null && password != null && passwordUtil.passwordEncoder(username).equals(password)) {
-                QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
-                queryWrapper.eq("username", username);
-                int uid = userInfoMapper.selectOne(queryWrapper).getUid();
+                LambdaQueryWrapper<UserInfo>userInfoLambdaQueryWrapper=new LambdaQueryWrapper<>();
+                userInfoLambdaQueryWrapper
+                        .eq(UserInfo::getUsername,username)
+                        .select(UserInfo::getUid);
+                int uid = userInfoMapper.selectOne(userInfoLambdaQueryWrapper).getUid();
                 session.setAttribute("uid", uid);
                 return true;
             }

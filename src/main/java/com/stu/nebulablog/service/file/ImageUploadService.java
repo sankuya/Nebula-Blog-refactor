@@ -10,14 +10,12 @@ import java.io.IOException;
 @Service
 public class ImageUploadService extends AbstractFileUploadService {
     @Override
-    protected boolean doUploadPhoto(String prePath, MultipartFile multipartFile) {
+    protected void doUploadPhoto(String prePath, MultipartFile multipartFile) {
         String path=prePath+"/img/"+multipartFile.getOriginalFilename();
         try {
             multipartFile.transferTo(new File(path));
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
-        return true;
     }
 }

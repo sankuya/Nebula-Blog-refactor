@@ -53,13 +53,14 @@ public class UserController {
     }
 
     @PostMapping("/uploadPhoto")
-    public Object uploadPhoto(@RequestParam("file") MultipartFile multipartFile, HttpSession session) {
+    public Object uploadPhoto(HttpServletRequest httpServletRequest, HttpSession session) {
+        MultipartFile multipartFile = ((MultipartHttpServletRequest) httpServletRequest).getFiles("file").get(0);
         ResponseData responseData = new ResponseData();
         Integer uid = (Integer) session.getAttribute("uid");
         UserInfo userInfo = userInfoMapper.selectById(uid);
         if (userInfo != null && photoUploadService.uploadPhoto(userInfo, multipartFile)) {
             responseData.setCode(300);
-            responseData.setData("../" + userInfo.getUsername() + "/ProfilePhoto.jpg");
+            responseData.setData("/user/" + userInfo.getUsername() + "/ProfilePhoto.jpg");
         } else {
             responseData.setCode(301);
         }

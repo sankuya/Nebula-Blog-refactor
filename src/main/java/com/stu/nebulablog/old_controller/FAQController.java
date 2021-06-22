@@ -48,7 +48,7 @@ public class FAQController {
         String username = userInfo.getUsername();
         answer.setUsername(username);
         answer.setUid(uid);
-        if (answerPostService.doAnswerPost(answer))
+        if (answerPostService.doPost(answer))
             return "ok";
         else
             return "wrong";
@@ -56,7 +56,7 @@ public class FAQController {
 
     @PostMapping("/getAData")
     public List<Answer> ADataGet(@RequestParam int qid) {
-        return answerGetService.doGetA(qid);
+        return answerGetService.doGet(qid);
     }
 
     @PostMapping("/getQAList")

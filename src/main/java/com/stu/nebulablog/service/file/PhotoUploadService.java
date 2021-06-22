@@ -13,7 +13,7 @@ import java.io.IOException;
 public class PhotoUploadService extends AbstractFileUploadService {
 
     @Override
-    protected boolean doUploadPhoto(String prePath, MultipartFile multipartFile) {
+    protected void doUploadPhoto(String prePath, MultipartFile multipartFile) {
         String path=prePath+ "ProfilePhoto.jpg";
         try {
             BufferedImage image = ImageIO.read(multipartFile.getInputStream());
@@ -24,8 +24,6 @@ public class PhotoUploadService extends AbstractFileUploadService {
             Thumbnails.of(multipartFile.getInputStream()).forceSize(newWith, newHeight).toFile(path);
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
-        return true;
     }
 }
