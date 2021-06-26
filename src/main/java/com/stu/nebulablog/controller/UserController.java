@@ -54,8 +54,15 @@ public class UserController {
 
     @PostMapping("/uploadPhoto")
     public Object uploadPhoto(HttpServletRequest httpServletRequest, HttpSession session) {
-        MultipartFile multipartFile = ((MultipartHttpServletRequest) httpServletRequest).getFiles("file").get(0);
         ResponseData responseData = new ResponseData();
+        MultipartFile multipartFile;
+        try {
+            multipartFile = ((MultipartHttpServletRequest) httpServletRequest).getFiles("file").get(0);
+        } catch (ClassCastException | IndexOutOfBoundsException e) {
+            responseData.setCode(302);
+            responseData.setMsg("文件不能为空");
+            return responseData;
+        }
         Integer uid = (Integer) session.getAttribute("uid");
         UserInfo userInfo = userInfoMapper.selectById(uid);
         if (userInfo != null && photoUploadService.uploadPhoto(userInfo, multipartFile)) {
@@ -66,10 +73,18 @@ public class UserController {
         }
         return responseData;
     }
+
     @PostMapping("uploadImage")
     public ResponseData uploadImage(HttpServletRequest httpServletRequest, HttpSession session) {
         ResponseData responseData = new ResponseData();
-        MultipartFile multipartFile = ((MultipartHttpServletRequest) httpServletRequest).getFiles("editormd-image-file").get(0);
+        MultipartFile multipartFile;
+        try {
+            multipartFile = ((MultipartHttpServletRequest) httpServletRequest).getFiles("editormd-image-file").get(0);
+        } catch (ClassCastException | IndexOutOfBoundsException e) {
+            responseData.setCode(302);
+            responseData.setMsg("文件不能为空");
+            return responseData;
+        }
         try {
             Integer uid = (Integer) session.getAttribute("uid");
             UserInfo userInfo = userInfoMapper.selectById(uid);

@@ -18,7 +18,8 @@ public class ArticlePostService {
 
     public boolean doPostArticle(Article article) {
         LambdaQueryWrapper<UserInfo> userInfoLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        userInfoLambdaQueryWrapper.eq(UserInfo::getUid, article.getUid())
+        userInfoLambdaQueryWrapper
+                .eq(UserInfo::getUid, article.getUid())
                 .select(UserInfo::getUsername);
         article.setAuthor(userInfoMapper.selectOne(userInfoLambdaQueryWrapper).getUsername());
         LambdaQueryWrapper<Article> articleLambdaQueryWrapper = new LambdaQueryWrapper<>();

@@ -21,6 +21,8 @@ public class QuestionController {
         ResponseData responseData=new ResponseData();
         Integer uid = (Integer)session.getAttribute("uid");
         question.setUid(uid);
+        question.setQuestionId(null);
+        question.setAnswer(0);
         if (questionPostService.doPost(question)){
             responseData.setCode(800);
         }else{

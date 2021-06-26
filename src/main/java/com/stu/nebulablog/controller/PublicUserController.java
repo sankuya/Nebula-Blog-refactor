@@ -26,6 +26,7 @@ public class PublicUserController {
     private RegisterService registerService;
     @Autowired
     private UserGetService userGetService;
+
     @PostMapping("login")
     ResponseData login(@RequestBody UserVO userVO, HttpSession httpSession, HttpServletResponse httpServletResponse) {
         ResponseData responseData = new ResponseData();
@@ -44,19 +45,22 @@ public class PublicUserController {
         httpServletResponse.addCookie(passwordCookie);
         return responseData;
     }
+
     @PostMapping("register")
     ResponseData register(@RequestBody UserInfo userRegisterVO) {
-        ResponseData responseData=new ResponseData();
-        int code=registerService.doRegister(userRegisterVO);
+        ResponseData responseData = new ResponseData();
+        int code = registerService.doRegister(userRegisterVO);
+        userRegisterVO.setUid(null);
         responseData.setCode(code);
-        if(code==100)responseData.setMsg("注册成功");
-        if(code==101)responseData.setMsg("用户已存在");
-        if(code==102)responseData.setMsg("未知错误");
+        if (code == 100) responseData.setMsg("注册成功");
+        if (code == 101) responseData.setMsg("用户已存在");
+        if (code == 102) responseData.setMsg("未知错误");
         return responseData;
     }
+
     @PostMapping("logout")
     public ResponseData logout(HttpSession session, HttpServletResponse httpServletResponse) {
-        ResponseData responseData=new ResponseData();
+        ResponseData responseData = new ResponseData();
         if (session.getAttribute("uid") != null) session.removeAttribute("uid");
         Cookie usernameCookie = new Cookie("username", null);
         Cookie passwordCookie = new Cookie("password", null);
@@ -68,14 +72,15 @@ public class PublicUserController {
         responseData.setMsg("ok");
         return responseData;
     }
+
     @PostMapping("getUserById")
     public ResponseData getUserDataByID(@RequestParam int uid) {
         ResponseData responseData = new ResponseData();
         Map<String, Object> data = userGetService.doGetUser(uid);
         if (data == null) {
             responseData.setCode(101);
-            responseData.setMsg("uid错误");
-        }else{
+            responseData.setMsg("uid不存在");
+        } else {
             responseData.setCode(100);
             responseData.setData(data);
         }

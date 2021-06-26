@@ -20,6 +20,6 @@ public class Article {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date date;
     public int hashCode(){
-        return (int)articleId;
+        return articleId;
     }
 }
