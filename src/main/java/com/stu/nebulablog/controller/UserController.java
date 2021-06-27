@@ -65,7 +65,7 @@ public class UserController {
         }
         Integer uid = (Integer) session.getAttribute("uid");
         UserInfo userInfo = userInfoMapper.selectById(uid);
-        if (userInfo != null && photoUploadService.uploadPhoto(userInfo, multipartFile)) {
+        if (userInfo != null && photoUploadService.uploadPhoto(userInfo.getUsername(), multipartFile)) {
             responseData.setCode(300);
             responseData.setData("/user/" + userInfo.getUsername() + "/ProfilePhoto.jpg");
         } else {
@@ -88,7 +88,7 @@ public class UserController {
         try {
             Integer uid = (Integer) session.getAttribute("uid");
             UserInfo userInfo = userInfoMapper.selectById(uid);
-            if (userInfo != null && imageUploadService.uploadPhoto(userInfo, multipartFile)) {
+            if (userInfo != null && imageUploadService.uploadPhoto(userInfo.getUsername(), multipartFile)) {
                 responseData.setCode(300);
                 responseData.setData("/user/" + userInfo.getUsername() + "/img/" + multipartFile.getOriginalFilename());
             } else {
