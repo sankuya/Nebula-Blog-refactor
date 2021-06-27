@@ -5,6 +5,7 @@ import com.stu.nebulablog.mapper.UserDetailMapper;
 import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.entity.UserDetail;
 import com.stu.nebulablog.module.entity.UserInfo;
+import com.stu.nebulablog.service.file.HeadPhotoInitService;
 import com.stu.nebulablog.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,22 +17,14 @@ import java.nio.file.Files;
 
 @Service
 public class RegisterService {
-    private static String preUrl;
-    private static String defaultProfilePhotoPath;
-    private static File defaultProfilePhotoFile;
     @Autowired
     private UserDetailMapper userDetailMapper;
     @Autowired
     private UserInfoMapper userInfoMapper;
     @Autowired
     private PasswordUtil passwordUtil;
-
-    @Value("${user.photo.preUrl}")
-    public void setPreUrl(String preUrl) {
-        this.preUrl = preUrl;
-        this.defaultProfilePhotoPath = preUrl + "defaultProfilePhoto.jpg";
-        this.defaultProfilePhotoFile = new File(defaultProfilePhotoPath);
-    }
+    @Autowired
+    private HeadPhotoInitService headPhotoInitService;
 
     public int doRegister(UserInfo userRegisterVO) {
         userRegisterVO.setPassword(passwordUtil.passwordEncoder(userRegisterVO.getPassword()));
@@ -52,17 +45,8 @@ public class RegisterService {
         userDetail.setGender("男");
         userDetail.setNickname(userInfo.getUsername());
         if (userInfoMapper.insert(userInfo) == 1 && userDetailMapper.insert(userDetail) == 1) {
-            String imgDirectoryPath = preUrl + userInfo.getUsername();
-            File imgDirectory = new File(imgDirectoryPath+"/img");
-            imgDirectory.mkdirs();
-            File imgFile = new File(imgDirectoryPath, "ProfilePhoto.jpg");
-            try {
-                Files.copy(defaultProfilePhotoFile.toPath(), imgFile.toPath());
-                return 200;//"注册成功"
-            } catch (IOException e) {
-                e.printStackTrace();
-                return 203;//"注册成功可是初始化头像失败了qwq";
-            }
+            headPhotoInitService.initHeadPhoto(userInfo.getUsername());
+            return 200;
         }
         return 202;//"未知错误";
     }
