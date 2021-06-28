@@ -56,7 +56,7 @@ public class FAQController {
 
     @PostMapping("/getAData")
     public List<Answer> ADataGet(@RequestParam int qid) {
-        return answerListService.doGet(qid);
+        return answerListService.doList(qid);
     }
 
     @PostMapping("/getQAList")
