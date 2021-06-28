@@ -1,6 +1,5 @@
-package com.stu.nebulablog.service.file;
+package com.stu.nebulablog.service.file.upload;
 
-import com.stu.nebulablog.service.file.AbstractFileUploadService;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,7 +12,7 @@ import java.io.IOException;
 public class PhotoUploadService extends AbstractFileUploadService {
 
     @Override
-    protected void doUploadPhoto(String prePath, MultipartFile multipartFile) {
+    protected boolean doUploadFile(String prePath, MultipartFile multipartFile) {
         String path=prePath+ "/ProfilePhoto.jpg";
         try {
             BufferedImage image = ImageIO.read(multipartFile.getInputStream());
@@ -24,6 +23,11 @@ public class PhotoUploadService extends AbstractFileUploadService {
             Thumbnails.of(multipartFile.getInputStream()).forceSize(newWith, newHeight).toFile(path);
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
+    }
+    public boolean uploadPhoto(String prePath, MultipartFile multipartFile){
+        return doUploadFile(prePath,multipartFile);
     }
 }

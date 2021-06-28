@@ -4,9 +4,9 @@ import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.ResponseData;
 import com.stu.nebulablog.module.entity.UserDetail;
 import com.stu.nebulablog.module.entity.UserInfo;
-import com.stu.nebulablog.service.file.ImageUploadService;
+import com.stu.nebulablog.service.file.upload.ImageUploadService;
 import com.stu.nebulablog.service.user.UserInfoChangeService;
-import com.stu.nebulablog.service.file.PhotoUploadService;
+import com.stu.nebulablog.service.file.upload.PhotoUploadService;
 import com.stu.nebulablog.service.user.UserGetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -88,7 +88,7 @@ public class UserController {
         try {
             Integer uid = (Integer) session.getAttribute("uid");
             UserInfo userInfo = userInfoMapper.selectById(uid);
-            if (userInfo != null && imageUploadService.uploadPhoto(userInfo.getUsername(), multipartFile)) {
+            if (userInfo != null && imageUploadService.uploadImage(userInfo.getUsername(), multipartFile)) {
                 responseData.setCode(300);
                 responseData.setData("/user/" + userInfo.getUsername() + "/img/" + multipartFile.getOriginalFilename());
             } else {
