@@ -4,15 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stu.nebulablog.mapper.AnswerMapper;
 import com.stu.nebulablog.module.entity.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AnswerGetService {
+public class AnswerListService {
     @Autowired
     private AnswerMapper answerMapper;
-    public List<Answer> doGet(Integer qid){
+    @Cacheable(cacheNames = "answerList",key = "#qid")
+    public List<Answer> doList(Integer qid){
         QueryWrapper<Answer>aQueryWrapper=new QueryWrapper<>();
         aQueryWrapper.eq("qid",qid).orderByAsc("aid");
         return answerMapper.selectList(aQueryWrapper);

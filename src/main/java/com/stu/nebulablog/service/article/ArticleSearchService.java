@@ -7,6 +7,7 @@ import com.stu.nebulablog.mapper.ArticleMapper;
 import com.stu.nebulablog.module.entity.Article;
 import com.stu.nebulablog.utils.PageToMapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -17,7 +18,7 @@ public class ArticleSearchService {
     PageToMapUtil<Article> articlePageToMapUtil;
     @Autowired
     private ArticleMapper articleMapper;
-
+    @Cacheable("articleList")
     public Map<String, Object> doSearchArticle(String keyword, int page, int size) {
         Page<Article> articlePage = new Page<>(page, size);
         LambdaQueryWrapper<Article>articleLambdaQueryWrapper=new LambdaQueryWrapper<>();

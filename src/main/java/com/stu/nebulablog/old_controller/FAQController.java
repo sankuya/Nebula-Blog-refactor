@@ -4,7 +4,7 @@ import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.entity.Answer;
 import com.stu.nebulablog.module.entity.Question;
 import com.stu.nebulablog.module.entity.UserInfo;
-import com.stu.nebulablog.service.answer.AnswerGetService;
+import com.stu.nebulablog.service.answer.AnswerListService;
 import com.stu.nebulablog.service.answer.AnswerPostService;
 import com.stu.nebulablog.service.question.QuestionGetService;
 import com.stu.nebulablog.service.question.QuestionListService;
@@ -27,7 +27,7 @@ public class FAQController {
     @Autowired
     private AnswerPostService answerPostService;
     @Autowired
-    private AnswerGetService answerGetService;
+    private AnswerListService answerListService;
     @Autowired
     private UserInfoMapper userInfoMapper;
     @Autowired
@@ -56,7 +56,7 @@ public class FAQController {
 
     @PostMapping("/getAData")
     public List<Answer> ADataGet(@RequestParam int qid) {
-        return answerGetService.doGet(qid);
+        return answerListService.doGet(qid);
     }
 
     @PostMapping("/getQAList")

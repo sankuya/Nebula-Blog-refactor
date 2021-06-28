@@ -1,6 +1,6 @@
 package com.stu.nebulablog.service.user;
 
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.stu.nebulablog.mapper.AnswerMapper;
 import com.stu.nebulablog.mapper.ArticleMapper;
 import com.stu.nebulablog.mapper.QuestionMapper;
@@ -10,6 +10,8 @@ import com.stu.nebulablog.module.entity.Article;
 import com.stu.nebulablog.module.entity.Question;
 import com.stu.nebulablog.module.entity.UserDetail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +27,15 @@ public class UserInfoChangeService {
     private AnswerMapper answerMapper;
 
     @Transactional
-    public boolean doInfoChange(UserDetail userDetail){
+    @Caching(evict = {
+            @CacheEvict(cacheNames = "user", key = "#userDetail.uid"),
+            @CacheEvict(cacheNames = "articleList", allEntries = true),
+            @CacheEvict(cacheNames = "article", allEntries = true),
+            @CacheEvict(cacheNames = "questionList", allEntries = true),
+            @CacheEvict(cacheNames = "question", allEntries = true),
+            @CacheEvict(cacheNames = "answerList", allEntries = true)
+    })
+    public boolean doInfoChange(UserDetail userDetail) {
         Article article = new Article();
         Question question = new Question();
         Answer answer = new Answer();
@@ -36,15 +46,15 @@ public class UserInfoChangeService {
         answer.setAuthor(userDetail.getNickname());
         answer.setUid(userDetail.getUid());
         if (userDetailMapper.updateById(userDetail) == 0) return false;
-        UpdateWrapper<Article> userDetailUpdateWrapper = new UpdateWrapper<>();
-        userDetailUpdateWrapper.eq("uid", article.getUid());
-        articleMapper.update(article, userDetailUpdateWrapper);
-        UpdateWrapper<Question> qUpdateWrapper = new UpdateWrapper<>();
-        qUpdateWrapper.eq("uid", question.getUid());
-        questionMapper.update(question, qUpdateWrapper);
-        UpdateWrapper<Answer> aUpdateWrapper = new UpdateWrapper<>();
-        aUpdateWrapper.eq("uid", answer.getUid());
-        answerMapper.update(answer, aUpdateWrapper);
+        articleMapper.update(article,
+                new LambdaUpdateWrapper<Article>()
+                        .eq(Article::getUid, article.getUid()));
+        questionMapper.update(question,
+                new LambdaUpdateWrapper<Question>()
+                        .eq(Question::getUid, question.getUid()));
+        answerMapper.update(answer,
+                new LambdaUpdateWrapper<Answer>()
+                        .eq(Answer::getUid, answer.getUid()));
         return true;
     }
 }

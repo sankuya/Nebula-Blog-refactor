@@ -6,6 +6,7 @@ import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.entity.FileInfo;
 import com.stu.nebulablog.module.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +17,7 @@ public class SharedFileUploadService extends AbstractSharedFileUploadService {
     @Autowired
     private UserInfoMapper userInfoMapper;
 
+    @CacheEvict(cacheNames = "fileInfoList", allEntries = true)
     public boolean uploadSharedFile(int uid, MultipartFile multipartFile) {
         String username = userInfoMapper.selectOne(
                 new LambdaQueryWrapper<UserInfo>()
@@ -29,7 +31,7 @@ public class SharedFileUploadService extends AbstractSharedFileUploadService {
         if ((tmpFileInfo = fileInfoMapper.selectOne(
                 new LambdaQueryWrapper<FileInfo>()
                         .select(FileInfo::getFileId)
-                        .eq(FileInfo::getUid,fileInfo.getUid())
+                        .eq(FileInfo::getUid, fileInfo.getUid())
                         .eq(FileInfo::getFilename, fileInfo.getFilename())
         )) != null) {
             fileInfo.setFileId(tmpFileInfo.getFileId());

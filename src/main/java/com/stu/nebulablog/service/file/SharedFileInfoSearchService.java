@@ -6,6 +6,7 @@ import com.stu.nebulablog.mapper.FileInfoMapper;
 import com.stu.nebulablog.module.entity.FileInfo;
 import com.stu.nebulablog.utils.PageToMapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.nio.file.Paths;
@@ -20,6 +21,7 @@ public class SharedFileInfoSearchService {
     @Autowired
     private PageToMapUtil<FileInfo> fileInfoPageToMapUtil;
 
+    @Cacheable(cacheNames = "FileInfoList")
     public Map<String, Object> searchSharedFileInfo(int page, int size, String keyword) {
         Page<FileInfo> fileInfoPage = new Page<>(page, size);
         fileInfoMapper.selectPage(fileInfoPage,
