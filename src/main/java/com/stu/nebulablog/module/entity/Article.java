@@ -6,11 +6,12 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.sql.Timestamp;
 
 @Data
-public class Article {
+public class Article implements Serializable {
     @TableId(type = IdType.AUTO,value = "art_id")
     private Integer articleId;
     private int uid;

@@ -2,18 +2,18 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
          updateCheck="false">
-<!--
-        磁盘存储:将缓存中暂时不使用的对象,转移到硬盘,类似于Windows系统的虚拟内存
-        path:指定在硬盘上存储对象的路径
-        path可以配置的目录有：
-            user.home（用户的家目录）
-            user.dir（用户当前的工作目录）
-            java.io.tmpdir（默认的临时目录）
-            ehcache.disk.store.dir（ehcache的配置目录）
-            绝对路径（如：d:\\ehcache）
-        查看路径方法：String tmpDir = System.getProperty("java.io.tmpdir");
-     -->
-    <diskStore path="java.io.tmpdir" />
+    <!--
+            磁盘存储:将缓存中暂时不使用的对象,转移到硬盘,类似于Windows系统的虚拟内存
+            path:指定在硬盘上存储对象的路径
+            path可以配置的目录有：
+                user.home（用户的家目录）
+                user.dir（用户当前的工作目录）
+                java.io.tmpdir（默认的临时目录）
+                ehcache.disk.store.dir（ehcache的配置目录）
+                绝对路径（如：d:\\ehcache）
+            查看路径方法：String tmpDir = System.getProperty("java.io.tmpdir");
+         -->
+    <diskStore path="java.io.tmpdir"/>
 
     <!--
         defaultCache:默认的缓存配置信息,如果不加特殊说明,则所有对象按照此配置项处理
@@ -27,7 +27,21 @@
         就算有访问，也只会存活600秒。
      -->
     <defaultCache maxElementsInMemory="10000" eternal="false"
-                  timeToIdleSeconds="600" timeToLiveSeconds="600" overflowToDisk="true" />
+                  timeToIdleSeconds="600" timeToLiveSeconds="600" overflowToDisk="true"/>
+    <cache name="article" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+           overflowToDisk="true"/>
+    <cache name="articleList" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="300"
+           timeToLiveSeconds="600" overflowToDisk="true"/>
+    <cache name="answerList" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+           overflowToDisk="true"/>
+    <cache name="fileInfoList" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="300"
+           timeToLiveSeconds="600" overflowToDisk="true"/>
+    <cache name="questionList" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="300"
+           timeToLiveSeconds="600" overflowToDisk="true"/>
+    <cache name="question" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+           overflowToDisk="true"/>
+    <cache name="user" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+           overflowToDisk="true"/>
 
 
 </ehcache>

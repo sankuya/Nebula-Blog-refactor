@@ -3,12 +3,13 @@ package com.stu.nebulablog.module.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
 @TableName("a")
-public class Answer {
+public class Answer implements Serializable {
     @TableId(type = IdType.AUTO,value = "aid")
     private Integer answerId;
     private Integer uid;

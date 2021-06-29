@@ -82,8 +82,5 @@
         <appender-ref ref="fileErrorLog"/>
         <appender-ref ref="fileSQLLog"/>
     </root>
-    <logger name="org.springframework" level="WARN" />
-    <logger name="org.apache.ibatis" level="DEBUG" />
-    <logger name="java.sql" level="DEBUG" />
     <logger name="com.stu.nebulablog.mapper" level="DEBUG"></logger>
 </configuration>

@@ -6,10 +6,11 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class FileInfo {
+public class FileInfo implements Serializable {
     @TableId(type = IdType.AUTO,value = "file_id")
     private Integer fileId;
     private Integer uid;
