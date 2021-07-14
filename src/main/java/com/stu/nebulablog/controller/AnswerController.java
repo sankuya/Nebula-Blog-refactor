@@ -20,21 +20,19 @@ public class AnswerController {
     private UserInfoMapper userInfoMapper;
     @Autowired
     private AnswerPostService answerPostService;
+
     @PostMapping("/post")
     public ResponseData aPost(@RequestBody Answer answer, HttpSession session) {
-        ResponseData responseData=new ResponseData();
-        Integer uid = (Integer)session.getAttribute("uid");
+        Integer uid = (Integer) session.getAttribute("uid");
         UserInfo userInfo = userInfoMapper.selectById(uid);
-        if (userInfo != null){
+        if (userInfo != null) {
             String username = userInfo.getUsername();
             answer.setUsername(username);
             answer.setUid(uid);
-            if(answerPostService.doPost(answer)){
-                responseData.setCode(500);
-                return responseData;
+            if (answerPostService.doPost(answer)) {
+                return ResponseData.success();
             }
         }
-        responseData.setCode(501);
-        return responseData;
+        return ResponseData.fail();
     }
 }

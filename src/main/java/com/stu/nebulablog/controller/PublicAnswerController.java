@@ -15,9 +15,8 @@ public class PublicAnswerController {
    private AnswerListService answerListService;
     @GetMapping("/getByQuestionId")
     public ResponseData getByQuestionId(@RequestParam int questionId) {
-        ResponseData responseData=new ResponseData();
+        ResponseData responseData=ResponseData.success();
         List<Answer>data= answerListService.doList(questionId);
-        responseData.setCode(600);
         responseData.setData(data);
         return responseData;
     }

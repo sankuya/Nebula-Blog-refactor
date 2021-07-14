@@ -23,34 +23,31 @@ public class PublicQuestionController {
 
     @GetMapping("/list")
     public ResponseData list(@RequestParam int page, @RequestParam int size) {
-        ResponseData responseData = new ResponseData();
         size = Math.min(MAXSIZE, size);
         Map<String, Object> data = questionListService.doList(size, page);
-        responseData.setCode(700);
+        ResponseData responseData=ResponseData.success();
         responseData.setData(data);
         return responseData;
     }
 
     @GetMapping("/search")
     public ResponseData search(@RequestParam int page, @RequestParam int size, @RequestParam String keyword) {
-        ResponseData responseData = new ResponseData();
         size = Math.min(size, MAXSIZE);
         Map<String, Object> data = questionSearchService.doQuestionSearch(keyword, page, size);
-        responseData.setCode(700);
+        ResponseData responseData=ResponseData.success();
         responseData.setData(data);
         return responseData;
     }
 
     @GetMapping("/get")
     public ResponseData get(@RequestParam int questionId) {
-        ResponseData responseData = new ResponseData();
         Question question = questionGetService.doGetQuestion(questionId);
         if (question == null) {
-            responseData.setCode(701);
+            return  ResponseData.fail();
         } else {
-            responseData.setCode(700);
+            ResponseData responseData=ResponseData.success();
             responseData.setData(question);
+            return ResponseData.success();
         }
-        return responseData;
     }
 }

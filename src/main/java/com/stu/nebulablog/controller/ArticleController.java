@@ -26,34 +26,28 @@ public class ArticleController {
 
     @PostMapping("/delete")
     public ResponseData delete(@RequestParam int articleId, HttpSession session) {
-        ResponseData responseData = new ResponseData();
         Integer uid = (Integer) session.getAttribute("uid");
         if (uid == null) {
-            responseData.setCode(401);
-            responseData.setMsg("未登录不能删除文章");
+            return ResponseData.fail();
         } else if (articleDeleteService.doDeleteArticle(uid, articleId)) {
-            responseData.setCode(400);
+            return ResponseData.success();
         } else {
-            responseData.setCode(402);
-            responseData.setMsg("不能删除别人的文章");
+            return ResponseData.fail();
         }
-        return responseData;
     }
 
     @PostMapping("/edit")
     public ResponseData edit(@RequestBody Article article, HttpSession session) {
-        ResponseData responseData = new ResponseData();
         Integer uid = (Integer) session.getAttribute("uid");
         if (uid.equals(article.getUid()) && articleEditService.doEditArticle(article)) {
-            responseData.setCode(400);
+            return ResponseData.success();
         } else {
-            responseData.setCode(401);
+            return ResponseData.fail();
         }
-        return responseData;
     }
 
 
-    @GetMapping ("/list")
+    @GetMapping("/list")
     public ResponseData getArticleList(@RequestParam int page, @RequestParam int size, HttpSession session) {
         ResponseData responseData = new ResponseData();
         Integer uid = (Integer) session.getAttribute("uid");

@@ -30,73 +30,61 @@ public class UserController {
     @Autowired
     private PhotoUploadService photoUploadService;
 
-    @PostMapping("getUser")
+    @GetMapping("getUser")
     public ResponseData getUserData(HttpSession session) {
         Integer uid = (Integer) session.getAttribute("uid");
-        ResponseData responseData = new ResponseData();
-        responseData.setCode(300);
+        ResponseData responseData = ResponseData.success();
         responseData.setData(userGetService.doGetUser(uid));
         return responseData;
     }
 
     @PostMapping("infoChange")
     public ResponseData infoChange(@RequestBody UserDetail src, HttpSession session) {
-        ResponseData responseData = new ResponseData();
         Integer uid = (Integer) session.getAttribute("uid");
         src.setUid(uid);
         if (userInfoChangeService.doInfoChange(src)) {
-            responseData.setCode(300);
+            return ResponseData.success();
         } else {
-            responseData.setCode(301);
+            return ResponseData.fail();
         }
-        return responseData;
     }
 
     @PostMapping("/uploadPhoto")
     public Object uploadPhoto(HttpServletRequest httpServletRequest, HttpSession session) {
-        ResponseData responseData = new ResponseData();
         MultipartFile multipartFile;
         try {
             multipartFile = ((MultipartHttpServletRequest) httpServletRequest).getFiles("file").get(0);
         } catch (ClassCastException | IndexOutOfBoundsException e) {
-            responseData.setCode(302);
-            responseData.setMsg("文件不能为空");
-            return responseData;
+            return ResponseData.fail();
         }
         Integer uid = (Integer) session.getAttribute("uid");
         UserInfo userInfo = userInfoMapper.selectById(uid);
         if (userInfo != null && photoUploadService.uploadPhoto(userInfo.getUsername(), multipartFile)) {
-            responseData.setCode(300);
+            ResponseData responseData = ResponseData.success();
             responseData.setData("/user/" + userInfo.getUsername() + "/ProfilePhoto.jpg");
+            return responseData;
         } else {
-            responseData.setCode(301);
+            return ResponseData.fail();
         }
-        return responseData;
     }
 
     @PostMapping("uploadImage")
     public ResponseData uploadImage(HttpServletRequest httpServletRequest, HttpSession session) {
-        ResponseData responseData = new ResponseData();
         MultipartFile multipartFile;
         try {
             multipartFile = ((MultipartHttpServletRequest) httpServletRequest).getFiles("editormd-image-file").get(0);
         } catch (ClassCastException | IndexOutOfBoundsException e) {
-            responseData.setCode(302);
-            responseData.setMsg("文件不能为空");
+            return ResponseData.fail();
+        }
+        Integer uid = (Integer) session.getAttribute("uid");
+        if (uid == null) return ResponseData.fail();
+        UserInfo userInfo = userInfoMapper.selectById(uid);
+        if (userInfo != null && imageUploadService.uploadImage(userInfo.getUsername(), multipartFile)) {
+            ResponseData responseData = ResponseData.success();
+            responseData.setData("/user/" + userInfo.getUsername() + "/img/" + multipartFile.getOriginalFilename());
             return responseData;
+        } else {
+            return ResponseData.fail();
         }
-        try {
-            Integer uid = (Integer) session.getAttribute("uid");
-            UserInfo userInfo = userInfoMapper.selectById(uid);
-            if (userInfo != null && imageUploadService.uploadImage(userInfo.getUsername(), multipartFile)) {
-                responseData.setCode(300);
-                responseData.setData("/user/" + userInfo.getUsername() + "/img/" + multipartFile.getOriginalFilename());
-            } else {
-                responseData.setCode(301);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return responseData;
     }
 }

@@ -23,16 +23,14 @@ public class PublicFileController {
     private static final int MAXSIZE=10;
     @GetMapping("list")
     public ResponseData list(@RequestParam int page, @RequestParam int size) {
-        ResponseData responseData = new ResponseData();
+        ResponseData responseData = ResponseData.success();
         size=Math.min(MAXSIZE,size);
         responseData.setData(sharedFileInfoListService.listSharedFileInfo(page, size));
         if (((List)((Map)responseData.getData()).get("detail")).size()!= 0) {
-            responseData.setCode(900);
+            return responseData;
         } else {
-            responseData.setCode(901);
-            responseData.setMsg("获取失败");
+            return ResponseData.fail();
         }
-        return responseData;
     }
     @GetMapping("search")
     public ResponseData search(@RequestParam int page, @RequestParam int size,@RequestParam String keyword) {
@@ -40,11 +38,9 @@ public class PublicFileController {
         size=Math.min(MAXSIZE,size);
         responseData.setData(sharedFileInfoSearchService.searchSharedFileInfo(page,size,keyword));
         if (((List)((Map)responseData.getData()).get("detail")).size()!= 0) {
-            responseData.setCode(900);
+            return responseData;
         } else {
-            responseData.setCode(901);
-            responseData.setMsg("获取失败");
+            return ResponseData.fail();
         }
-        return responseData;
     }
 }

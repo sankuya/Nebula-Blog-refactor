@@ -29,38 +29,30 @@ public class PublicUserController {
 
     @PostMapping("login")
     ResponseData login(@RequestBody UserVO userVO, HttpSession httpSession, HttpServletResponse httpServletResponse) {
-        ResponseData responseData = new ResponseData();
         int uid = loginService.doLogin(userVO);
         if (uid == -1) {
-            responseData.setCode(101);
-            responseData.setMsg("账号或密码错误");
-            return responseData;
+            return ResponseData.fail();
         }
-        responseData.setCode(100);
-        responseData.setMsg("登录成功");
         httpSession.setAttribute("uid", uid);
         Cookie usernameCookie = new Cookie("username", String.valueOf(uid));
         Cookie passwordCookie = new Cookie("password", passwordUtil.passwordEncoder(String.valueOf(uid)));
         httpServletResponse.addCookie(usernameCookie);
         httpServletResponse.addCookie(passwordCookie);
-        return responseData;
+        return ResponseData.success();
     }
 
     @PostMapping("register")
     ResponseData register(@RequestBody UserInfo userRegisterVO) {
-        ResponseData responseData = new ResponseData();
-        int code = registerService.doRegister(userRegisterVO);
-        userRegisterVO.setUid(null);
-        responseData.setCode(code);
-        if (code == 100) responseData.setMsg("注册成功");
-        if (code == 101) responseData.setMsg("用户已存在");
-        if (code == 102) responseData.setMsg("未知错误");
-        return responseData;
+        ResponseData responseData = new ResponseData();userRegisterVO.setUid(null);
+        if(registerService.doRegister(userRegisterVO)){
+            return ResponseData.success();
+        }else{
+            return ResponseData.fail();
+        }
     }
 
     @PostMapping("logout")
     public ResponseData logout(HttpSession session, HttpServletResponse httpServletResponse) {
-        ResponseData responseData = new ResponseData();
         if (session.getAttribute("uid") != null) session.removeAttribute("uid");
         Cookie usernameCookie = new Cookie("username", null);
         Cookie passwordCookie = new Cookie("password", null);
@@ -68,22 +60,18 @@ public class PublicUserController {
         passwordCookie.setMaxAge(0);
         httpServletResponse.addCookie(usernameCookie);
         httpServletResponse.addCookie(passwordCookie);
-        responseData.setCode(100);
-        responseData.setMsg("ok");
-        return responseData;
+        return ResponseData.success();
     }
 
-    @PostMapping("getUserById")
+    @GetMapping("getUserById")
     public ResponseData getUserDataByID(@RequestParam int uid) {
-        ResponseData responseData = new ResponseData();
         Map<String, Object> data = userGetService.doGetUser(uid);
         if (data == null) {
-            responseData.setCode(101);
-            responseData.setMsg("uid不存在");
+            return ResponseData.fail();
         } else {
-            responseData.setCode(100);
+            ResponseData responseData=ResponseData.success();
             responseData.setData(data);
+            return responseData;
         }
-        return responseData;
     }
 }

@@ -26,7 +26,7 @@ public class RegisterService {
     @Autowired
     private HeadPhotoInitService headPhotoInitService;
 
-    public int doRegister(UserInfo userRegisterVO) {
+    public boolean doRegister(UserInfo userRegisterVO) {
         userRegisterVO.setPassword(passwordUtil.passwordEncoder(userRegisterVO.getPassword()));
         QueryWrapper<UserInfo> userInfoQueryWrapper = new QueryWrapper<>();
         userInfoQueryWrapper
@@ -37,7 +37,7 @@ public class RegisterService {
                 .eq("tel", userRegisterVO.getTel());
         UserInfo userInfo = userInfoMapper.selectOne(userInfoQueryWrapper);
         if (userInfo != null) {
-            return 201;//"该用户名已存在"
+            return false;
         }
         userInfo = userRegisterVO;
         UserDetail userDetail = new UserDetail();
@@ -46,8 +46,8 @@ public class RegisterService {
         userDetail.setNickname(userInfo.getUsername());
         if (userInfoMapper.insert(userInfo) == 1 && userDetailMapper.insert(userDetail) == 1) {
             headPhotoInitService.initHeadPhoto(userInfo.getUsername());
-            return 200;
+            return true;
         }
-        return 202;//"未知错误";
+        return false;
     }
 }

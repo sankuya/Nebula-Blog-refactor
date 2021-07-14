@@ -18,16 +18,14 @@ public class QuestionController {
     private QuestionPostService questionPostService;
     @PostMapping("/post")
     public ResponseData questionPost(@RequestBody Question question, HttpSession session) {
-        ResponseData responseData=new ResponseData();
         Integer uid = (Integer)session.getAttribute("uid");
         question.setUid(uid);
         question.setQuestionId(null);
         question.setAnswer(0);
         if (questionPostService.doPost(question)){
-            responseData.setCode(800);
+            return ResponseData.success();
         }else{
-            responseData.setCode(801);
+            return ResponseData.fail();
         }
-        return responseData;
     }
 }

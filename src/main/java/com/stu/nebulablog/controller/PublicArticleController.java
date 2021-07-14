@@ -24,32 +24,29 @@ public class PublicArticleController {
 
     @GetMapping("/list")
     public ResponseData getArticleList(@RequestParam int page, @RequestParam int size) {
-        ResponseData responseData = new ResponseData();
+        ResponseData responseData = ResponseData.success();
         size=Math.min(MAXSIZE,size);
         Map<String, Object> data = articleListService.listAll(page, size);
-        responseData.setCode(200);
         responseData.setData(data);
         return responseData;
     }
     @GetMapping("/search")
     public Object search(@RequestParam int page,@RequestParam int size,@RequestParam String keyword) {
-        ResponseData responseData = new ResponseData();
+        ResponseData responseData = ResponseData.success();
         size = Math.min(size, MAXSIZE);
         Map<String, Object> data = articleSearchService.doSearchArticle(keyword, page, size);
-        responseData.setCode(400);
         responseData.setData(data);
         return responseData;
     }
     @GetMapping("/get")
     public ResponseData get(@RequestParam int articleId) {
-        ResponseData responseData = new ResponseData();
         Article article = articleGetService.doGetArticle(articleId);
         if (article != null) {
-            responseData.setCode(400);
+            ResponseData responseData=ResponseData.success();
             responseData.setData(article);
+            return responseData;
         } else {
-            responseData.setCode(401);
+            return ResponseData.fail();
         }
-        return responseData;
     }
 }
