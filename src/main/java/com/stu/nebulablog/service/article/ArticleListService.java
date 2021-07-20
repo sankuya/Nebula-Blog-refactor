@@ -24,7 +24,7 @@ public class ArticleListService {
     public Map<String, Object> listAll(int p, int size) {
         Page<Article> articlePage = new Page<>(p, size);
         LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.select(Article::getArticleId,Article::getAuthor,Article::getTitle,Article::getDate);
+        queryWrapper.select(Article::getArticleId,Article::getAuthor,Article::getTitle,Article::getDate,Article::getUid);
         articleMapper.selectPage(articlePage, queryWrapper);
         return articlePageToMapUtil.getMapFromPageWithPages(articlePage);
     }
