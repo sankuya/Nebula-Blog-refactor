@@ -8,7 +8,6 @@ import org.springframework.util.DigestUtils;
 public class PasswordUtil {
     private final String salt = "*NebulA*";
 
-    @Cacheable(cacheNames = "passwordEncode", key = "#password")
     public String passwordEncoder(String password) {
         return DigestUtils.md5DigestAsHex((password + salt).getBytes());
     }
