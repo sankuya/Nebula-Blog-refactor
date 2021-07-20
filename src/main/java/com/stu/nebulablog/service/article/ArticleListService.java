@@ -5,37 +5,40 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.stu.nebulablog.mapper.ArticleMapper;
 import com.stu.nebulablog.module.entity.Article;
+import com.stu.nebulablog.module.vo.PageDataVO;
 import com.stu.nebulablog.utils.PageToMapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @Cacheable(cacheNames = "articleList")
 public class ArticleListService {
     @Autowired
     private ArticleMapper articleMapper;
-
+    private static final int SUMMARY_SIZE = 255;
     @Autowired
-    private PageToMapUtil<Article>articlePageToMapUtil;
+    private PageToMapUtil<Article> articlePageToMapUtil;
 
-    public Map<String, Object> listAll(int p, int size) {
+    public PageDataVO<Article> list(int p, Integer uid, int size) {
         Page<Article> articlePage = new Page<>(p, size);
         LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.select(Article::getArticleId,Article::getAuthor,Article::getTitle,Article::getDate,Article::getUid);
-        articleMapper.selectPage(articlePage, queryWrapper);
-        return articlePageToMapUtil.getMapFromPageWithPages(articlePage);
-    }
-
-    public Map<String, Object> listByUid(int p, int uid, int size) {
-        Page<Article> articlePage = new Page<>(p, size);
-        QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
         queryWrapper
-                .eq("uid", uid)
-                .select("art_id", "title", "author", "date");
+                .eq(uid != null, Article::getUid, uid)
+                .select(Article::getArticleId, Article::getAuthor, Article::getTitle, Article::getDate, Article::getUid, Article::getContent)
+                .orderByDesc(Article::getArticleId);
         articleMapper.selectPage(articlePage, queryWrapper);
-        return articlePageToMapUtil.getMapFromPageWithPages(articlePage);
+        PageDataVO<Article> res = articlePageToMapUtil.getMapFromPageWithPages(articlePage);
+        res.getDetail().forEach(article -> {//取内容的前n位作为摘要，todo：数据库中直接设置摘要字段
+            String content=article.getContent();
+            if(content==null)return;
+            article.setSummary(content.substring(0,Math.min(SUMMARY_SIZE,article.getContent().length())));
+            article.setContent(null);
+        });
+        return res;
     }
 }

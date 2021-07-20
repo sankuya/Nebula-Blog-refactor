@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.stu.nebulablog.mapper.QuestionMapper;
 import com.stu.nebulablog.module.entity.Question;
+import com.stu.nebulablog.module.vo.PageDataVO;
 import com.stu.nebulablog.utils.PageToMapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,7 +20,7 @@ public class QuestionListService {
     private PageToMapUtil<Question> qPageToMapUtil;
 
     @Cacheable(cacheNames = "questionList")
-    public Map<String, Object> doList(int size, int page) {
+    public PageDataVO<Question> doList(int size, int page) {
         Page<Question> qPage = new Page<>(page, size);
         questionMapper.selectPage(qPage,
                 new LambdaQueryWrapper<Question>()

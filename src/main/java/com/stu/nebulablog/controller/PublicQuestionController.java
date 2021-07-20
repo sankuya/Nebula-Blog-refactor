@@ -2,6 +2,7 @@ package com.stu.nebulablog.controller;
 
 import com.stu.nebulablog.module.ResponseData;
 import com.stu.nebulablog.module.entity.Question;
+import com.stu.nebulablog.module.vo.PageDataVO;
 import com.stu.nebulablog.service.question.QuestionGetService;
 import com.stu.nebulablog.service.question.QuestionSearchService;
 import com.stu.nebulablog.service.question.QuestionListService;
@@ -24,8 +25,8 @@ public class PublicQuestionController {
     @GetMapping("/list")
     public ResponseData list(@RequestParam int page, @RequestParam int size) {
         size = Math.min(MAXSIZE, size);
-        Map<String, Object> data = questionListService.doList(size, page);
-        ResponseData responseData=ResponseData.success();
+        PageDataVO<Question> data = questionListService.doList(size, page);
+        ResponseData responseData = ResponseData.success();
         responseData.setData(data);
         return responseData;
     }
@@ -33,8 +34,8 @@ public class PublicQuestionController {
     @GetMapping("/search")
     public ResponseData search(@RequestParam int page, @RequestParam int size, @RequestParam String keyword) {
         size = Math.min(size, MAXSIZE);
-        Map<String, Object> data = questionSearchService.doQuestionSearch(keyword, page, size);
-        ResponseData responseData=ResponseData.success();
+        PageDataVO<Question> data = questionSearchService.doQuestionSearch(keyword, page, size);
+        ResponseData responseData = ResponseData.success();
         responseData.setData(data);
         return responseData;
     }
@@ -43,9 +44,9 @@ public class PublicQuestionController {
     public ResponseData get(@RequestParam int questionId) {
         Question question = questionGetService.doGetQuestion(questionId);
         if (question == null) {
-            return  ResponseData.fail();
+            return ResponseData.fail();
         } else {
-            ResponseData responseData=ResponseData.success();
+            ResponseData responseData = ResponseData.success();
             responseData.setData(question);
             return ResponseData.success();
         }

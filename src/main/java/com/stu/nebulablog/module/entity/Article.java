@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 
 @Data
 public class Article implements Serializable {
-    @TableId(type = IdType.AUTO,value = "art_id")
+    @TableId(type = IdType.AUTO, value = "art_id")
     private Integer articleId;
     private int uid;
     private String author;
@@ -20,7 +20,10 @@ public class Article implements Serializable {
     private String content;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date date;
-    public int hashCode(){
+    @TableField(exist = false)
+    private String summary;
+
+    public int hashCode() {
         return articleId;
     }
 }

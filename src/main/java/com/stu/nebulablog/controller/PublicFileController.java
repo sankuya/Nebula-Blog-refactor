@@ -1,6 +1,7 @@
 package com.stu.nebulablog.controller;
 
 import com.stu.nebulablog.module.ResponseData;
+import com.stu.nebulablog.module.vo.PageDataVO;
 import com.stu.nebulablog.service.file.SharedFileInfoListService;
 import com.stu.nebulablog.service.file.SharedFileInfoSearchService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,27 +21,25 @@ public class PublicFileController {
     private SharedFileInfoListService sharedFileInfoListService;
     @Autowired
     private SharedFileInfoSearchService sharedFileInfoSearchService;
-    private static final int MAXSIZE=10;
+    private static final int MAXSIZE = 10;
+
     @GetMapping("list")
     public ResponseData list(@RequestParam int page, @RequestParam int size) {
         ResponseData responseData = ResponseData.success();
-        size=Math.min(MAXSIZE,size);
-        responseData.setData(sharedFileInfoListService.listSharedFileInfo(page, size));
-        if (((List)((Map)responseData.getData()).get("detail")).size()!= 0) {
-            return responseData;
-        } else {
-            return ResponseData.fail();
-        }
+        size = Math.min(MAXSIZE, size);
+        PageDataVO<String> data = sharedFileInfoListService.listSharedFileInfo(page, size);
+        if (data.getDetail().size() == 0) return ResponseData.fail();
+        responseData.setData(data);
+        return responseData;
     }
+
     @GetMapping("search")
-    public ResponseData search(@RequestParam int page, @RequestParam int size,@RequestParam String keyword) {
+    public ResponseData search(@RequestParam int page, @RequestParam int size, @RequestParam String keyword) {
         ResponseData responseData = new ResponseData();
-        size=Math.min(MAXSIZE,size);
-        responseData.setData(sharedFileInfoSearchService.searchSharedFileInfo(page,size,keyword));
-        if (((List)((Map)responseData.getData()).get("detail")).size()!= 0) {
-            return responseData;
-        } else {
-            return ResponseData.fail();
-        }
+        size = Math.min(MAXSIZE, size);
+        PageDataVO<String> data = sharedFileInfoSearchService.searchSharedFileInfo(page, size, keyword);
+        if (data.getDetail().size() == 0) return ResponseData.fail();
+        responseData.setData(data);
+        return responseData;
     }
 }

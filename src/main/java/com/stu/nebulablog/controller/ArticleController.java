@@ -2,6 +2,7 @@ package com.stu.nebulablog.controller;
 
 import com.stu.nebulablog.module.ResponseData;
 import com.stu.nebulablog.module.entity.Article;
+import com.stu.nebulablog.module.vo.PageDataVO;
 import com.stu.nebulablog.service.article.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,6 @@ public class ArticleController {
     private ArticleDeleteService articleDeleteService;
     @Autowired
     private ArticleEditService articleEditService;
-    @Autowired
-    private ArticleGetService articleGetService;
     private static final int MAXSIZE = 10;
 
     @PostMapping("/delete")
@@ -52,7 +51,7 @@ public class ArticleController {
         ResponseData responseData = new ResponseData();
         Integer uid = (Integer) session.getAttribute("uid");
         size = Math.min(size, MAXSIZE);
-        Map<String, Object> data = articleListService.listByUid(page, uid, size);
+        PageDataVO<Article> data = articleListService.list(page, uid, size);
         responseData.setCode(400);
         responseData.setData(data);
         return responseData;

@@ -1,4 +1,4 @@
-package com.stu.nebulablog.module;
+package com.stu.nebulablog.module.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

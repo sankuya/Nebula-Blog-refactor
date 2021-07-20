@@ -1,7 +1,7 @@
 package com.stu.nebulablog.controller;
 
 import com.stu.nebulablog.module.ResponseData;
-import com.stu.nebulablog.module.UserVO;
+import com.stu.nebulablog.module.vo.UserVO;
 import com.stu.nebulablog.module.entity.UserInfo;
 import com.stu.nebulablog.service.user.UserGetService;
 import com.stu.nebulablog.service.login.LoginService;

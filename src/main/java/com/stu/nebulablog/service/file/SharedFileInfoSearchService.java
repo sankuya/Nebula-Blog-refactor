@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.stu.nebulablog.mapper.FileInfoMapper;
 import com.stu.nebulablog.module.entity.FileInfo;
+import com.stu.nebulablog.module.vo.PageDataVO;
 import com.stu.nebulablog.utils.PageToMapUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -13,6 +14,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class SharedFileInfoSearchService {
@@ -22,7 +24,7 @@ public class SharedFileInfoSearchService {
     private PageToMapUtil<FileInfo> fileInfoPageToMapUtil;
 
     @Cacheable(cacheNames = "FileInfoList")
-    public Map<String, Object> searchSharedFileInfo(int page, int size, String keyword) {
+    public PageDataVO<String> searchSharedFileInfo(int page, int size, String keyword) {
         Page<FileInfo> fileInfoPage = new Page<>(page, size);
         fileInfoMapper.selectPage(fileInfoPage,
                 new LambdaQueryWrapper<FileInfo>()
@@ -30,13 +32,11 @@ public class SharedFileInfoSearchService {
                         .or()
                         .like(FileInfo::getUsername, keyword)
         );
-        Map<String, Object> res = fileInfoPageToMapUtil.getMapFromPageWithPages(fileInfoPage);
-        List<FileInfo> fileInfos = (List<FileInfo>) res.get("detail");
-        List<String> paths = new ArrayList<>();
-        fileInfos.forEach(file ->
-                paths.add(Paths.get("user", file.getUsername(), "share", file.getFilename()).toString())
-        );
-        res.put("detail", paths);
-        return res;
+        PageDataVO<FileInfo> res = fileInfoPageToMapUtil.getMapFromPageWithPages(fileInfoPage);
+        return new PageDataVO<>(res.getSize(), res//FileInfo提取出path
+                .getDetail()
+                .stream()
+                .map(fileInfo -> Paths.get("/user", fileInfo.getUsername(), "share", fileInfo.getFilename()).toString())
+                .collect(Collectors.toList()));
     }
 }
