@@ -22,10 +22,11 @@ public class InterceptorConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOriginPatterns("*")
+                .allowedHeaders("*")
                 // 是否允许证书（cookies）
                 .allowCredentials(true)
                 // 设置允许的方法
-                .allowedMethods("*")
+                .allowedMethods("POST")
                 // 跨域允许时间
                 .maxAge(3600);
     }
