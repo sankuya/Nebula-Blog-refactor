@@ -26,7 +26,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 // 是否允许证书（cookies）
                 .allowCredentials(true)
                 // 设置允许的方法
-                .allowedMethods("POST")
+                .allowedMethods("*")
                 // 跨域允许时间
                 .maxAge(3600);
     }

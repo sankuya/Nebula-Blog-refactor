@@ -26,6 +26,7 @@ public class PublicUserController {
     private RegisterService registerService;
     @Autowired
     private UserGetService userGetService;
+    private static final int COOKIE_EXPIRED = 60 * 60 * 12 * 7;
 
     @PostMapping("login")
     ResponseData login(@RequestBody UserVO userVO, HttpSession httpSession, HttpServletResponse httpServletResponse) {
@@ -36,6 +37,8 @@ public class PublicUserController {
         httpSession.setAttribute("uid", uid);
         Cookie usernameCookie = new Cookie("username", String.valueOf(uid));
         Cookie passwordCookie = new Cookie("password", passwordUtil.passwordEncoder(String.valueOf(uid)));
+        usernameCookie.setMaxAge(COOKIE_EXPIRED);
+        passwordCookie.setMaxAge(COOKIE_EXPIRED);
         httpServletResponse.addCookie(usernameCookie);
         httpServletResponse.addCookie(passwordCookie);
         return ResponseData.success();
@@ -43,10 +46,11 @@ public class PublicUserController {
 
     @PostMapping("register")
     ResponseData register(@RequestBody UserInfo userRegisterVO) {
-        ResponseData responseData = new ResponseData();userRegisterVO.setUid(null);
-        if(registerService.doRegister(userRegisterVO)){
+        ResponseData responseData = new ResponseData();
+        userRegisterVO.setUid(null);
+        if (registerService.doRegister(userRegisterVO)) {
             return ResponseData.success();
-        }else{
+        } else {
             return ResponseData.fail();
         }
     }
@@ -69,7 +73,7 @@ public class PublicUserController {
         if (data == null) {
             return ResponseData.fail();
         } else {
-            ResponseData responseData=ResponseData.success();
+            ResponseData responseData = ResponseData.success();
             responseData.setData(data);
             return responseData;
         }
