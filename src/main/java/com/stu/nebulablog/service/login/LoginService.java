@@ -15,7 +15,9 @@ public class LoginService {
 
     @Autowired
     private PasswordUtil passwordUtil;
+
     public int doLogin(UserVO userVO) {
+        if (userVO.getUsername() == null || userVO.getPassword() == null) return -1;
         userVO.setPassword(passwordUtil.passwordEncoder(userVO.getPassword()));
         QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper
@@ -26,7 +28,7 @@ public class LoginService {
                 .eq("mail", userVO.getUsername())
         ;
         UserInfo userInfo = userInfoMapper.selectOne(queryWrapper);
-        if (userInfo!=null&&userInfo.getPassword().equals(userVO.getPassword())) {
+        if (userInfo != null && userInfo.getPassword().equals(userVO.getPassword())) {
             return userInfo.getUid();
         }
         return -1;

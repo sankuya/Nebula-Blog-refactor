@@ -8,12 +8,16 @@ import com.stu.nebulablog.service.login.LoginService;
 import com.stu.nebulablog.service.login.RegisterService;
 import com.stu.nebulablog.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/public/user")
@@ -29,8 +33,21 @@ public class PublicUserController {
     private static final int COOKIE_EXPIRED = 60 * 60 * 12 * 7;
 
     @PostMapping("login")
-    ResponseData login(@RequestBody UserVO userVO, HttpSession httpSession, HttpServletResponse httpServletResponse) {
-        int uid = loginService.doLogin(userVO);
+    ResponseData login(@Nullable @RequestBody UserVO userVO, HttpSession httpSession, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        int uid = Optional
+                .ofNullable(userVO)
+                .map(notNullUerVO -> loginService.doLogin(notNullUerVO))
+                .orElseGet(() -> {
+                    Cookie[] cookies = httpServletRequest.getCookies();
+                    String username = null, password = null;
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().equals("username")) username = cookie.getValue();
+                        if (cookie.getName().equals("password")) password = cookie.getValue();
+                    }
+                    if (username != null && password != null && passwordUtil.passwordEncoder(username).equals(password))
+                        return Integer.valueOf(username);
+                    else return -1;
+                });
         if (uid == -1) {
             return ResponseData.fail();
         }
@@ -46,7 +63,6 @@ public class PublicUserController {
 
     @PostMapping("register")
     ResponseData register(@RequestBody UserInfo userRegisterVO) {
-        ResponseData responseData = new ResponseData();
         userRegisterVO.setUid(null);
         if (registerService.doRegister(userRegisterVO)) {
             return ResponseData.success();
