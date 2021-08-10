@@ -20,7 +20,7 @@ public class ArticleSearchService {
     @Autowired
     private ArticleMapper articleMapper;
     @Cacheable("articleList")
-    public PageDataVO doSearchArticle(String keyword, int page, int size) {
+    public PageDataVO<Article> doSearchArticle(String keyword, int page, int size) {
         Page<Article> articlePage = new Page<>(page, size);
         LambdaQueryWrapper<Article>articleLambdaQueryWrapper=new LambdaQueryWrapper<>();
         articleLambdaQueryWrapper

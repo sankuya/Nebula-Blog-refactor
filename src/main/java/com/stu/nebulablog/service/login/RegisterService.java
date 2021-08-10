@@ -41,7 +41,6 @@ public class RegisterService {
         }
         userInfo = userRegisterVO;
         UserDetail userDetail = new UserDetail();
-        userDetail.setBlogname(userInfo.getUsername() + "的小天地");
         userDetail.setGender("男");
         userDetail.setNickname(userInfo.getUsername());
         if (userInfoMapper.insert(userInfo) == 1 && userDetailMapper.insert(userDetail) == 1) {

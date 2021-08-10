@@ -28,7 +28,7 @@ public class PublicArticleController {
     public ResponseData getArticleList(@RequestParam int page, @RequestParam int size, @Nullable @RequestParam Integer uid) {
         ResponseData responseData = ResponseData.success();
         size = Math.min(MAXSIZE, size);
-        PageDataVO data = articleListService.list(page, uid, size);
+        PageDataVO<Article> data = articleListService.list(page, uid, size);
         responseData.setData(data);
         return responseData;
     }
@@ -37,7 +37,7 @@ public class PublicArticleController {
     public Object search(@RequestParam int page, @RequestParam int size, @RequestParam String keyword) {
         ResponseData responseData = ResponseData.success();
         size = Math.min(size, MAXSIZE);
-        PageDataVO data = articleSearchService.doSearchArticle(keyword, page, size);
+        PageDataVO<Article> data = articleSearchService.doSearchArticle(keyword, page, size);
         responseData.setData(data);
         return responseData;
     }

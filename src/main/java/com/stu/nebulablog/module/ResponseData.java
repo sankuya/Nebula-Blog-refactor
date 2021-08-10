@@ -8,12 +8,12 @@ public class ResponseData {
     private Object data;
     public static ResponseData success(){
         ResponseData responseData=new ResponseData();
-        responseData.setCode(200);
+        responseData.setCode(1);
         return responseData;
     }
     public static ResponseData fail(){
         ResponseData responseData=new ResponseData();
-        responseData.setCode(404);
+        responseData.setCode(0);
         return responseData;
     }
 }
