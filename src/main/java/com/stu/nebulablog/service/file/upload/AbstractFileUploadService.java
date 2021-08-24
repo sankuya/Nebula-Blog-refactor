@@ -11,11 +11,14 @@ import java.io.File;
 
 
 abstract public class AbstractFileUploadService extends AbstractFileService {
+    public AbstractFileUploadService(String preUrl) {
+        super(preUrl);
+    }
 
     @Async
     abstract protected boolean doUploadFile(String prePath, MultipartFile multipartFile);
 
-    protected boolean uploadFile(String  username, MultipartFile multipartFile) {
+    protected boolean uploadFile(String username, MultipartFile multipartFile) {
         String tmpPath = preUrl + username;
         File directory = new File(tmpPath);
         try {

@@ -6,7 +6,9 @@ import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.entity.FileInfo;
 import com.stu.nebulablog.module.entity.UserInfo;
 import com.stu.nebulablog.service.file.AbstractFileService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,11 +22,16 @@ import java.nio.file.Paths;
 @Service
 @Transactional(rollbackFor = IOException.class)
 public class SharedFileDeleteService extends AbstractFileService {
-    @Autowired
-    private UserInfoMapper userInfoMapper;
-    @Autowired
-    private FileInfoMapper fileInfoMapper;
-    @CacheEvict(cacheNames = "fileInfoList",allEntries = true)
+    private final UserInfoMapper userInfoMapper;
+    private final FileInfoMapper fileInfoMapper;
+
+    public SharedFileDeleteService(String preUrl, UserInfoMapper userInfoMapper, FileInfoMapper fileInfoMapper) {
+        super(preUrl);
+        this.userInfoMapper = userInfoMapper;
+        this.fileInfoMapper = fileInfoMapper;
+    }
+
+    @CacheEvict(cacheNames = "fileInfoList", allEntries = true)
     public boolean deleteSharedFile(int uid, int fileId) {
         String username, filename;
         try {

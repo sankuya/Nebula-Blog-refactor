@@ -6,6 +6,7 @@ import com.stu.nebulablog.mapper.QuestionMapper;
 import com.stu.nebulablog.module.entity.Question;
 import com.stu.nebulablog.module.vo.PageDataVO;
 import com.stu.nebulablog.utils.PageToMapUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,10 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 @Service
+@AllArgsConstructor
 public class QuestionListService {
-    @Autowired
-    private QuestionMapper questionMapper;
-    @Autowired
-    private PageToMapUtil<Question> qPageToMapUtil;
+    private final QuestionMapper questionMapper;
+    private final PageToMapUtil<Question> qPageToMapUtil;
 
     @Cacheable(cacheNames = "questionList")
     public PageDataVO<Question> doList(int size, int page) {

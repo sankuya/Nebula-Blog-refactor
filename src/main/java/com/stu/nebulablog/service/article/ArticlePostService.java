@@ -6,19 +6,19 @@ import com.stu.nebulablog.mapper.ArticleMapper;
 import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.entity.Article;
 import com.stu.nebulablog.module.entity.UserInfo;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 @Service
-
+@AllArgsConstructor
 public class ArticlePostService {
-    @Autowired
-    private ArticleMapper articleMapper;
-    @Autowired
-    private UserInfoMapper userInfoMapper;
-    @CacheEvict(value = "articleList",allEntries = true)
+    private final ArticleMapper articleMapper;
+    private final UserInfoMapper userInfoMapper;
+
+    @CacheEvict(value = "articleList", allEntries = true)
     public boolean doPostArticle(Article article) {
         LambdaQueryWrapper<UserInfo> userInfoLambdaQueryWrapper = new LambdaQueryWrapper<>();
         userInfoLambdaQueryWrapper

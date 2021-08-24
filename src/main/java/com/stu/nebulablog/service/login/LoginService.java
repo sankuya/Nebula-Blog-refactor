@@ -5,16 +5,15 @@ import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.entity.UserInfo;
 import com.stu.nebulablog.module.vo.UserVO;
 import com.stu.nebulablog.utils.PasswordUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class LoginService {
-    @Autowired
-    private UserInfoMapper userInfoMapper;
-
-    @Autowired
-    private PasswordUtil passwordUtil;
+    private final UserInfoMapper userInfoMapper;
+    private final PasswordUtil passwordUtil;
 
     public int doLogin(UserVO userVO) {
         if (userVO.getUsername() == null || userVO.getPassword() == null) return -1;

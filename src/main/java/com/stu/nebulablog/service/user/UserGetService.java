@@ -6,6 +6,7 @@ import com.stu.nebulablog.mapper.UserDetailMapper;
 import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.entity.UserDetail;
 import com.stu.nebulablog.module.entity.UserInfo;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,11 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 @Service
+@AllArgsConstructor
 public class UserGetService {
-    @Autowired
-    private UserDetailMapper userDetailMapper;
-    @Autowired
-    private UserInfoMapper userInfoMapper;
+    private final UserDetailMapper userDetailMapper;
+    private final UserInfoMapper userInfoMapper;
+
     @Cacheable(cacheNames = "user")
     public Map<String, Object> doGetUser(int uid) {
         try {

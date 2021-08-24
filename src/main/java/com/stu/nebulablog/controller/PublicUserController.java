@@ -7,6 +7,7 @@ import com.stu.nebulablog.service.user.UserGetService;
 import com.stu.nebulablog.service.login.LoginService;
 import com.stu.nebulablog.service.login.RegisterService;
 import com.stu.nebulablog.utils.PasswordUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
@@ -21,15 +22,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/public/user")
+@AllArgsConstructor
 public class PublicUserController {
-    @Autowired
-    private LoginService loginService;
-    @Autowired
-    private PasswordUtil passwordUtil;
-    @Autowired
-    private RegisterService registerService;
-    @Autowired
-    private UserGetService userGetService;
+    private final LoginService loginService;
+    private final PasswordUtil passwordUtil;
+    private final RegisterService registerService;
+    private final UserGetService userGetService;
     private static final int COOKIE_EXPIRED = 60 * 60 * 12 * 7;
 
     @PostMapping("login")

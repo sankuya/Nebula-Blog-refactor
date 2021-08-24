@@ -6,6 +6,7 @@ import com.stu.nebulablog.module.vo.PageDataVO;
 import com.stu.nebulablog.service.article.ArticleGetService;
 import com.stu.nebulablog.service.article.ArticleListService;
 import com.stu.nebulablog.service.article.ArticleSearchService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +15,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/public/article")
+@AllArgsConstructor
 public class PublicArticleController {
-
-    @Autowired
-    private ArticleListService articleListService;
-    @Autowired
-    private ArticleSearchService articleSearchService;
-    @Autowired
-    private ArticleGetService articleGetService;
+    private final ArticleListService articleListService;
+    private final ArticleSearchService articleSearchService;
+    private final ArticleGetService articleGetService;
     private static final int MAXSIZE = 10;
 
     @GetMapping("/list")

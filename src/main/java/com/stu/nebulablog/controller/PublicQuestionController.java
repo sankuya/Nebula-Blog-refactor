@@ -6,6 +6,7 @@ import com.stu.nebulablog.module.vo.PageDataVO;
 import com.stu.nebulablog.service.question.QuestionGetService;
 import com.stu.nebulablog.service.question.QuestionSearchService;
 import com.stu.nebulablog.service.question.QuestionListService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,13 +14,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/public/question")
+@AllArgsConstructor
 public class PublicQuestionController {
-    @Autowired
-    private QuestionListService questionListService;
-    @Autowired
-    private QuestionSearchService questionSearchService;
-    @Autowired
-    private QuestionGetService questionGetService;
+    private final QuestionListService questionListService;
+    private final QuestionSearchService questionSearchService;
+    private final QuestionGetService questionGetService;
     private static final int MAXSIZE = 10;
 
     @GetMapping("/list")

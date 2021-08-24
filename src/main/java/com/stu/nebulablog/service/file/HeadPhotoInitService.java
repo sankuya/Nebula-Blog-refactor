@@ -15,6 +15,10 @@ import java.nio.file.Paths;
 
 @Service
 public class HeadPhotoInitService extends AbstractFileService {
+    public HeadPhotoInitService(String preUrl) {
+        super(preUrl);
+    }
+
     @Async
     public void initHeadPhoto(String username) {
         Path source = Paths.get(preUrl + "ProfilePhoto.jpg");

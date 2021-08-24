@@ -4,6 +4,7 @@ import com.stu.nebulablog.module.ResponseData;
 import com.stu.nebulablog.module.vo.PageDataVO;
 import com.stu.nebulablog.service.file.SharedFileInfoListService;
 import com.stu.nebulablog.service.file.SharedFileInfoSearchService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +17,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("public/file")
+@AllArgsConstructor
 public class PublicFileController {
-    @Autowired
-    private SharedFileInfoListService sharedFileInfoListService;
-    @Autowired
-    private SharedFileInfoSearchService sharedFileInfoSearchService;
+    private final SharedFileInfoListService sharedFileInfoListService;
+    private final SharedFileInfoSearchService sharedFileInfoSearchService;
     private static final int MAXSIZE = 10;
 
     @GetMapping("list")

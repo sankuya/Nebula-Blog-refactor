@@ -7,6 +7,7 @@ import com.stu.nebulablog.module.entity.UserDetail;
 import com.stu.nebulablog.module.entity.UserInfo;
 import com.stu.nebulablog.service.file.HeadPhotoInitService;
 import com.stu.nebulablog.utils.PasswordUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,15 +17,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 @Service
+@AllArgsConstructor
 public class RegisterService {
-    @Autowired
-    private UserDetailMapper userDetailMapper;
-    @Autowired
-    private UserInfoMapper userInfoMapper;
-    @Autowired
-    private PasswordUtil passwordUtil;
-    @Autowired
-    private HeadPhotoInitService headPhotoInitService;
+    private final UserDetailMapper userDetailMapper;
+    private final UserInfoMapper userInfoMapper;
+    private final PasswordUtil passwordUtil;
+    private final HeadPhotoInitService headPhotoInitService;
 
     public boolean doRegister(UserInfo userRegisterVO) {
         userRegisterVO.setPassword(passwordUtil.passwordEncoder(userRegisterVO.getPassword()));

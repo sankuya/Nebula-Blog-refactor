@@ -12,10 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class SharedFileUploadService extends AbstractSharedFileUploadService {
-    @Autowired
-    private FileInfoMapper fileInfoMapper;
-    @Autowired
-    private UserInfoMapper userInfoMapper;
+    private final FileInfoMapper fileInfoMapper;
+    private final UserInfoMapper userInfoMapper;
+
+    public SharedFileUploadService(String preUrl, FileInfoMapper fileInfoMapper, UserInfoMapper userInfoMapper) {
+        super(preUrl);
+        this.fileInfoMapper = fileInfoMapper;
+        this.userInfoMapper = userInfoMapper;
+    }
 
     @CacheEvict(cacheNames = "fileInfoList", allEntries = true)
     public boolean uploadSharedFile(int uid, MultipartFile multipartFile) {

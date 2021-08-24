@@ -8,6 +8,7 @@ import com.stu.nebulablog.service.file.upload.ImageUploadService;
 import com.stu.nebulablog.service.user.UserInfoChangeService;
 import com.stu.nebulablog.service.file.upload.PhotoUploadService;
 import com.stu.nebulablog.service.user.UserGetService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,17 +19,13 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("user")
+@AllArgsConstructor
 public class UserController {
-    @Autowired
-    private UserGetService userGetService;
-    @Autowired
-    private UserInfoMapper userInfoMapper;
-    @Autowired
-    private ImageUploadService imageUploadService;
-    @Autowired
-    private UserInfoChangeService userInfoChangeService;
-    @Autowired
-    private PhotoUploadService photoUploadService;
+    private final UserGetService userGetService;
+    private final UserInfoMapper userInfoMapper;
+    private final ImageUploadService imageUploadService;
+    private final UserInfoChangeService userInfoChangeService;
+    private final PhotoUploadService photoUploadService;
 
     @GetMapping("getUser")
     public ResponseData getUserData(HttpSession session) {
@@ -49,7 +46,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/uploadPhoto")
+    @PostMapping("uploadPhoto")
     public Object uploadPhoto(HttpServletRequest httpServletRequest, HttpSession session) {
         MultipartFile multipartFile;
         try {

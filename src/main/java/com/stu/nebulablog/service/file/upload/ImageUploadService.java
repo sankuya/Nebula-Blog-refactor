@@ -8,6 +8,10 @@ import java.io.IOException;
 
 @Service
 public class ImageUploadService extends AbstractFileUploadService {
+    public ImageUploadService(String preUrl) {
+        super(preUrl);
+    }
+
     @Override
     protected boolean doUploadFile(String prePath, MultipartFile multipartFile) {
         String path = prePath + "/img/" + multipartFile.getOriginalFilename();
@@ -21,6 +25,6 @@ public class ImageUploadService extends AbstractFileUploadService {
     }
 
     public boolean uploadImage(String prePath, MultipartFile multipartFile) {
-        return doUploadFile(prePath, multipartFile);
+        return super.uploadFile(prePath, multipartFile);
     }
 }

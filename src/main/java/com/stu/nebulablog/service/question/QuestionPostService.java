@@ -6,6 +6,7 @@ import com.stu.nebulablog.mapper.QuestionMapper;
 import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.entity.Question;
 import com.stu.nebulablog.module.entity.UserInfo;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -13,11 +14,10 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class QuestionPostService {
-    @Autowired
-    private QuestionMapper questionMapper;
-    @Autowired
-    private UserInfoMapper userInfoMapper;
+    private final QuestionMapper questionMapper;
+    private final UserInfoMapper userInfoMapper;
 
     @CacheEvict(cacheNames = "questionList", allEntries = true)
     public boolean doPost(Question question) {

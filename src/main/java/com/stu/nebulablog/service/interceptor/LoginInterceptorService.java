@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stu.nebulablog.mapper.UserInfoMapper;
 import com.stu.nebulablog.module.entity.UserInfo;
 import com.stu.nebulablog.utils.PasswordUtil;
+import lombok.AllArgsConstructor;
 import org.apache.ibatis.javassist.util.proxy.MethodHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
@@ -19,11 +20,10 @@ import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 
 @Service
+@AllArgsConstructor
 public class LoginInterceptorService implements HandlerInterceptor {
-    @Autowired
-    private PasswordUtil passwordUtil;
-    @Autowired
-    private UserInfoMapper userInfoMapper;
+    private final PasswordUtil passwordUtil;
+    private final UserInfoMapper userInfoMapper;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {

@@ -10,10 +10,13 @@ import java.io.IOException;
 
 @Service
 public class PhotoUploadService extends AbstractFileUploadService {
+    public PhotoUploadService(String preUrl) {
+        super(preUrl);
+    }
 
     @Override
     protected boolean doUploadFile(String prePath, MultipartFile multipartFile) {
-        String path=prePath+ "/ProfilePhoto.jpg";
+        String path = prePath + "/ProfilePhoto.jpg";
         try {
             BufferedImage image = ImageIO.read(multipartFile.getInputStream());
             int size = Math.min(image.getHeight(), image.getWidth());
@@ -27,7 +30,8 @@ public class PhotoUploadService extends AbstractFileUploadService {
         }
         return true;
     }
-    public boolean uploadPhoto(String prePath, MultipartFile multipartFile){
-        return doUploadFile(prePath,multipartFile);
+
+    public boolean uploadPhoto(String prePath, MultipartFile multipartFile) {
+        return super.uploadFile(prePath, multipartFile);
     }
 }

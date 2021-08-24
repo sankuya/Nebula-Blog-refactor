@@ -9,6 +9,7 @@ import com.stu.nebulablog.module.entity.Answer;
 import com.stu.nebulablog.module.entity.Article;
 import com.stu.nebulablog.module.entity.Question;
 import com.stu.nebulablog.module.entity.UserDetail;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Caching;
@@ -16,15 +17,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@AllArgsConstructor
 public class UserInfoChangeService {
-    @Autowired
-    private UserDetailMapper userDetailMapper;
-    @Autowired
-    private ArticleMapper articleMapper;
-    @Autowired
-    private QuestionMapper questionMapper;
-    @Autowired
-    private AnswerMapper answerMapper;
+    private final UserDetailMapper userDetailMapper;
+    private final ArticleMapper articleMapper;
+    private final QuestionMapper questionMapper;
+    private final AnswerMapper answerMapper;
 
     @Transactional
     @Caching(evict = {

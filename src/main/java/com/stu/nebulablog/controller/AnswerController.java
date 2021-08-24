@@ -5,6 +5,7 @@ import com.stu.nebulablog.module.ResponseData;
 import com.stu.nebulablog.module.entity.Answer;
 import com.stu.nebulablog.module.entity.UserInfo;
 import com.stu.nebulablog.service.answer.AnswerPostService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,11 +16,10 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("answer")
+@AllArgsConstructor
 public class AnswerController {
-    @Autowired
-    private UserInfoMapper userInfoMapper;
-    @Autowired
-    private AnswerPostService answerPostService;
+    private final UserInfoMapper userInfoMapper;
+    private final AnswerPostService answerPostService;
 
     @PostMapping("/post")
     public ResponseData aPost(@RequestBody Answer answer, HttpSession session) {

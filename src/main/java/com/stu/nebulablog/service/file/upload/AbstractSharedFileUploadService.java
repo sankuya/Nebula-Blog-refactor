@@ -7,14 +7,18 @@ import java.io.IOException;
 
 
 public abstract class AbstractSharedFileUploadService extends AbstractFileUploadService {
+    public AbstractSharedFileUploadService(String preUrl) {
+        super(preUrl);
+    }
+
     @Override
     protected boolean doUploadFile(String prePath, MultipartFile multipartFile) {
-        String path=prePath+"/share/";
-        File dir=new File(path);
-        if(!dir.exists()){
+        String path = prePath + "/share/";
+        File dir = new File(path);
+        if (!dir.exists()) {
             dir.mkdirs();
         }
-        path+=multipartFile.getOriginalFilename();
+        path += multipartFile.getOriginalFilename();
         try {
             multipartFile.transferTo(new File(path));
         } catch (IOException e) {

@@ -4,6 +4,7 @@ import com.stu.nebulablog.module.ResponseData;
 import com.stu.nebulablog.module.entity.Article;
 import com.stu.nebulablog.module.vo.PageDataVO;
 import com.stu.nebulablog.service.article.*;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,15 +13,12 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("article")
+@AllArgsConstructor
 public class ArticleController {
-    @Autowired
-    private ArticleListService articleListService;
-    @Autowired
-    private ArticlePostService articlePostService;
-    @Autowired
-    private ArticleDeleteService articleDeleteService;
-    @Autowired
-    private ArticleEditService articleEditService;
+    private final ArticleListService articleListService;
+    private final ArticlePostService articlePostService;
+    private final ArticleDeleteService articleDeleteService;
+    private final ArticleEditService articleEditService;
     private static final int MAXSIZE = 10;
 
     @PostMapping("/delete")

@@ -3,6 +3,7 @@ package com.stu.nebulablog.controller;
 import com.stu.nebulablog.module.ResponseData;
 import com.stu.nebulablog.service.file.upload.SharedFileDeleteService;
 import com.stu.nebulablog.service.file.upload.SharedFileUploadService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,12 +17,10 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @RestController
-@RequestMapping("file")
+@RequestMapping("file")@AllArgsConstructor
 public class FileController {
-    @Autowired
-    private SharedFileUploadService sharedFileUploadService;
-    @Autowired
-    private SharedFileDeleteService sharedFileDeleteService;
+    private final SharedFileUploadService sharedFileUploadService;
+    private final SharedFileDeleteService sharedFileDeleteService;
 
     @PostMapping("/upload")
     public ResponseData upload(HttpServletRequest httpServletRequest, HttpSession session) {

@@ -3,6 +3,7 @@ package com.stu.nebulablog.controller;
 import com.stu.nebulablog.module.ResponseData;
 import com.stu.nebulablog.module.entity.Question;
 import com.stu.nebulablog.service.question.QuestionPostService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,18 +14,19 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("question")
+@AllArgsConstructor
 public class QuestionController {
-    @Autowired
-    private QuestionPostService questionPostService;
+    private final QuestionPostService questionPostService;
+
     @PostMapping("/post")
     public ResponseData questionPost(@RequestBody Question question, HttpSession session) {
-        Integer uid = (Integer)session.getAttribute("uid");
+        Integer uid = (Integer) session.getAttribute("uid");
         question.setUid(uid);
         question.setQuestionId(null);
         question.setAnswer(0);
-        if (questionPostService.doPost(question)){
+        if (questionPostService.doPost(question)) {
             return ResponseData.success();
-        }else{
+        } else {
             return ResponseData.fail();
         }
     }
