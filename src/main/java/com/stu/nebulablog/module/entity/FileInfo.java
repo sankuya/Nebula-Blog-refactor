@@ -14,8 +14,11 @@ public class FileInfo implements Serializable {
     @TableId(type = IdType.AUTO,value = "file_id")
     private Integer fileId;
     private Integer uid;
-    private String filename;
     private String username;
+    private String filename;
+    private String introduction;
+    private String link;
+    private String verify;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date date;
 }
