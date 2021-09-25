@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Data
 public class FileInfo implements Serializable {
-    @TableId(type = IdType.AUTO,value = "file_id")
+    @TableId(type = IdType.AUTO)
     private Integer fileId;
     private Integer uid;
     private String username;

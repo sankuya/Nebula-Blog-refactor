@@ -24,21 +24,15 @@ public class ArticleListService {
     private final PageToMapUtil<Article> articlePageToMapUtil;
     private static final int SUMMARY_SIZE = 255;
 
-    public PageDataVO<Article> list(int p, Integer uid, int size) {
-        Page<Article> articlePage = new Page<>(p, size);
-        LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper
+    public PageDataVO<Article> list(Integer uid,int page,  int size) {
+        Page<Article> articlePage = new Page<>(page, size);
+        LambdaQueryWrapper<Article> articleLambdaQueryWrapper = new QueryWrapper<Article>()
+                .select("article_id", "author", "title", "date", "uid", "LEFT(content,"+SUMMARY_SIZE+") AS summary")
+                .lambda()
                 .eq(uid != null, Article::getUid, uid)
-                .select(Article::getArticleId, Article::getAuthor, Article::getTitle, Article::getDate, Article::getUid, Article::getContent)
                 .orderByDesc(Article::getArticleId);
-        articleMapper.selectPage(articlePage, queryWrapper);
+        articleMapper.selectPage(articlePage, articleLambdaQueryWrapper);
         PageDataVO<Article> res = articlePageToMapUtil.getMapFromPageWithPages(articlePage);
-        res.getDetail().forEach(article -> {//取内容的前n位作为摘要，todo：数据库中直接设置摘要字段
-            String content = article.getContent();
-            if (content == null) return;
-            article.setSummary(content.substring(0, Math.min(SUMMARY_SIZE, article.getContent().length())));
-            article.setContent(null);
-        });
         return res;
     }
 }

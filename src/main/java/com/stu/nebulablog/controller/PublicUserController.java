@@ -31,10 +31,11 @@ public class PublicUserController {
     private static final int COOKIE_EXPIRED = 60 * 60 * 12 * 7;
 
     @PostMapping("login")
-    ResponseData login(@Nullable @RequestBody UserVO userVO, HttpSession httpSession, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public ResponseData login(@Nullable @RequestBody UserVO userVO, HttpSession httpSession,
+                              HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         int uid = Optional
                 .ofNullable(userVO)
-                .map(notNullUerVO -> loginService.doLogin(notNullUerVO))
+                .map(loginService::doLogin)
                 .orElseGet(() -> {
                     Cookie[] cookies = httpServletRequest.getCookies();
                     String username = null, password = null;
@@ -60,7 +61,7 @@ public class PublicUserController {
     }
 
     @PostMapping("register")
-    ResponseData register(@RequestBody UserInfo userRegisterVO) {
+    public ResponseData register(@RequestBody UserInfo userRegisterVO) {
         userRegisterVO.setUid(null);
         if (registerService.doRegister(userRegisterVO)) {
             return ResponseData.success();
@@ -72,6 +73,7 @@ public class PublicUserController {
     @PostMapping("logout")
     public ResponseData logout(HttpSession session, HttpServletResponse httpServletResponse) {
         if (session.getAttribute("uid") != null) session.removeAttribute("uid");
+        else return ResponseData.fail();
         Cookie usernameCookie = new Cookie("username", null);
         Cookie passwordCookie = new Cookie("password", null);
         usernameCookie.setMaxAge(0);
@@ -81,8 +83,8 @@ public class PublicUserController {
         return ResponseData.success();
     }
 
-    @GetMapping("getUserById")
-    public ResponseData getUserDataByID(@RequestParam int uid) {
+    @GetMapping("getUser")
+    public ResponseData getUser(@RequestParam int uid) {
         Map<String, Object> data = userGetService.doGetUser(uid);
         if (data == null) {
             return ResponseData.fail();

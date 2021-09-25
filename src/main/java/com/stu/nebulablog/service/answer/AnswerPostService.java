@@ -27,10 +27,8 @@ public class AnswerPostService {
         answer.setAnswerId(null);
         LambdaUpdateWrapper<Question> questionLambdaUpdateWrapper = new LambdaUpdateWrapper<>();
         questionLambdaUpdateWrapper
-                .setSql("answer=answer+1")
+                .setSql("answer_num=answer_num+1")
                 .eq(Question::getQuestionId, answer.getQuestionId());
-        if (answerMapper.insert(answer) != 0 && questionMapper.update(null, questionLambdaUpdateWrapper) != 0)
-            return true;
-        return false;
+        return answerMapper.insert(answer) != 0 && questionMapper.update(null, questionLambdaUpdateWrapper) != 0;
     }
 }

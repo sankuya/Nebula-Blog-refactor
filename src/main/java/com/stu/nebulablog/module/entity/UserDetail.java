@@ -15,7 +15,7 @@ public class UserDetail implements Serializable {
     private String motto;
     private String gender;
     private String hobby;
-    private String QQ;
+    private String qq;
     private String location;
     public int hashCode(){
         return uid;

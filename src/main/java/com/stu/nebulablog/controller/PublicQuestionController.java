@@ -47,7 +47,7 @@ public class PublicQuestionController {
         } else {
             ResponseData responseData = ResponseData.success();
             responseData.setData(question);
-            return ResponseData.success();
+            return responseData;
         }
     }
 }

@@ -26,7 +26,7 @@ public class PublicArticleController {
     public ResponseData getArticleList(@RequestParam int page, @RequestParam int size, @Nullable @RequestParam Integer uid) {
         ResponseData responseData = ResponseData.success();
         size = Math.min(MAXSIZE, size);
-        PageDataVO<Article> data = articleListService.list(page, uid, size);
+        PageDataVO<Article> data = articleListService.list(uid, page, size);
         responseData.setData(data);
         return responseData;
     }

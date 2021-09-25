@@ -19,13 +19,15 @@ import java.util.Map;
 public class QuestionSearchService {
     private final QuestionMapper questionMapper;
     private final PageToMapUtil<Question> pageToMapUtil;
+    private static final int SUMMARY_SIZE = 255;
 
     @Cacheable(cacheNames = "questionList")
     public PageDataVO<Question> doQuestionSearch(String keyword, int page, int size) {
         Page<Question> qPage = new Page<>(page, size);
-        LambdaQueryWrapper<Question> questionLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        questionLambdaQueryWrapper
-                .select(Question::getQuestionId, Question::getTitle, Question::getAuthor, Question::getDate, Question::getAnswer, Question::getStatus)
+        LambdaQueryWrapper<Question> questionLambdaQueryWrapper = new QueryWrapper<Question>()
+                .select("title", "author", "answer_num", "status", "date",
+                        "question_id", "uid", "LEFT(content," + SUMMARY_SIZE + ") AS summary")
+                .lambda()
                 .like(Question::getTitle, keyword)
                 .or()
                 .like(Question::getContent, keyword)

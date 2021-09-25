@@ -19,12 +19,14 @@ import java.util.Map;
 public class ArticleSearchService {
     private final PageToMapUtil<Article> articlePageToMapUtil;
     private final ArticleMapper articleMapper;
+    private static final int SUMMARY_SIZE = 255;
 
     @Cacheable("articleList")
     public PageDataVO<Article> doSearchArticle(String keyword, int page, int size) {
         Page<Article> articlePage = new Page<>(page, size);
-        LambdaQueryWrapper<Article> articleLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        articleLambdaQueryWrapper
+        LambdaQueryWrapper<Article> articleLambdaQueryWrapper = new QueryWrapper<Article>()
+                .select("article_id", "author", "title", "date", "uid", "LEFT(content," + SUMMARY_SIZE + ") AS summary")
+                .lambda()
                 .like(Article::getTitle, keyword)
                 .or()
                 .like(Article::getAuthor, keyword);

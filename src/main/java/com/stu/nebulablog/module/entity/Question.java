@@ -8,19 +8,21 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
-@TableName("q")
 public class Question implements Serializable {
-    @TableId(type = IdType.AUTO,value = "q_id")
+    @TableId(type = IdType.AUTO)
     private Integer questionId;
     private Integer uid;
     private String title;
     private String author;
     private Integer status;
     private String content;
+    @TableField(exist = false)
+    private String summary;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date date;
-    private Integer answer;
-    public int hashCode(){
+    private Integer answerNum;
+
+    public int hashCode() {
         return questionId;
     }
 }

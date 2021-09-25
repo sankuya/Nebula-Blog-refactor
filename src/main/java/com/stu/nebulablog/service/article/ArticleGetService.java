@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 public class ArticleGetService {
     private final ArticleMapper articleMapper;
 
-    @Cacheable(value = "article", key = "#artId")
-    public Article doGetArticle(int artId) {
-        return articleMapper.selectById(artId);
+    @Cacheable(value = "article", key = "#articleId")
+    public Article doGetArticle(int articleId) {
+        return articleMapper.selectById(articleId);
     }
 }

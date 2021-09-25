@@ -14,7 +14,10 @@ public class ImageUploadService extends AbstractFileUploadService {
 
     @Override
     protected boolean doUploadFile(String prePath, MultipartFile multipartFile) {
-        String path = prePath + "/img/" + multipartFile.getOriginalFilename();
+        String path = prePath + "/img/";
+        File directory = new File(path);
+        path += multipartFile.getOriginalFilename();
+        if (!directory.exists()) directory.mkdirs();
         try {
             multipartFile.transferTo(new File(path));
         } catch (IOException e) {

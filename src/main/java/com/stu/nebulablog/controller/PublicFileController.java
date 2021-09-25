@@ -17,9 +17,8 @@ public class PublicFileController {
     private static final int MAXSIZE = 10;
 
     @GetMapping("list")
-    public ResponseData list(@SessionAttribute("uid") @Nullable Integer curUid, @RequestParam @Nullable Integer uid,
+    public ResponseData list(@RequestParam @Nullable Integer uid,
                              @RequestParam int page, @RequestParam int size) {
-        if (uid == null) uid = curUid;
         size = Math.min(MAXSIZE, size);
         ResponseData responseData = ResponseData.success();
         responseData.setData(sharedFileInfoListService.list(uid, page, size));
@@ -27,9 +26,8 @@ public class PublicFileController {
     }
 
     @GetMapping("search")
-    public ResponseData search(@SessionAttribute("uid") @Nullable Integer curUid, @RequestParam @Nullable Integer uid,
-                               @RequestParam String keyword, @RequestParam int page, @RequestParam int size) {
-        if (uid == null) uid = curUid;
+    public ResponseData search(@RequestParam @Nullable Integer uid, @RequestParam String keyword,
+                               @RequestParam int page, @RequestParam int size) {
         size = Math.min(MAXSIZE, size);
         ResponseData responseData = ResponseData.success();
         responseData.setData(sharedFileInfoListService.search(uid, keyword, page, size));

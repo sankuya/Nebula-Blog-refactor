@@ -17,7 +17,7 @@ public class ArticleDeleteService {
 
     @Caching(evict = {
             @CacheEvict(cacheNames = "articleList", allEntries = true),
-            @CacheEvict(cacheNames = "article", key = "articleId")})
+            @CacheEvict(cacheNames = "article", key = "#articleId")})
     public boolean doDeleteArticle(int uid, int articleId) {
         LambdaQueryWrapper<Article> articleLambdaQueryWrapper = new LambdaQueryWrapper<>();
         articleLambdaQueryWrapper

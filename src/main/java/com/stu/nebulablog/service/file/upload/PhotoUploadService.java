@@ -14,15 +14,15 @@ public class PhotoUploadService extends AbstractFileUploadService {
         super(preUrl);
     }
 
+    private static final int MAXSIZE = 100;
+
     @Override
     protected boolean doUploadFile(String prePath, MultipartFile multipartFile) {
         String path = prePath + "/ProfilePhoto.jpg";
         try {
             BufferedImage image = ImageIO.read(multipartFile.getInputStream());
-            int size = Math.min(image.getHeight(), image.getWidth());
-            int percent = Math.min(1, 200 / size);
-            int newWith = image.getHeight() * percent;
-            int newHeight = image.getWidth() * percent;
+            int newWith = Math.min(image.getHeight(), MAXSIZE);
+            int newHeight = Math.min(image.getWidth(), MAXSIZE);
             Thumbnails.of(multipartFile.getInputStream()).forceSize(newWith, newHeight).toFile(path);
         } catch (IOException e) {
             e.printStackTrace();

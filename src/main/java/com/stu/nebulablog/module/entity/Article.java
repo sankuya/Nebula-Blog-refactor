@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 
 @Data
 public class Article implements Serializable {
-    @TableId(type = IdType.AUTO, value = "art_id")
+    @TableId(type = IdType.AUTO)
     private Integer articleId;
     private int uid;
     private String author;

@@ -28,16 +28,14 @@ public class UserController {
     private final PhotoUploadService photoUploadService;
 
     @GetMapping("getUser")
-    public ResponseData getUserData(HttpSession session) {
-        Integer uid = (Integer) session.getAttribute("uid");
+    public ResponseData getUserData(@SessionAttribute Integer uid) {
         ResponseData responseData = ResponseData.success();
         responseData.setData(userGetService.doGetUser(uid));
         return responseData;
     }
 
     @PostMapping("infoChange")
-    public ResponseData infoChange(@RequestBody UserDetail src, HttpSession session) {
-        Integer uid = (Integer) session.getAttribute("uid");
+    public ResponseData infoChange(@RequestBody UserDetail src, @SessionAttribute Integer uid) {
         src.setUid(uid);
         if (userInfoChangeService.doInfoChange(src)) {
             return ResponseData.success();
@@ -47,14 +45,13 @@ public class UserController {
     }
 
     @PostMapping("uploadPhoto")
-    public Object uploadPhoto(HttpServletRequest httpServletRequest, HttpSession session) {
+    public Object uploadPhoto(HttpServletRequest httpServletRequest, @SessionAttribute Integer uid) {
         MultipartFile multipartFile;
         try {
             multipartFile = ((MultipartHttpServletRequest) httpServletRequest).getFiles("file").get(0);
         } catch (ClassCastException | IndexOutOfBoundsException e) {
             return ResponseData.fail();
         }
-        Integer uid = (Integer) session.getAttribute("uid");
         UserInfo userInfo = userInfoMapper.selectById(uid);
         if (userInfo != null && photoUploadService.uploadPhoto(userInfo.getUsername(), multipartFile)) {
             ResponseData responseData = ResponseData.success();
@@ -66,14 +63,13 @@ public class UserController {
     }
 
     @PostMapping("uploadImage")
-    public ResponseData uploadImage(HttpServletRequest httpServletRequest, HttpSession session) {
+    public ResponseData uploadImage(HttpServletRequest httpServletRequest, @SessionAttribute Integer uid) {
         MultipartFile multipartFile;
         try {
-            multipartFile = ((MultipartHttpServletRequest) httpServletRequest).getFiles("editormd-image-file").get(0);
+            multipartFile = ((MultipartHttpServletRequest) httpServletRequest).getFiles("file").get(0);
         } catch (ClassCastException | IndexOutOfBoundsException e) {
             return ResponseData.fail();
         }
-        Integer uid = (Integer) session.getAttribute("uid");
         if (uid == null) return ResponseData.fail();
         UserInfo userInfo = userInfoMapper.selectById(uid);
         if (userInfo != null && imageUploadService.uploadImage(userInfo.getUsername(), multipartFile)) {

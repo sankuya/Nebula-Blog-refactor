@@ -21,7 +21,8 @@ public class UserInfo implements Serializable {
     private String tel;
     @NotNull
     private String mail;
-    public int hashCode(){
+
+    public int hashCode() {
         return uid;
     }
 }

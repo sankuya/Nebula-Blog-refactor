@@ -5,10 +5,7 @@ import com.stu.nebulablog.module.entity.Question;
 import com.stu.nebulablog.service.question.QuestionPostService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,11 +16,10 @@ public class QuestionController {
     private final QuestionPostService questionPostService;
 
     @PostMapping("/post")
-    public ResponseData questionPost(@RequestBody Question question, HttpSession session) {
-        Integer uid = (Integer) session.getAttribute("uid");
+    public ResponseData questionPost(@RequestBody Question question, @SessionAttribute Integer uid) {
         question.setUid(uid);
         question.setQuestionId(null);
-        question.setAnswer(0);
+        question.setAnswerNum(0);
         if (questionPostService.doPost(question)) {
             return ResponseData.success();
         } else {

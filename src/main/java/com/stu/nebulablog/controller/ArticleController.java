@@ -22,37 +22,32 @@ public class ArticleController {
     private static final int MAXSIZE = 10;
 
     @PostMapping("/delete")
-    public ResponseData delete(@RequestParam int articleId, HttpSession session) {
-        Integer uid = (Integer) session.getAttribute("uid");
-        if (uid == null)
-            return ResponseData.fail();
-        else if (articleDeleteService.doDeleteArticle(uid, articleId))
+    public ResponseData delete(@RequestBody Map<String, Integer> src, @SessionAttribute Integer uid) {
+        if (src.containsKey("articleId") && articleDeleteService.doDeleteArticle(uid, src.get("articleId")))
             return ResponseData.success();
         else return ResponseData.fail();
     }
 
     @PostMapping("/edit")
-    public ResponseData edit(@RequestBody Article article, HttpSession session) {
-        Integer uid = (Integer) session.getAttribute("uid");
-        if (uid.equals(article.getUid()) && articleEditService.doEditArticle(article))
+    public ResponseData edit(@RequestBody Article article, @SessionAttribute Integer uid) {
+        article.setUid(uid);
+        if (articleEditService.doEditArticle(article))
             return ResponseData.success();
         else return ResponseData.fail();
     }
 
 
     @GetMapping("/list")
-    public ResponseData getArticleList(@RequestParam int page, @RequestParam int size, HttpSession session) {
+    public ResponseData getArticleList(@RequestParam int page, @RequestParam int size, @SessionAttribute Integer uid) {
         ResponseData responseData = ResponseData.success();
-        Integer uid = (Integer) session.getAttribute("uid");
         size = Math.min(size, MAXSIZE);
-        PageDataVO<Article> data = articleListService.list(page, uid, size);
+        PageDataVO<Article> data = articleListService.list(uid, page, size);
         responseData.setData(data);
         return responseData;
     }
 
     @PostMapping("/post")
-    public ResponseData postArticle(@RequestBody Article srcArticle, HttpSession session) {
-        Integer uid = (Integer) session.getAttribute("uid");
+    public ResponseData postArticle(@RequestBody Article srcArticle, @SessionAttribute Integer uid) {
         srcArticle.setUid(uid);
         if (articlePostService.doPostArticle(srcArticle))
             return ResponseData.success();
