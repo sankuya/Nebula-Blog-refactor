@@ -3,6 +3,7 @@ package com.stu.nebulablog.controller;
 import com.stu.nebulablog.module.ResponseData;
 import com.stu.nebulablog.module.entity.Answer;
 import com.stu.nebulablog.module.vo.PageDataVO;
+import com.stu.nebulablog.service.answer.AnswerGetService;
 import com.stu.nebulablog.service.answer.AnswerListService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class PublicAnswerController {
     private final AnswerListService answerListService;
+    private final AnswerGetService answerGetService;
     private static final int MAXSIZE = 10;
 
     @GetMapping("/list")
@@ -26,6 +28,13 @@ public class PublicAnswerController {
         size = Optional.ofNullable(size).map(notNullSize -> Math.min(MAXSIZE, notNullSize)).orElse(MAXSIZE);
         PageDataVO<Answer> data = answerListService.list(questionId, page, size);
         responseData.setData(data);
+        return responseData;
+    }
+
+    @GetMapping("get")
+    public ResponseData get(@RequestParam Long answerId) {
+        ResponseData responseData = ResponseData.success();
+        responseData.setData(answerGetService.get(answerId));
         return responseData;
     }
 }
