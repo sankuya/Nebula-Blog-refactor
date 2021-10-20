@@ -24,7 +24,7 @@ public class PublicQuestionController {
     @GetMapping("/list")
     public ResponseData list(@RequestParam int page, @RequestParam int size) {
         size = Math.min(MAXSIZE, size);
-        PageDataVO<Question> data = questionListService.doList(size, page);
+        PageDataVO<Question> data = questionListService.list(size, page);
         ResponseData responseData = ResponseData.success();
         responseData.setData(data);
         return responseData;

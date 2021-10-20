@@ -124,7 +124,7 @@
             </build>
         </profile>
 
-        <!--生产环境-->
+        <!--生产环境 暂时还未使用-->
         <profile>
             <id>pro</id>
             <activation>
