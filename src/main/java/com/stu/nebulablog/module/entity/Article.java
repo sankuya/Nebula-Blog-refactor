@@ -15,6 +15,7 @@ public class Article implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer articleId;
     private int uid;
+    @TableField(exist = false)
     private String author;
     private String title;
     private String content;

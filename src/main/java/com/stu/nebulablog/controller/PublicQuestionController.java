@@ -21,27 +21,27 @@ public class PublicQuestionController {
     private final QuestionGetService questionGetService;
     private static final int MAXSIZE = 10;
 
-    @GetMapping("/list")
+    @GetMapping("list")
     public ResponseData list(@RequestParam int page, @RequestParam int size) {
         size = Math.min(MAXSIZE, size);
-        PageDataVO<Question> data = questionListService.list(size, page);
+        PageDataVO<Question> data = questionListService.listQuestion(null, size, page);
         ResponseData responseData = ResponseData.success();
         responseData.setData(data);
         return responseData;
     }
 
-    @GetMapping("/search")
+    @GetMapping("search")
     public ResponseData search(@RequestParam int page, @RequestParam int size, @RequestParam String keyword) {
         size = Math.min(size, MAXSIZE);
-        PageDataVO<Question> data = questionSearchService.doQuestionSearch(keyword, page, size);
+        PageDataVO<Question> data = questionSearchService.searchQuestion(keyword, page, size);
         ResponseData responseData = ResponseData.success();
         responseData.setData(data);
         return responseData;
     }
 
-    @GetMapping("/get")
+    @GetMapping("get")
     public ResponseData get(@RequestParam int questionId) {
-        Question question = questionGetService.doGetQuestion(questionId);
+        Question question = questionGetService.getQuestion(questionId);
         if (question == null) {
             return ResponseData.fail();
         } else {

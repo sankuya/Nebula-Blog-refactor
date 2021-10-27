@@ -22,27 +22,27 @@ public class PublicArticleController {
     private final ArticleGetService articleGetService;
     private static final int MAXSIZE = 10;
 
-    @GetMapping("/list")
-    public ResponseData getArticleList(@RequestParam int page, @RequestParam int size, @Nullable @RequestParam Integer uid) {
+    @GetMapping("list")
+    public ResponseData list(@RequestParam int page, @RequestParam int size, @Nullable @RequestParam Integer uid) {
         ResponseData responseData = ResponseData.success();
         size = Math.min(MAXSIZE, size);
-        PageDataVO<Article> data = articleListService.list(uid, page, size);
+        PageDataVO<Article> data = articleListService.listArticle(uid, page, size);
         responseData.setData(data);
         return responseData;
     }
 
-    @GetMapping("/search")
+    @GetMapping("search")
     public Object search(@RequestParam int page, @RequestParam int size, @RequestParam String keyword) {
         ResponseData responseData = ResponseData.success();
         size = Math.min(size, MAXSIZE);
-        PageDataVO<Article> data = articleSearchService.doSearchArticle(keyword, page, size);
+        PageDataVO<Article> data = articleSearchService.searchArticle(keyword, page, size);
         responseData.setData(data);
         return responseData;
     }
 
-    @GetMapping("/get")
+    @GetMapping("get")
     public ResponseData get(@RequestParam int articleId) {
-        Article article = articleGetService.doGetArticle(articleId);
+        Article article = articleGetService.getArticleDetail(articleId);
         if (article != null) {
             ResponseData responseData = ResponseData.success();
             responseData.setData(article);

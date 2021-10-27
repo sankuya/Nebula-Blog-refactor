@@ -38,6 +38,7 @@ public class PublicUserController {
                 .map(loginService::doLogin)
                 .orElseGet(() -> {
                     Cookie[] cookies = httpServletRequest.getCookies();
+                    if (cookies == null) return -1;
                     String username = null, password = null;
                     for (Cookie cookie : cookies) {
                         if (cookie.getName().equals("username")) username = cookie.getValue();

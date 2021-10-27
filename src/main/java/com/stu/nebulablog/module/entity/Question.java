@@ -13,6 +13,7 @@ public class Question implements Serializable {
     private Integer questionId;
     private Integer uid;
     private String title;
+    @TableField(exist = false)
     private String author;
     private Integer status;
     private String content;

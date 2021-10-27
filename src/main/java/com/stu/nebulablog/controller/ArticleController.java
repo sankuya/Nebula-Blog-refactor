@@ -21,14 +21,14 @@ public class ArticleController {
     private final ArticleEditService articleEditService;
     private static final int MAXSIZE = 10;
 
-    @PostMapping("/delete")
+    @PostMapping("delete")
     public ResponseData delete(@RequestBody Map<String, Integer> src, @SessionAttribute Integer uid) {
         if (src.containsKey("articleId") && articleDeleteService.doDeleteArticle(uid, src.get("articleId")))
             return ResponseData.success();
         else return ResponseData.fail();
     }
 
-    @PostMapping("/edit")
+    @PostMapping("edit")
     public ResponseData edit(@RequestBody Article article, @SessionAttribute Integer uid) {
         article.setUid(uid);
         if (articleEditService.doEditArticle(article))
@@ -37,16 +37,16 @@ public class ArticleController {
     }
 
 
-    @GetMapping("/list")
+    @GetMapping("list")
     public ResponseData getArticleList(@RequestParam int page, @RequestParam int size, @SessionAttribute Integer uid) {
         ResponseData responseData = ResponseData.success();
         size = Math.min(size, MAXSIZE);
-        PageDataVO<Article> data = articleListService.list(uid, page, size);
+        PageDataVO<Article> data = articleListService.listArticle(uid, page, size);
         responseData.setData(data);
         return responseData;
     }
 
-    @PostMapping("/post")
+    @PostMapping("post")
     public ResponseData postArticle(@RequestBody Article srcArticle, @SessionAttribute Integer uid) {
         srcArticle.setUid(uid);
         if (articlePostService.doPostArticle(srcArticle))

@@ -14,6 +14,7 @@ public class FileInfo implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer fileId;
     private Integer uid;
+    @TableField(exist = false)
     private String username;
     private String filename;
     private String introduction;

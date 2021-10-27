@@ -17,7 +17,7 @@ public class QuestionController {
     private final QuestionPostService questionPostService;
     private final QuestionListService questionListService;
 
-    @PostMapping("/post")
+    @PostMapping("post")
     public ResponseData questionPost(@RequestBody Question question, @SessionAttribute Integer uid) {
         question.setUid(uid);
         question.setQuestionId(null);
@@ -32,7 +32,7 @@ public class QuestionController {
     @GetMapping("listMe")
     public ResponseData questionGet(@SessionAttribute Integer uid, @RequestParam Integer page, @RequestParam Integer size) {
         ResponseData responseData = ResponseData.success();
-        responseData.setData(questionListService.list(uid, size, page));
+        responseData.setData(questionListService.listQuestion(uid, size, page));
         return responseData;
     }
 }

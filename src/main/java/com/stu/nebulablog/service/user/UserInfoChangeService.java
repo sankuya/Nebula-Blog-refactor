@@ -20,39 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 @AllArgsConstructor
 public class UserInfoChangeService {
     private final UserDetailMapper userDetailMapper;
-    private final ArticleMapper articleMapper;
-    private final QuestionMapper questionMapper;
-    private final AnswerMapper answerMapper;
 
     @Transactional
     @Caching(evict = {
             @CacheEvict(cacheNames = "user", key = "#userDetail.uid"),
-            @CacheEvict(cacheNames = "articleList", allEntries = true),
-            @CacheEvict(cacheNames = "article", allEntries = true),
-            @CacheEvict(cacheNames = "questionList", allEntries = true),
-            @CacheEvict(cacheNames = "question", allEntries = true),
-            @CacheEvict(cacheNames = "answerList", allEntries = true)
+            @CacheEvict(cacheNames = "userDetail", key = "#userDetail.uid")
     })
     public boolean doInfoChange(UserDetail userDetail) {
-        Article article = new Article();
-        Question question = new Question();
-        Answer answer = new Answer();
-        article.setAuthor(userDetail.getNickname());
-        article.setUid(userDetail.getUid());
-        question.setAuthor(userDetail.getNickname());
-        question.setUid(userDetail.getUid());
-        answer.setAuthor(userDetail.getNickname());
-        answer.setUid(userDetail.getUid());
-        if (userDetailMapper.updateById(userDetail) == 0) return false;
-        articleMapper.update(article,
-                new LambdaUpdateWrapper<Article>()
-                        .eq(Article::getUid, article.getUid()));
-        questionMapper.update(question,
-                new LambdaUpdateWrapper<Question>()
-                        .eq(Question::getUid, question.getUid()));
-        answerMapper.update(answer,
-                new LambdaUpdateWrapper<Answer>()
-                        .eq(Answer::getUid, answer.getUid()));
-        return true;
+        return userDetailMapper.updateById(userDetail) != 0;
     }
 }

@@ -16,8 +16,9 @@ public class Answer implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date date;
     private Integer questionId;
+    @TableField(exist = false)
     private String author;
-    private String username;
+//    private String username;
     @TableField(exist = false)
     private String summary;
 

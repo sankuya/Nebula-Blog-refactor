@@ -21,12 +21,12 @@ public class PublicAnswerController {
     private final AnswerGetService answerGetService;
     private static final int MAXSIZE = 10;
 
-    @GetMapping("/list")
+    @GetMapping("list")
     public ResponseData list(@RequestParam @Nullable Integer questionId,
                              @RequestParam @Nullable Integer page, @RequestParam @Nullable Integer size) {
         ResponseData responseData = ResponseData.success();
         size = Optional.ofNullable(size).map(notNullSize -> Math.min(MAXSIZE, notNullSize)).orElse(MAXSIZE);
-        PageDataVO<Answer> data = answerListService.list(questionId, page, size);
+        PageDataVO<Answer> data = answerListService.listAnswer(questionId, page, size);
         responseData.setData(data);
         return responseData;
     }
@@ -34,7 +34,7 @@ public class PublicAnswerController {
     @GetMapping("get")
     public ResponseData get(@RequestParam Long answerId) {
         ResponseData responseData = ResponseData.success();
-        responseData.setData(answerGetService.get(answerId));
+        responseData.setData(answerGetService.getAnswer(answerId));
         return responseData;
     }
 }
