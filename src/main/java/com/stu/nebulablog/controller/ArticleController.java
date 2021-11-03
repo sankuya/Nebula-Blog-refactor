@@ -19,7 +19,7 @@ public class ArticleController {
     private final ArticlePostService articlePostService;
     private final ArticleDeleteService articleDeleteService;
     private final ArticleEditService articleEditService;
-    private static final int MAXSIZE = 10;
+    private final int maxSize;
 
     @PostMapping("delete")
     public ResponseData delete(@RequestBody Map<String, Integer> src, @SessionAttribute Integer uid) {
@@ -40,7 +40,7 @@ public class ArticleController {
     @GetMapping("list")
     public ResponseData getArticleList(@RequestParam int page, @RequestParam int size, @SessionAttribute Integer uid) {
         ResponseData responseData = ResponseData.success();
-        size = Math.min(size, MAXSIZE);
+        size = Math.min(size, maxSize);
         PageDataVO<Article> data = articleListService.listArticle(uid, page, size);
         responseData.setData(data);
         return responseData;

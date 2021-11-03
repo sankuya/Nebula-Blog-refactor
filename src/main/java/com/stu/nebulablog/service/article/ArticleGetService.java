@@ -20,7 +20,7 @@ public class ArticleGetService {
     @Autowired
     private ArticleGetService articleGetService;
 
-    @Cacheable(cacheNames = "article", key = "#articleId")
+    @Cacheable(cacheNames = "article")
     public Article doGetArticleDetail(int articleId) {
         return articleMapper.selectById(articleId);
     }

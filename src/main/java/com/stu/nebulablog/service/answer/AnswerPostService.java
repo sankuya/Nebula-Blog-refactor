@@ -19,7 +19,7 @@ public class AnswerPostService {
     private final QuestionMapper questionMapper;
 
     @Caching(evict = {
-            @CacheEvict(cacheNames = "answerList", key = "#answer.questionId"),
+            @CacheEvict(cacheNames = "answerList", allEntries = true),
             @CacheEvict(cacheNames = "questionList", allEntries = true),
             @CacheEvict(cacheNames = "question", key = "#answer.questionId")
     })

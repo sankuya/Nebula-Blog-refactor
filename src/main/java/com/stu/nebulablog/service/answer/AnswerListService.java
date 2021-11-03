@@ -30,7 +30,7 @@ public class AnswerListService {
     @Autowired
     private AnswerListService answerListService;
 
-    @Cacheable(cacheNames = "answerList", key = "#questionId")
+    @Cacheable(cacheNames = "answerList")
     public PageDataVO<Answer> doListAnswer(Integer questionId, Integer page, Integer size) {
         Page<Answer> answerPage = new Page<>(page, size);
         answerMapper.selectPage(answerPage, new QueryWrapper<Answer>()

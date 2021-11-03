@@ -82,5 +82,5 @@
         <appender-ref ref="fileErrorLog"/>
         <appender-ref ref="fileSQLLog"/>
     </root>
-    <logger name="com.stu.nebulablog.mapper" level="DEBUG"></logger>
+<!--    <logger name="com.stu.nebulablog.mapper" level="DEBUG"></logger>-->
 </configuration>

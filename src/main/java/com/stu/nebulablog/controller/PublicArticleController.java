@@ -8,6 +8,7 @@ import com.stu.nebulablog.service.article.ArticleListService;
 import com.stu.nebulablog.service.article.ArticleSearchService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,12 +21,12 @@ public class PublicArticleController {
     private final ArticleListService articleListService;
     private final ArticleSearchService articleSearchService;
     private final ArticleGetService articleGetService;
-    private static final int MAXSIZE = 10;
+    private final int maxSize;
 
     @GetMapping("list")
     public ResponseData list(@RequestParam int page, @RequestParam int size, @Nullable @RequestParam Integer uid) {
         ResponseData responseData = ResponseData.success();
-        size = Math.min(MAXSIZE, size);
+        size = Math.min(maxSize, size);
         PageDataVO<Article> data = articleListService.listArticle(uid, page, size);
         responseData.setData(data);
         return responseData;
@@ -34,7 +35,7 @@ public class PublicArticleController {
     @GetMapping("search")
     public Object search(@RequestParam int page, @RequestParam int size, @RequestParam String keyword) {
         ResponseData responseData = ResponseData.success();
-        size = Math.min(size, MAXSIZE);
+        size = Math.min(size, maxSize);
         PageDataVO<Article> data = articleSearchService.searchArticle(keyword, page, size);
         responseData.setData(data);
         return responseData;

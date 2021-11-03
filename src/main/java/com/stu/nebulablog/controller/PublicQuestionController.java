@@ -8,6 +8,7 @@ import com.stu.nebulablog.service.question.QuestionSearchService;
 import com.stu.nebulablog.service.question.QuestionListService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -19,11 +20,11 @@ public class PublicQuestionController {
     private final QuestionListService questionListService;
     private final QuestionSearchService questionSearchService;
     private final QuestionGetService questionGetService;
-    private static final int MAXSIZE = 10;
+    private final int maxSize;
 
     @GetMapping("list")
     public ResponseData list(@RequestParam int page, @RequestParam int size) {
-        size = Math.min(MAXSIZE, size);
+        size = Math.min(maxSize, size);
         PageDataVO<Question> data = questionListService.listQuestion(null, size, page);
         ResponseData responseData = ResponseData.success();
         responseData.setData(data);
@@ -32,7 +33,7 @@ public class PublicQuestionController {
 
     @GetMapping("search")
     public ResponseData search(@RequestParam int page, @RequestParam int size, @RequestParam String keyword) {
-        size = Math.min(size, MAXSIZE);
+        size = Math.min(size, maxSize);
         PageDataVO<Question> data = questionSearchService.searchQuestion(keyword, page, size);
         ResponseData responseData = ResponseData.success();
         responseData.setData(data);
