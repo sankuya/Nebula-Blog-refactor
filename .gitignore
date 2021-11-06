@@ -32,7 +32,7 @@ build/
 
 ### VS Code ###
 .vscode/
-/src/main/resources/
 /logs/
-/config/pro/
 /user/
+/config/
+/static/

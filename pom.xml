@@ -68,6 +68,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>net.sf.ehcache</groupId>-->
+        <!--            <artifactId>ehcache</artifactId>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -100,10 +113,6 @@
     <profiles>
         <profile>
             <id>dev</id>
-<!--            <properties>-->
-<!--                <profiles.active>dev</profiles.active>-->
-<!--&lt;!&ndash;                <log.path>./logs</log.path>&ndash;&gt;-->
-<!--            </properties>-->
             <activation>
                 <activeByDefault>true</activeByDefault>
                 <property>
@@ -115,21 +124,14 @@
                 <resources>
                     <resource>
                         <directory>src/main/resources</directory>
-<!--                        <includes>-->
-<!--                            <include>profiles/dev/**/*</include>-->
-<!--                        </includes>-->
                     </resource>
                 </resources>
             </build>
         </profile>
 
-        <!--生产环境-->
+        <!--生产环境 暂时还未使用-->
         <profile>
             <id>pro</id>
-<!--            <properties>-->
-<!--                <profiles.active>pro</profiles.active>-->
-<!--                <log.path>/home/sankuyan/project/Nebula-Blog/java/logs</log.path>-->
-<!--            </properties>-->
             <activation>
                 <property>
                     <name>env</name>
@@ -140,12 +142,10 @@
                 <resources>
                     <resource>
                         <directory>src/main/resources</directory>
-<!--                        <includes>-->
-<!--                            <include>profiles/pro/**/*</include>-->
-<!--                        </includes>-->
                     </resource>
                 </resources>
             </build>
         </profile>
     </profiles>
 </project>
+

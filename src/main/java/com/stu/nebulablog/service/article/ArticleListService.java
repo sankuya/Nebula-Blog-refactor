@@ -13,35 +13,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
-public class ArticleSearchService {
-    @Autowired
-    private PageToMapUtil<Article> articlePageToMapUtil;
+@Cacheable(cacheNames = "articleList")
+
+public class ArticleListService {
     @Autowired
     private ArticleMapper articleMapper;
+    @Autowired
+    private PageToMapUtil<Article> articlePageToMapUtil;
     @Autowired
     private UserDetailGetService userDetailGetService;
     private static final int SUMMARY_SIZE = 255;
     @Autowired
-    private ArticleSearchService articleSearchService;
+    private ArticleListService articleListService;
 
     @Cacheable(cacheNames = "articleList")
-    public PageDataVO<Article> doSearchArticle(String keyword, int page, int size) {
+    public PageDataVO<Article> doListArticle(Integer uid, int page, int size) {
         Page<Article> articlePage = new Page<>(page, size);
         LambdaQueryWrapper<Article> articleLambdaQueryWrapper = new QueryWrapper<Article>()
                 .select("article_id", "title", "date", "uid", "LEFT(content," + SUMMARY_SIZE + ") AS summary")
                 .lambda()
-                .like(Article::getTitle, keyword);
+                .eq(uid != null, Article::getUid, uid)
+                .orderByDesc(Article::getArticleId);
         articleMapper.selectPage(articlePage, articleLambdaQueryWrapper);
         return articlePageToMapUtil.getMapFromPageWithPages(articlePage);
     }
 
-    public PageDataVO<Article> searchArticle(String keyword, int page, int size) {
-        PageDataVO<Article> articlePageDataVO = articleSearchService.doSearchArticle(keyword, page, size);
-        articlePageDataVO.getDetail().forEach(article ->
+    public PageDataVO<Article> listArticle(Integer uid, int page, int size) {
+        PageDataVO<Article> res = articleListService.doListArticle(uid, page, size);
+        res.getDetail().forEach(article ->
                 article.setAuthor(userDetailGetService.getUserDetail(article.getUid()).getNickname()));
-        return articlePageDataVO;
+        return res;
     }
 }

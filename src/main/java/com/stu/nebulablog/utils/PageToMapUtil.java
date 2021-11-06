@@ -1,19 +1,16 @@
 package com.stu.nebulablog.utils;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.stu.nebulablog.module.vo.PageDataVO;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
 public class PageToMapUtil<T> {
-    public Map<String ,Object>getMapFromPageWithPages(Page<T> page){
-        Map<String, Object> res = page
-                .getRecords()
-                .stream()
-                .collect(Collectors.toMap((e) -> String.valueOf(e.hashCode()), (e) -> e));
-        res.put("maxPageNum", page.getPages());
-        return res;
+    public PageDataVO<T> getMapFromPageWithPages(Page<T> page){
+        List<T> data=new ArrayList<>(page.getRecords());
+        return new PageDataVO<T>(page.getPages(),data);
     }
 }
