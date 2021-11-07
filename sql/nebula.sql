@@ -1,86 +1,81 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : nebula
  Source Server Type    : MySQL
- Source Server Version : 50515
- Source Host           : localhost:3306
+ Source Server Version : 50736
+ Source Host           : sankuyan.cn:3306
  Source Schema         : nebula
 
  Target Server Type    : MySQL
- Target Server Version : 50515
+ Target Server Version : 50736
  File Encoding         : 65001
 
- Date: 29/05/2021 17:03:46
+ Date: 07/11/2021 10:22:48
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for a
+-- Table structure for answer
 -- ----------------------------
-DROP TABLE IF EXISTS `a`;
-CREATE TABLE `a`  (
-  `aid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `answer`;
+CREATE TABLE `answer`  (
+  `answer_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `uid` int(10) UNSIGNED NOT NULL,
-  `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `qid` int(10) UNSIGNED NOT NULL,
-  `author` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `username` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`aid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of a
--- ----------------------------
-INSERT INTO `a` VALUES (1, 2, 'dfasdfa', '2021-05-23 23:26:14', 1, 'vvvvv', 'vvvvv');
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `question_id` int(10) UNSIGNED NOT NULL,
+  `username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`answer_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Table structure for article
 -- ----------------------------
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article`  (
-  `art_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `article_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `uid` int(10) UNSIGNED NOT NULL,
-  `author` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`art_id`) USING BTREE,
-  INDEX `uid`(`uid`, `title`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+  PRIMARY KEY (`article_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
 
 -- ----------------------------
--- Records of article
+-- Table structure for file_info
 -- ----------------------------
-INSERT INTO `article` VALUES (1, 1, 'root', 'test', 'test', '2021-05-19 17:35:03');
-INSERT INTO `article` VALUES (2, 1, 'root', 'testdsaf', 'tets', '2021-05-20 18:42:27');
-INSERT INTO `article` VALUES (4, 2, 'vvvvv', 'testdasfasdfasdf', 'sdat', '2021-05-23 23:16:42');
-INSERT INTO `article` VALUES (5, 2, 'vvvvv', 'dsf', '![](/user/vvvvv/img/test24.jpg)', '2021-05-24 10:44:10');
+DROP TABLE IF EXISTS `file_info`;
+CREATE TABLE `file_info`  (
+  `file_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `filename` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `uid` int(10) UNSIGNED NOT NULL,
+  `date` timestamp NULL DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `introduction` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `link` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `verify` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`file_id`) USING BTREE,
+  INDEX `uid`(`uid`) USING BTREE,
+  CONSTRAINT `file_info_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user_info` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
 
 -- ----------------------------
--- Table structure for q
+-- Table structure for question
 -- ----------------------------
-DROP TABLE IF EXISTS `q`;
-CREATE TABLE `q`  (
-  `q_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `question`;
+CREATE TABLE `question`  (
+  `question_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `uid` int(11) UNSIGNED NOT NULL,
-  `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-  `author` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `status` int(11) UNSIGNED NULL DEFAULT 0,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `answer` int(10) UNSIGNED NULL DEFAULT 0,
-  PRIMARY KEY (`q_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of q
--- ----------------------------
-INSERT INTO `q` VALUES (1, 1, 'test', 'test', 'root', 0, '2021-05-19 17:35:23', 1);
-INSERT INTO `q` VALUES (2, 2, 'asdf', 'dsaf', 'vvvvv', 0, '2021-05-23 23:26:04', 0);
+  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `answer_num` int(10) UNSIGNED NULL DEFAULT 0,
+  PRIMARY KEY (`question_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Table structure for user_detail
@@ -96,14 +91,7 @@ CREATE TABLE `user_detail`  (
   `QQ` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `location` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`uid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of user_detail
--- ----------------------------
-INSERT INTO `user_detail` VALUES (1, 'root', 'root的小天地', '', '男', '', '', '');
-INSERT INTO `user_detail` VALUES (2, 'vvvvv', 'vvvvv的小天地', '', '男', '', NULL, '');
-INSERT INTO `user_detail` VALUES (3, 'vvvvvv', 'vvvvvv的小天地', NULL, '男', NULL, NULL, NULL);
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Table structure for user_info
@@ -112,17 +100,10 @@ DROP TABLE IF EXISTS `user_info`;
 CREATE TABLE `user_info`  (
   `uid` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `password` char(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `password` char(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `tel` char(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `mail` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`uid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of user_info
--- ----------------------------
-INSERT INTO `user_info` VALUES (1, 'root', '5b7ebefabae7bf4e4056148cba52bdb8', '15875870016', '982486598@qq.com');
-INSERT INTO `user_info` VALUES (2, 'vvvvv', '5b7ebefabae7bf4e4056148cba52bdb8', '15875870014', 'adsf@jkdfl.com');
-INSERT INTO `user_info` VALUES (3, 'vvvvvv', '5b7ebefabae7bf4e4056148cba52bdb8', '15875870013', 'addsf@jkdfl.com');
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
 
 SET FOREIGN_KEY_CHECKS = 1;
